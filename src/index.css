@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root{
+  color-scheme: dark;
+}
+@theme{
+  --indigo-500: #6366f1;
+  --indigo-400: #818cf8;
+  --indigo-600: #4f46e5;
+
+  --gray-900: #0f172a;
+  --gray-800: #1e293b;
+  --gray-700: #334155;
+
+  --gray-100: #f1f5f9;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+
+  --green-500: #22c55e;
+  --yellow-500: #f59e0b;
+  --red-500: #ef4444;
+
+  --color-bg-primary: var(--gray-900); /* nền chính */
+  --color-bg-secondary: var(--gray-800); /* card / sidebar */
+  --color-bg-tertiary: var(--gray-700); /* hover */
+
+  --color-primary: var(--indigo-500);
+  --color-primary-hover: var(--indigo-400);
+  --color-primary-active: var(--indigo-600);
+
+  --color-text-primary: var(--gray-100);
+  --color-text-secondary: var(--gray-400);
+  --color-text-muted: var(--gray-500);
+
+  --color-success: var(--green-500);
+  --color-warning: var(--yellow-500);
+  --color-error: var(--red-500);
+
+  --color-border-primary: var(--gray-700);
+}
+
+.light{
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #e2e8f0;
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+
+  --color-border-primary: #e2e8f0;
+}
+
+body{
+  background: var(--color-bg-primary);
+  color: var(--color-primary);
+  font-family: Inter, sans-serif;
+}
