@@ -6,7 +6,7 @@ const LoginByGoogleSection = () => {
             <div className={"flex justify-center items-center w-4 h-4 shrink-0"}>
                 <img src={GoogleIcon} alt={"google-icon"}/>
             </div>
-            <span className={"text-text-primary font-medium"}>Login By Google</span>
+            <span className={"text-text-primary font-medium"}>Continue with Google</span>
         </Button>
     );
 };
