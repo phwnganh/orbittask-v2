@@ -5,7 +5,7 @@ import Button from "@/components/uis/Button.tsx";
 
 const LoginFormSection = () => {
     return (
-        <form method={"POST"} className={"flex flex-col gap-4"}>
+        <form method={"POST"} noValidate className={"flex flex-col gap-4"}>
             <div className={"flex flex-col gap-1"}>
                 <label htmlFor={"email"}>Email<span className={"ml-2 text-error"}>*</span></label>
                 <Input id={"email"} type={"email"} placeholder={"Enter your email"}/>

@@ -5,10 +5,14 @@ import LoginByGoogleSection from "@/components/LoginComponent/LoginByGoogleSecti
 const LoginPage = () => {
     return (
         <div className={"flex justify-center items-center min-h-screen bg-bg-primary"}>
-            <div className={"max-w-1/3 w-full flex flex-col gap-4"}>
+            <div className={"max-w-md w-full flex flex-col gap-6 border border-border-primary p-6 rounded-xl shadow-lg"}>
                 <LoginTitleSection/>
                 <LoginFormSection/>
-                <p className={"text-xl font-bold text-text-secondary text-center"}>OR</p>
+                <div className="flex items-center gap-3">
+                    <div className="flex-1 h-px bg-border-primary"/>
+                    <span className="text-sm text-text-muted">OR</span>
+                    <div className="flex-1 h-px bg-border-primary"/>
+                </div>
                 <LoginByGoogleSection/>
             </div>
         </div>
