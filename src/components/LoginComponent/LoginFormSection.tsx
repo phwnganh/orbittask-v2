@@ -1,15 +1,18 @@
 import Input from "@/components/uis/Input.tsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {FORGOT_PASSWORD} from "@/constants/route.constant.ts";
 import Button from "@/components/uis/Button.tsx";
-import {type ChangeEvent, useState} from "react";
+import {type ChangeEvent, type FormEvent, useState} from "react";
 import type {LoginPayload} from "@/types/user.type.ts";
+import {useLogin} from "@/hooks/useAuth.ts";
 
 const LoginFormSection = () => {
     const [values, setValues] = useState<LoginPayload>({
         email: "",
         password: "",
     })
+    const {mutate, isPending} = useLogin()
+    const navigate = useNavigate()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
@@ -18,8 +21,18 @@ const LoginFormSection = () => {
             [name]: value
         }))
     }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        mutate(values, {
+            onSuccess: async () => {
+                navigate("/")
+            }
+        })
+
+    }
     return (
-        <form method={"POST"} noValidate className={"flex flex-col gap-4"}>
+        <form method={"POST"} noValidate className={"flex flex-col gap-4"} onSubmit={handleSubmit}>
             <div className={"flex flex-col gap-1"}>
                 <label htmlFor={"email"} className={"text-sm font-medium"}>Email<span className={"ml-2 text-error"}>*</span></label>
                 <Input id={"email"} type={"email"} required autoComplete={"email"} name={"email"} aria-describedby={"email-error"} value={values.email} onChange={handleChange} placeholder={"Enter your email"}/>

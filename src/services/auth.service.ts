@@ -1,8 +1,8 @@
-import type {RegisterPayload} from "@/types/user.type.ts";
+import type {LoginPayload, RegisterPayload} from "@/types/user.type.ts";
 import {supabase} from "@/libs/supabase.ts";
 import {SUCCESSFUL_VERIFIED_ACCOUNT} from "@/constants/route.constant.ts";
 
-const mapAuthError = (message: string) => {
+const mapRegisterError = (message: string) => {
     if (message.includes("User already registered")) {
         return "Email already exists";
     }
@@ -13,6 +13,13 @@ const mapAuthError = (message: string) => {
 
     return "Something went wrong. Please try again.";
 };
+
+const mapLoginError = (message: string) => {
+    if (message.includes("Invalid login credentials")) {
+        return "Email or password is incorrect";
+    }
+    return "Something went wrong. Please try again.";
+}
 export const apiRegister = async (payload: RegisterPayload) => {
     const {email, password, first_name, last_name} = payload
     const {data, error} = await supabase.auth.signUp({
@@ -28,7 +35,7 @@ export const apiRegister = async (payload: RegisterPayload) => {
     })
 
     if(error){
-        throw new Error(mapAuthError(error.message))
+        throw new Error(mapRegisterError(error.message))
     }
     return data
 }
@@ -39,5 +46,13 @@ export const apiUpdateUserStatus = async () => {
     const {data: profile} = await supabase.from("Profile").select("status").eq("id", data.user.id).single()
     if(profile?.status === "Active") return;
         await supabase.from("Profile").update({status: "Active"}).eq("id", data.user.id)
+}
 
+export const apiLogin = async (payload: LoginPayload) => {
+    const {email, password} = payload
+    const {data, error} = await supabase.auth.signInWithPassword({email, password})
+    if(error){
+        throw new Error(mapLoginError(error.message))
+    }
+    return data;
 }
