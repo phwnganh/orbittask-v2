@@ -9,3 +9,14 @@ export type RegisterPayload = {
     first_name: string;
     last_name: string;
 }
+
+export type Profile = {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    role: "Admin" | "User";
+    date_of_birth: Date;
+    phone_number: string;
+    address: string;
+}

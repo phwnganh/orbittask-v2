@@ -2,14 +2,8 @@ import Button from "@/components/uis/Button.tsx";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "@/constants/route.constant.ts";
 import SuccessIcon from '@/assets/success-icon.svg'
-import {useEffect} from "react";
-import {useUpdateUserStatus} from "@/hooks/useAuth.ts";
 const SuccessfulVerifiedAccountPage = () => {
     const navigate = useNavigate();
-    const {mutate} = useUpdateUserStatus()
-    useEffect(() => {
-        mutate()
-    }, [])
     return (
         <div className={"flex flex-col items-center text-center gap-6"}>
             <div className={"flex justify-center items-center w-12 h-12 shrink-0"}>

@@ -5,6 +5,7 @@ import Button from "@/components/uis/Button.tsx";
 import {type ChangeEvent, type FormEvent, useState} from "react";
 import type {LoginPayload} from "@/types/user.type.ts";
 import {useLogin} from "@/hooks/useAuth.ts";
+import {apiGetCurrentUser} from "@/services/auth.service.ts";
 
 const LoginFormSection = () => {
     const [values, setValues] = useState<LoginPayload>({
@@ -26,6 +27,7 @@ const LoginFormSection = () => {
         e.preventDefault();
         mutate(values, {
             onSuccess: async () => {
+                await apiGetCurrentUser()
                 navigate("/")
             }
         })

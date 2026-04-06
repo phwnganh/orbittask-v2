@@ -1,6 +1,7 @@
 import type {LoginPayload, RegisterPayload} from "@/types/user.type.ts";
 import {supabase} from "@/libs/supabase.ts";
 import {SUCCESSFUL_VERIFIED_ACCOUNT} from "@/constants/route.constant.ts";
+import {useAuthStore} from "@/stores/auth.store.ts";
 
 const mapRegisterError = (message: string) => {
     if (message.includes("User already registered")) {
@@ -39,15 +40,6 @@ export const apiRegister = async (payload: RegisterPayload) => {
     }
     return data
 }
-
-export const apiUpdateUserStatus = async () => {
-    const {data} = await supabase.auth.getUser()
-    if(!data.user) return;
-    const {data: profile} = await supabase.from("Profile").select("status").eq("id", data.user.id).single()
-    if(profile?.status === "Active") return;
-        await supabase.from("Profile").update({status: "Active"}).eq("id", data.user.id)
-}
-
 export const apiLogin = async (payload: LoginPayload) => {
     const {email, password} = payload
     const {data, error} = await supabase.auth.signInWithPassword({email, password})
@@ -55,4 +47,38 @@ export const apiLogin = async (payload: LoginPayload) => {
         throw new Error(mapLoginError(error.message))
     }
     return data;
+}
+
+export const apiLoginWithGoogle = async () => {
+    const {data, error} = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo: "http://localhost:5173/auth/callback",
+        }
+    })
+    if(error){
+        throw new Error("Google login failed.")
+    }
+    return data
+}
+
+export const apiGetCurrentUser = async () => {
+    try {
+        const {data} = await supabase.auth.getSession()
+        const user = data.session?.user;
+        if(!user){
+            useAuthStore.getState().logout()
+            return null;
+        }
+        const {data: profile} = await supabase.from("Profile").select("*").eq("id", user.id).single()
+
+        useAuthStore.getState().setUser(user)
+        useAuthStore.getState().setProfile(profile)
+        useAuthStore.getState().setInitialized(true)
+        return {user, profile}
+    }catch(error){
+        useAuthStore.getState().logout()
+        return null;
+    }
+
 }

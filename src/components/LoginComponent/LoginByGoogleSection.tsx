@@ -1,8 +1,14 @@
 import Button from "@/components/uis/Button.tsx";
 import GoogleIcon from '@/assets/google-icon.svg'
+import {useLoginWithGoogle} from "@/hooks/useAuth.ts";
 const LoginByGoogleSection = () => {
+    const {mutate} = useLoginWithGoogle()
+
+    const handleLoginByGoogle = async () => {
+        mutate()
+    }
     return (
-        <Button type={"button"} variant={"secondary"} className={"flex items-center gap-2 justify-center"}>
+        <Button onClick={handleLoginByGoogle} type={"button"} variant={"secondary"} className={"flex items-center gap-2 justify-center"}>
             <div className={"flex justify-center items-center w-4 h-4 shrink-0"}>
                 <img src={GoogleIcon} alt={"google-icon"}/>
             </div>

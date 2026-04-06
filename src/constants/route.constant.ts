@@ -1,3 +1,4 @@
+export const FORBIDDEN = "/forbidden"
 export const LOGIN = "/auth/login"
 export const REGISTER = "/auth/register"
 export const VERIFIED_ACCOUNT = "/auth/verify-account"

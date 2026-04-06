@@ -1,9 +1,10 @@
+import ProtectedRoute from "@/routes/protected.route.tsx";
 
 const PostLoginLayout = () => {
     return (
-        <div>
-
-        </div>
+        <ProtectedRoute>
+                abc
+        </ProtectedRoute>
     );
 };
 
