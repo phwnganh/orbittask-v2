@@ -2,7 +2,6 @@ import {useAuthStore} from "@/stores/auth.store.ts";
 import {Navigate} from "react-router-dom";
 import {FORBIDDEN, LOGIN} from "@/constants/route.constant.ts";
 import type {ReactNode} from "react";
-import Skeleton from "@/components/uis/Skeleton.tsx";
 
 type ProtectedRouteProps = {
     allowRoles?: ("Admin" | "User")[]
@@ -12,7 +11,7 @@ const ProtectedRoute = ({allowRoles, children}: ProtectedRouteProps) => {
     const {user, isInitialized, profile} = useAuthStore()
 
     if (!isInitialized) {
-        return <Skeleton/>;
+        return null;
     }
     if(!user){
         return <Navigate to={LOGIN} replace/>

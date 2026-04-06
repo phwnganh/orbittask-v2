@@ -1,5 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import {
+    DASHBOARD,
     FORBIDDEN,
     LOGIN,
     PROJECTS,
@@ -8,13 +9,14 @@ import {
     VERIFIED_ACCOUNT
 } from "../constants/route.constant.ts";
 import LoginPage from "../pages/LoginPage";
-import PostloginLayout from "../layouts/postlogin.layout.tsx";
+import PostLoginLayout from "../layouts/postlogin.layout.tsx";
 import ProjectsPage from "../pages/ProjectsPage";
 import PreLoginLayout from "@/layouts/prelogin.layout.tsx";
 import RegisterPage from "@/pages/RegisterPage";
 import VerifiedAccountPage from "@/pages/VerifiedAccountPage";
 import SuccessfulVerifiedAccountPage from "@/pages/VerifiedAccountPage/SuccessfulVerifiedAccountPage.tsx";
 import ForbiddenPage from "@/pages/NotFoundPage/ForbiddenPage.tsx";
+import DashboardPage from "@/pages/DashboardPage/DashboardPage.tsx";
 
 const AppRoute = () => {
     return (
@@ -27,8 +29,10 @@ const AppRoute = () => {
                 <Route path={SUCCESSFUL_VERIFIED_ACCOUNT} element={<SuccessfulVerifiedAccountPage/>}/>
             </Route>
 
-            <Route element={<PostloginLayout/>}>
+            <Route element={<PostLoginLayout/>}>
                 <Route path={PROJECTS} element={<ProjectsPage/>}/>
+                <Route path={DASHBOARD} element={<DashboardPage/>}/>
+                <Route path={"/"} element={<DashboardPage/>} index/>
             </Route>
         </Routes>
     );

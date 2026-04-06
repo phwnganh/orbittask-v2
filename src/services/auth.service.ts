@@ -62,23 +62,21 @@ export const apiLoginWithGoogle = async () => {
     return data
 }
 
-export const apiGetCurrentUser = async () => {
-    try {
-        const {data} = await supabase.auth.getSession()
-        const user = data.session?.user;
-        if(!user){
-            useAuthStore.getState().logout()
-            return null;
-        }
-        const {data: profile} = await supabase.from("Profile").select("*").eq("id", user.id).single()
+export const initAuth = async () => {
+    const {setUser, setInitialized} = useAuthStore.getState()
+    setInitialized(false)
+    const {data} = await supabase.auth.getSession()
+    setUser(data.session?.user ?? null)
+    setInitialized(true)
+}
 
-        useAuthStore.getState().setUser(user)
-        useAuthStore.getState().setProfile(profile)
-        useAuthStore.getState().setInitialized(true)
-        return {user, profile}
-    }catch(error){
-        useAuthStore.getState().logout()
-        return null;
-    }
+let subscription: any = null;
+export const listenAuthChange = () => {
+    if(subscription) return;
+    const {setUser} = useAuthStore.getState()
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+        setUser(session?.user ?? null)
+    })
 
+    subscription = data.subscription
 }

@@ -1,7 +1,6 @@
 import type {Profile} from "@/types/user.type.ts";
 import {create} from "zustand";
 import type {User} from "@supabase/supabase-js";
-import {persist} from "zustand/middleware/persist";
 
 type AuthState = {
     user: User | null;
@@ -13,7 +12,7 @@ type AuthState = {
     logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>()(persist((set) => ({
+export const useAuthStore = create<AuthState>((set) => ({
     user: null,
     profile: null,
     isInitialized: false,
@@ -23,8 +22,6 @@ export const useAuthStore = create<AuthState>()(persist((set) => ({
     logout: () => set({
         user: null,
         profile: null,
-        isInitialized: true,
+        isInitialized: false,
     })
-}), {
-    name: "auth-storage"
 }))
