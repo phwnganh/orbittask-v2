@@ -7,7 +7,7 @@ import {
     REGISTER,
     SUCCESSFUL_VERIFIED_ACCOUNT,
     VERIFIED_ACCOUNT
-} from "../constants/route.constant.ts";
+} from "@/shared/constants/route.constant.ts";
 import LoginPage from "../pages/LoginPage";
 import PostLoginLayout from "../layouts/postlogin.layout.tsx";
 import ProjectsPage from "../pages/ProjectsPage";
@@ -16,7 +16,7 @@ import RegisterPage from "@/pages/RegisterPage";
 import VerifiedAccountPage from "@/pages/VerifiedAccountPage";
 import SuccessfulVerifiedAccountPage from "@/pages/VerifiedAccountPage/SuccessfulVerifiedAccountPage.tsx";
 import ForbiddenPage from "@/pages/NotFoundPage/ForbiddenPage.tsx";
-import DashboardPage from "@/pages/DashboardPage/DashboardPage.tsx";
+import DashboardPage from "@/pages/DashboardPage";
 
 const AppRoute = () => {
     return (

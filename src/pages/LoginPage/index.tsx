@@ -1,8 +1,8 @@
-import LoginTitleSection from "@/components/LoginComponent/LoginTitleSection.tsx";
-import LoginFormSection from "@/components/LoginComponent/LoginFormSection.tsx";
-import LoginByGoogleSection from "@/components/LoginComponent/LoginByGoogleSection.tsx";
+import LoginTitleSection from "@/features/auth/components/LoginTitleSection.tsx";
+import LoginFormSection from "@/features/auth/components/LoginFormSection.tsx";
+import LoginByGoogleSection from "@/features/auth/components/LoginByGoogleSection.tsx";
 import {Link} from "react-router-dom";
-import {REGISTER} from "@/constants/route.constant.ts";
+import {REGISTER} from "@/shared/constants/route.constant.ts";
 
 const LoginPage = () => {
     return (

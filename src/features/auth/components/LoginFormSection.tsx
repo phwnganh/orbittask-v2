@@ -1,10 +1,10 @@
-import Input from "@/components/uis/Input.tsx";
+import Input from "@/shared/components/Input.tsx";
 import {Link, useNavigate} from "react-router-dom";
-import {FORGOT_PASSWORD} from "@/constants/route.constant.ts";
-import Button from "@/components/uis/Button.tsx";
+import {FORGOT_PASSWORD} from "@/shared/constants/route.constant.ts";
+import Button from "@/shared/components/Button.tsx";
 import {type ChangeEvent, type FormEvent, useState} from "react";
-import type {LoginPayload} from "@/types/user.type.ts";
-import {useLogin} from "@/hooks/useAuth.ts";
+import {useLogin} from "@/features/auth/hooks/useLogin.ts";
+import type {LoginPayload} from "@/features/auth/types/auth.type.ts";
 
 const LoginFormSection = () => {
     const [values, setValues] = useState<LoginPayload>({

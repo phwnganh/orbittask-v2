@@ -1,10 +1,10 @@
-import Input from "@/components/uis/Input.tsx";
-import Button from "@/components/uis/Button.tsx";
-import {useRegister} from "@/hooks/useAuth.ts";
-import type {RegisterPayload} from "@/types/user.type.ts";
+import Input from "@/shared/components/Input.tsx";
+import Button from "@/shared/components/Button.tsx";
 import {type ChangeEvent, type FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {VERIFIED_ACCOUNT} from "@/constants/route.constant.ts";
+import {VERIFIED_ACCOUNT} from "@/shared/constants/route.constant.ts";
+import {useRegister} from "@/features/auth/hooks/useRegister.ts";
+import type {RegisterPayload} from "@/features/auth/types/auth.type.ts";
 
 const RegisterFormSection = () => {
     const [values, setValues] = useState<RegisterPayload>({
