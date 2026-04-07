@@ -1,7 +1,7 @@
-import Button from "@/components/uis/Button.tsx";
+import Button from "@/shared/components/Button.tsx";
 import EmailIcon from '@/assets/email-icon.svg'
 import {Link, useLocation} from "react-router-dom";
-import {LOGIN} from "@/constants/route.constant.ts";
+import {LOGIN} from "@/shared/constants/route.constant.ts";
 const VerifiedAccountPage = () => {
     const location = useLocation();
     const email = location.state?.email || "";
