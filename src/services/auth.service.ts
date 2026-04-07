@@ -1,6 +1,6 @@
 import type {LoginPayload, RegisterPayload} from "@/types/user.type.ts";
 import {supabase} from "@/libs/supabase.ts";
-import {SUCCESSFUL_VERIFIED_ACCOUNT} from "@/constants/route.constant.ts";
+import {DASHBOARD, SUCCESSFUL_VERIFIED_ACCOUNT} from "@/constants/route.constant.ts";
 import {useAuthStore} from "@/stores/auth.store.ts";
 
 const mapRegisterError = (message: string) => {
@@ -53,7 +53,7 @@ export const apiLoginWithGoogle = async () => {
     const {data, error} = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: "http://localhost:5173/auth/callback",
+            redirectTo: `http://localhost:5173${DASHBOARD}`,
         }
     })
     if(error){
