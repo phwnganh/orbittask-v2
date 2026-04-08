@@ -11,7 +11,7 @@ const LoginFormSection = () => {
         email: "",
         password: "",
     })
-    const {mutate, isPending} = useLogin()
+    const {mutate} = useLogin()
     const navigate = useNavigate()
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

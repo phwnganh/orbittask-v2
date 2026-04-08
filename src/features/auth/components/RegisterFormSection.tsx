@@ -22,7 +22,7 @@ const RegisterFormSection = () => {
             [name]: value,
         }))
     }
-    const {mutate, isPending, error} = useRegister()
+    const {mutate} = useRegister()
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         mutate({
