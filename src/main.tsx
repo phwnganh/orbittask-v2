@@ -4,16 +4,15 @@ import './index.css'
 import {BrowserRouter} from "react-router-dom";
 import AppRoute from "./routes/app.route.tsx";
 import QueryProvider from "@/shared/providers/QueryProvider.tsx";
-import AuthInitialization from "@/shared/providers/AuthInitialization.tsx";
+import {authInitialization} from "@/authInitialization.ts";
 
+await authInitialization()
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
       <QueryProvider>
-          <AuthInitialization>
             <BrowserRouter>
                 <AppRoute/>
             </BrowserRouter>
-          </AuthInitialization>
       </QueryProvider>
   </StrictMode>,
 )

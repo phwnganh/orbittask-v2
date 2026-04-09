@@ -1,4 +1,4 @@
-import Logo from '@/assets/sidebar_logo.png'
+import Logo from '@/assets/images/sidebar_logo.png'
 const LoginTitleSection = () => {
     return (
         <header className={"flex flex-col gap-2 text-center"}>

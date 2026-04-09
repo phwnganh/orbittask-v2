@@ -32,7 +32,7 @@ const AppRoute = () => {
             <Route element={<PostLoginLayout/>}>
                 <Route path={PROJECTS} element={<ProjectsPage/>}/>
                 <Route path={DASHBOARD} element={<DashboardPage/>}/>
-                <Route path={"/"} element={<DashboardPage/>} index/>
+                <Route index element={<DashboardPage/>} />
             </Route>
         </Routes>
     );

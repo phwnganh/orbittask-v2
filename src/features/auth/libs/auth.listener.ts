@@ -3,12 +3,32 @@ import {useAuthStore} from "@/features/auth/stores/auth.store.ts";
 import {useProfileStore} from "@/features/profile/stores/profile.store.ts";
 import {getProfileByUserIdApi} from "@/features/profile/services/profile.api.ts";
 
+let isAuthInitialized = false;
 export const initAuth = async () => {
+    if(isAuthInitialized) return;
+    isAuthInitialized = true;
     const {setUser, setInitialized} = useAuthStore.getState()
+    const {setProfile, clearProfile} = useProfileStore.getState()
     setInitialized(false)
-    const {data} = await supabase.auth.getSession()
-    setUser(data.session?.user ?? null)
-    setInitialized(true)
+
+    try{
+        const {data} = await supabase.auth.getSession()
+        const user = data.session?.user ?? null;
+        setUser(user)
+
+        if(user){
+            const {data: profile} = await getProfileByUserIdApi(user.id)
+            setProfile(profile)
+        }else{
+            clearProfile()
+        }
+    }
+    catch(e){
+        clearProfile()
+        setUser(null)
+    }finally {
+        setInitialized(true)
+    }
 }
 
 let subscription: any = null;

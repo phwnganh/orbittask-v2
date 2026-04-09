@@ -1,4 +1,4 @@
-import Logo from '@/assets/sidebar_logo.png'
+import Logo from '@/assets/images/sidebar_logo.png'
 
 const RegisterTitleSection = () => {
     return (

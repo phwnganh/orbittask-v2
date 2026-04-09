@@ -1,7 +1,7 @@
 import Button from "@/shared/components/Button.tsx";
 import {useNavigate} from "react-router-dom";
 import {LOGIN} from "@/shared/constants/route.constant.ts";
-import SuccessIcon from '@/assets/success-icon.svg'
+import SuccessIcon from '@/assets/icons/success-icon.svg'
 const SuccessfulVerifiedAccountPage = () => {
     const navigate = useNavigate();
     return (
