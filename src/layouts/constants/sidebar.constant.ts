@@ -1,11 +1,11 @@
-import type {SidebarItem} from "@/layouts/types/sidebar.type.ts";
+import type {Sidebar} from "@/layouts/types/sidebar.type.ts";
 import DashboardIcon from '@/assets/icons/dashboard-icon.svg?react';
 import InboxIcon from '@/assets/icons/inbox-icon.svg?react';
 import TasksIcon from '@/assets/icons/tasks-icon.svg?react';
 import ProjectsIcon from '@/assets/icons/projects-icon.svg?react';
 import LabelsIcon from '@/assets/icons/labels-icon.svg?react';
 import {DASHBOARD, INBOX, LABELS, MY_TASKS, PROJECTS} from "@/shared/constants/route.constant.ts";
-export const SIDEBAR: SidebarItem[] = [
+export const SIDEBAR: Sidebar[] = [
     {
         key: "dashboard",
         label: "Dashboard",
