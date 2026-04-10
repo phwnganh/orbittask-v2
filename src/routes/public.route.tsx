@@ -1,15 +1,17 @@
 import {Navigate} from "react-router-dom";
 import type {ReactNode} from "react";
-import {useAuthStore} from "@/features/auth/stores/auth.store.ts";
 import Skeleton from "@/shared/components/Skeleton.tsx";
+import {useSession} from "@/features/auth/hooks/useSession.ts";
+import {useProfile} from "@/features/profile/hooks/useProfile.ts";
 
 const PublicRoute = ({children}: {children: ReactNode}) => {
-    const {user, isInitialized} = useAuthStore()
+    const {data: session, isLoading: isSessionLoading} = useSession()
+    const { isLoading: isProfileLoading} = useProfile()
 
-    if (!isInitialized) {
+    if (isSessionLoading || isProfileLoading) {
         return <Skeleton/>;
     }
-    if(user){
+    if(session?.user){
         return <Navigate to={"/"} replace/>
     }
     return children
