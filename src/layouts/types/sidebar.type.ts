@@ -4,6 +4,6 @@ export type Sidebar = {
     key: string;
     label: string;
     icon: IconType;
-    path?: string;
+    path: string;
     children?: Sidebar[];
 }
