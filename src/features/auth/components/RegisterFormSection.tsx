@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {VERIFIED_ACCOUNT} from "@/shared/constants/route.constant.ts";
 import {useRegister} from "@/features/auth/hooks/useRegister.ts";
 import type {RegisterPayload} from "@/features/auth/types/auth.type.ts";
+import Alert from "@/shared/components/Alert.tsx";
 
 const RegisterFormSection = () => {
     const [values, setValues] = useState<RegisterPayload>({
@@ -30,15 +31,21 @@ const RegisterFormSection = () => {
             password: values.password,
             first_name: values.first_name,
             last_name: values.last_name,
-        })
-        navigate(VERIFIED_ACCOUNT, {
-            state: {
-                email: values.email,
+        }, {
+            onSuccess: () => {
+                navigate(VERIFIED_ACCOUNT, {
+                    state: {
+                        email: values.email,
+                    }
+                })
             }
         })
+
     }
     return (
         <form method={"POST"} noValidate className={"flex flex-col gap-4 sm:gap-5"} onSubmit={onSubmit}>
+
+            {error && <Alert variant={"error"} title={"Failed to signup"} message={error.message}/>}
             <div className={"flex flex-col gap-1"}>
                 <div className={"flex flex-col sm:items-center sm:flex-row gap-4"}>
                     <div className={"flex flex-col gap-1"}>
@@ -64,7 +71,7 @@ const RegisterFormSection = () => {
                     <span id={"password-error"} role={"alert"} className={"text-error"}></span>
                 </div>
             </div>
-            <Button type={"submit"} className={"font-semibold"}>Register</Button>
+            <Button disabled={isPending} type={"submit"} className={"font-semibold"}>{isPending ? "Registering..." : "Register"}</Button>
         </form>
     );
 };

@@ -31,8 +31,8 @@ const VerifiedAccountPage = () => {
                 <img src={EmailIcon} alt="email-icon" className={"text-text-primary text-center"}/>
             </div>
             <header className={"flex flex-col gap-2 text-center"}>
-                <h1 className={"text-text-primary font-semibold text-2xl"}>Check Your Email</h1>
-                <h2 className={"text-text-secondary font-medium text-sm"}>We've sent a verification link to <span className={"text-primary"}>{email}</span></h2>
+                <h1 className={"text-text-primary font-semibold text-xl sm:text-2xl"}>Check Your Email</h1>
+                <h2 className={"text-text-secondary font-medium text-xs sm:text-sm"}>We've sent a verification link to <span className={"text-primary"}>{email}</span></h2>
             </header>
             <div className={"flex flex-col gap-3 w-full"}>
                 <Button type={"button"} onClick={handleOpenEmail}>Open Email</Button>
