@@ -1,5 +1,5 @@
 import Button from "@/shared/components/Button.tsx";
-import GoogleIcon from '@/assets/google-icon.svg'
+import GoogleIcon from '@/assets/icons/google-icon.svg'
 import {useLoginWithGoogle} from "@/features/auth/hooks/useLogin.ts";
 const LoginByGoogleSection = () => {
     const {mutate} = useLoginWithGoogle()

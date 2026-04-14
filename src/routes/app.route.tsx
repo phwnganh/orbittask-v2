@@ -1,8 +1,8 @@
 import {Route, Routes} from "react-router-dom";
 import {
     DASHBOARD,
-    FORBIDDEN,
-    LOGIN,
+    FORBIDDEN, INBOX, LABELS,
+    LOGIN, MY_TASKS, PROJECT_DETAILS,
     PROJECTS,
     REGISTER,
     SUCCESSFUL_VERIFIED_ACCOUNT,
@@ -17,6 +17,10 @@ import VerifiedAccountPage from "@/pages/VerifiedAccountPage";
 import SuccessfulVerifiedAccountPage from "@/pages/VerifiedAccountPage/SuccessfulVerifiedAccountPage.tsx";
 import ForbiddenPage from "@/pages/NotFoundPage/ForbiddenPage.tsx";
 import DashboardPage from "@/pages/DashboardPage";
+import InboxPage from "@/pages/InboxPage";
+import TasksPage from "@/pages/TasksPage";
+import ProjectDetailPage from "@/pages/ProjectDetailPage";
+import LabelPage from "@/pages/LabelPage";
 
 const AppRoute = () => {
     return (
@@ -32,7 +36,11 @@ const AppRoute = () => {
             <Route element={<PostLoginLayout/>}>
                 <Route path={PROJECTS} element={<ProjectsPage/>}/>
                 <Route path={DASHBOARD} element={<DashboardPage/>}/>
-                <Route path={"/"} element={<DashboardPage/>} index/>
+                <Route path={INBOX} element={<InboxPage/>}/>
+                <Route path={MY_TASKS} element={<TasksPage/>}/>
+                <Route path={`${PROJECT_DETAILS}/:project-id`} element={<ProjectDetailPage/>}/>
+                <Route path={LABELS} element={<LabelPage/>}/>
+                <Route index element={<DashboardPage/>} />
             </Route>
         </Routes>
     );

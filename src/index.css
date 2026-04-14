@@ -16,10 +16,6 @@
   --gray-400: #94a3b8;
   --gray-500: #64748b;
 
-  --green-500: #22c55e;
-  --yellow-500: #f59e0b;
-  --red-500: #ef4444;
-
   --color-bg-primary: #0f172a; /* nền chính */
   --color-bg-secondary: #1e293b; /* card / sidebar */
   --color-bg-tertiary: #334155; /* hover */
@@ -34,11 +30,20 @@
   --color-text-secondary: #94a3b8;
   --color-text-muted: #64748b;
 
-  --color-success: var(--green-500);
-  --color-warning: var(--yellow-500);
-  --color-error: var(--red-500);
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --color-bg-success: #22c55e1a;
+  --color-bg-warning: #f59e0b1a;
+  --color-bg-error: #ef44441a;
+  --color-bg-info: #6366f11a;
 
   --color-border-primary: var(--gray-700);
+  --color-border-success: #22c55e4d;
+  --color-border-warning: #f59e0b4d;
+  --color-border-error: #ef44444d;
+  --color-border-info: #6366f14d;
 }
 
 .light{

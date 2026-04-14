@@ -1,7 +1,6 @@
 import Button from "@/shared/components/Button.tsx";
 import {useNavigate} from "react-router-dom";
-import {LOGIN} from "@/shared/constants/route.constant.ts";
-import SuccessIcon from '@/assets/success-icon.svg'
+import SuccessIcon from '@/assets/icons/verified-icon.svg'
 const SuccessfulVerifiedAccountPage = () => {
     const navigate = useNavigate();
     return (
@@ -12,15 +11,15 @@ const SuccessfulVerifiedAccountPage = () => {
             <header className={"flex flex-col gap-3 text-center"}>
                 <div className={"flex items-center gap-1"}>
 
-                    <h1 className={"text-text-primary font-semibold text-2xl"}>Email verified successfully!</h1>
+                    <h1 className={"text-text-primary font-semibold text-xl sm:text-2xl"}>Email verified successfully!</h1>
                 </div>
                 <div className={"flex flex-col gap-1"}>
-                    <h2 className={"text-text-secondary font-medium text-sm"}>Your account has been activated.</h2>
-                    <span className={"text-text-secondary font-medium text-sm"}>You can now log in and start using the app.</span>
+                    <h2 className={"text-text-secondary font-medium text-xs sm:text-sm"}>Your account has been activated.</h2>
+                    <span className={"text-text-secondary font-medium text-xs sm:text-sm"}>You're all set. Redirecting you to your dashboard.</span>
                 </div>
             </header>
             <div className={"w-full"}>
-                <Button variant={"secondary"} className={"w-full"} onClick={() => navigate(LOGIN)}>Go to Login</Button>
+                <Button variant={"secondary"} className={"w-full"} onClick={() => navigate("/")}>Go to Dashboard</Button>
             </div>
         </div>
     );

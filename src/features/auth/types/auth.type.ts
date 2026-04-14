@@ -16,7 +16,8 @@ export type Profile = {
     last_name: string;
     email: string;
     role: "Admin" | "User";
-    date_of_birth: Date;
+    date_of_birth: string;
     phone_number: string;
     address: string;
+    avatar_url: string;
 }

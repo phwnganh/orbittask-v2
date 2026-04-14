@@ -1,5 +1,5 @@
 import Button from "@/shared/components/Button.tsx";
-import EmailIcon from '@/assets/email-icon.svg'
+import EmailIcon from '@/assets/icons/email-icon.svg'
 import {Link, useLocation} from "react-router-dom";
 import {LOGIN} from "@/shared/constants/route.constant.ts";
 const VerifiedAccountPage = () => {
@@ -31,8 +31,8 @@ const VerifiedAccountPage = () => {
                 <img src={EmailIcon} alt="email-icon" className={"text-text-primary text-center"}/>
             </div>
             <header className={"flex flex-col gap-2 text-center"}>
-                <h1 className={"text-text-primary font-semibold text-2xl"}>Check Your Email</h1>
-                <h2 className={"text-text-secondary font-medium text-sm"}>We've sent a verification link to <span className={"text-primary"}>{email}</span></h2>
+                <h1 className={"text-text-primary font-semibold text-xl sm:text-2xl"}>Check Your Email</h1>
+                <h2 className={"text-text-secondary font-medium text-xs sm:text-sm"}>We've sent a verification link to <span className={"text-primary"}>{email}</span></h2>
             </header>
             <div className={"flex flex-col gap-3 w-full"}>
                 <Button type={"button"} onClick={handleOpenEmail}>Open Email</Button>
