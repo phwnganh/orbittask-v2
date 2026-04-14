@@ -13,11 +13,11 @@ const Sidebar = () => {
             {isMobileOpen && (
                 <div
                     onClick={closeMobile}
-                    className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+                    className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity"
                 />
             )}
             <aside className={`
-                    fixed top-0 left-0 z-50 h-full
+                    fixed lg:static flex flex-col top-0 left-0 z-50 h-full
                     bg-bg-secondary border-r border-border-primary
                     transition-all duration-300
                     ${desktopCollapsed ? "lg:w-20" : "lg:w-65"}
