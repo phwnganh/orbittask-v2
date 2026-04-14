@@ -6,6 +6,7 @@ import {type ChangeEvent, type FormEvent, useState} from "react";
 import {useLogin} from "@/features/auth/hooks/useLogin.ts";
 import type {LoginPayload} from "@/features/auth/types/auth.type.ts";
 import Alert from "@/shared/components/Alert.tsx";
+import {mapAuthLoginError} from "@/shared/utils/mapAuthLoginError.ts";
 
 const LoginFormSection = () => {
     const [values, setValues] = useState<LoginPayload>({
@@ -34,7 +35,7 @@ const LoginFormSection = () => {
     }
     return (
         <form method={"POST"} noValidate className={"flex flex-col gap-4 sm:gap-5"} onSubmit={handleSubmit}>
-            {error && <Alert variant={"error"} title={"Failed to login"} message={error.message}/>}
+            {error && <Alert variant={"error"} title={"Failed to login"} message={mapAuthLoginError(error.message)}/>}
             <div className={"flex flex-col gap-1"}>
                 <label htmlFor={"email"} className={"text-xs sm:text-sm font-medium"}>Email<span className={"ml-2 text-error"}>*</span></label>
                 <Input className={"text-sm"} id={"email"} type={"email"} required autoComplete={"email"} name={"email"} aria-describedby={"email-error"} value={values.email} onChange={handleChange} placeholder={"Enter your email"}/>
