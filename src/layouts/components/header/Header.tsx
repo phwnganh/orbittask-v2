@@ -22,6 +22,7 @@ const Header = () => {
 
         <button
           onClick={toggleDesktop}
+          aria-label={"Open sidebar"}
           className="p-2 rounded-md hover:bg-bg-tertiary hidden lg:block"
         >
           <PanelLeftIcon className="w-5 h-5" />
