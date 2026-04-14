@@ -5,23 +5,23 @@ import Header from "@/layouts/components/header/Header.tsx";
 import {useSidebarStore} from "@/layouts/stores/sidebar.store.ts";
 
 const PostLoginLayout = () => {
-    const {collapsed} = useSidebarStore()
+    const {desktopCollapsed} = useSidebarStore()
     return (
         <ProtectedRoute>
-            <div className={`grid h-screen transition-all duration-300 ${collapsed ? "grid-cols-[80px_1fr]" : "grid-cols-[260px_1fr]"} grid-rows-[64px_1fr]`}>
-                <div className={"row-span-2"}>
-                    <Sidebar/>
-                </div>
-                <div className={"flex items-center"}>
+            <div className="flex h-screen bg-bg-primary">
+                <Sidebar/>
+                <div
+                    className={`
+                        flex flex-col flex-1 transition-all duration-300
+                        ${desktopCollapsed ? "lg:ml-20" : "lg:ml-65"}
+                    `}
+                >
                     <Header/>
+                    <main className="flex-1 overflow-auto">
+                        <Outlet/>
+                    </main>
                 </div>
-                <main className={"overflow-auto"}>
-                    <Outlet/>
-                </main>
             </div>
-
-
-
         </ProtectedRoute>
     );
 };
