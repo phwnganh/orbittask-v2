@@ -19,4 +19,5 @@ export type Profile = {
     date_of_birth: string;
     phone_number: string;
     address: string;
+    avatar_url: string;
 }
