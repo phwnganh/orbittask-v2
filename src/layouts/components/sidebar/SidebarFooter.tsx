@@ -2,20 +2,22 @@ import Avatar from "@/shared/components/Avatar.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import ChevronIcon from "@/assets/icons/chevron-icon.svg?react";
 import { useUIStore } from "@/shared/store/ui.store.ts";
+import {useProfile} from "@/features/profile/hooks/useProfile.ts";
 
 const SidebarFooter = () => {
-  const { desktopCollapsed, isMobileOpen } = useSidebarStore();
+  const { desktopCollapsed } = useSidebarStore();
   const { isUserMenuOpen, toggleUserMenu } = useUIStore();
+  const {data: profile} = useProfile()
   return (
     <div
-      className={`flex items-center ${isMobileOpen ? "justify-center" : "justify-between"} hover:bg-bg-tertiary cursor-pointer transition-all duration-200 py-2 rounded-md px-2`}
+      className={`flex items-center ${desktopCollapsed ? "justify-center" : "justify-between"} hover:bg-bg-tertiary cursor-pointer transition-all duration-200 py-2 rounded-md px-2`}
     >
       <div
         className={`flex items-center h-10 ${desktopCollapsed ? "justify-center" : "gap-2"}`}
       >
-        <Avatar />
+        <Avatar avatarUrl={profile?.avatar_url}/>
         {!desktopCollapsed && (
-          <span className={"text-sm font-medium truncate"}>Your Name</span>
+          <span className={"text-sm font-medium truncate"}>{profile?.first_name} {profile?.last_name}</span>
         )}
       </div>
 
