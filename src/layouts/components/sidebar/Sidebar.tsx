@@ -4,6 +4,8 @@ import SidebarProjectList from "@/layouts/components/sidebar/SidebarProjectList.
 import SidebarFooter from "@/layouts/components/sidebar/SidebarFooter.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import SidebarHeader from "@/layouts/components/sidebar/SidebarHeader.tsx";
+import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
+import SidebarDropdownItem from "@/layouts/components/sidebar/SidebarDropdownItem.tsx";
 const Sidebar = () => {
   const { desktopCollapsed, isMobileOpen, closeMobile } = useSidebarStore();
   return (
@@ -41,7 +43,10 @@ const Sidebar = () => {
           })}
         </div>
         <div className={"p-3 border-t border-border-primary"}>
-          <SidebarFooter />
+            <Dropdown trigger={({open, ref, ...props}) => <SidebarFooter ref={ref} open={open} {...props}/>}>
+                <SidebarDropdownItem/>
+            </Dropdown>
+
         </div>
       </aside>
     </>
