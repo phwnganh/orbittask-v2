@@ -43,7 +43,7 @@ const Dropdown = ({trigger, children, className, placement = "bottom-end", offse
 
             {isOpenDropdown && (
                 <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()} className={`
-            min-w-52 rounded-xl border border-bg-secondary/50 bg-bg-primary/95 backdrop-blur-md shadow-xl p-1.5
+            min-w-52 rounded-xl border border-bg-secondary/50 bg-bg-elevated/95 backdrop-blur-md shadow-2xl p-1.5
             ${className}
           `} data-state={isOpenDropdown ? "open" : "closed"}>{children}</div>
             )}
