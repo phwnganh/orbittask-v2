@@ -1,5 +1,6 @@
 import NotificationIcon from "@/assets/icons/notification-icon.svg?react";
 import LanguageIcon from "@/assets/icons/language-icon.svg?react";
+import Badge from "@/shared/components/Badge.tsx";
 const HeaderAction = () => {
     const unreadCount = 33;
   return (
@@ -12,9 +13,7 @@ const HeaderAction = () => {
         <NotificationIcon className={"w-6 h-6"} />
 
           {unreadCount > 0 && (
-              <span className={"absolute top-1 right-0 min-w-4 h-4 px-1 flex items-center justify-center text-xs font-medium text-text-primary bg-error rounded-full"}>
-                  {unreadCount > 99 ? "99+" : unreadCount}
-              </span>
+              <Badge count={unreadCount} variant={"error"} className={"absolute top-1 right-0 ring-2 ring-bg-primary"}/>
           )}
       </button>
       <button
