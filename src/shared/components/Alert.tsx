@@ -3,6 +3,7 @@ import SuccessIcon from '@/assets/icons/success-icon.svg?react'
 import ErrorIcon from '@/assets/icons/error-icon.svg?react'
 import WarningIcon from '@/assets/icons/warning-icon.svg?react'
 import InfoIcon from '@/assets/icons/info-icon.svg?react'
+import CloseIcon from '@/assets/icons/close-icon.svg?react'
 type AlertProps = {
     children?: ReactNode;
     variant: "success" | "error" | "warning" | "info";
@@ -65,7 +66,9 @@ const Alert = ({children, title, message, variant, className, onClose, autoClose
                 {children}
             </div>
 
-            <button type={"button"} onClick={handleClose} className={"text-text-muted hover:text-text-primary transition"}>X</button>
+            <button type={"button"} onClick={handleClose} className={"text-text-muted hover:text-text-primary transition"}>
+                <CloseIcon className="h-5 w-5" />
+            </button>
         </div>
     );
 };
