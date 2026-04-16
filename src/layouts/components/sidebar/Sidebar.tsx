@@ -1,11 +1,11 @@
 import { SIDEBAR } from "@/layouts/constants/sidebar.constant.ts";
-import SidebarItem from "@/layouts/components/sidebar/SidebarItem.tsx";
-import SidebarProjectList from "@/layouts/components/sidebar/SidebarProjectList.tsx";
-import SidebarFooter from "@/layouts/components/sidebar/SidebarFooter.tsx";
+import SidebarItem from "@/layouts/components/sidebar/uis/SidebarItem.tsx";
+import SidebarProjectList from "@/layouts/components/sidebar/blocks/SidebarProjectList.tsx";
+import SidebarFooter from "@/layouts/components/sidebar/blocks/SidebarFooter.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
-import SidebarHeader from "@/layouts/components/sidebar/SidebarHeader.tsx";
+import SidebarHeader from "@/layouts/components/sidebar/blocks/SidebarHeader.tsx";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
-import SidebarDropdownItem from "@/layouts/components/sidebar/SidebarDropdownItem.tsx";
+import SidebarDropdownItem from "@/layouts/components/sidebar/uis/SidebarDropdownItem.tsx";
 const Sidebar = () => {
   const { desktopCollapsed, isMobileOpen, closeMobile } = useSidebarStore();
   return (

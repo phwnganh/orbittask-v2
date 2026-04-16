@@ -1,7 +1,7 @@
-import HeaderTitle from "@/layouts/components/header/HeaderTitle.tsx";
+import HeaderTitle from "@/layouts/components/header/uis/HeaderTitle.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import PanelLeftIcon from "@/assets/icons/panel-left-icon.svg?react";
-import HeaderAction from "@/layouts/components/header/HeaderAction.tsx";
+import HeaderAction from "@/layouts/components/header/uis/HeaderAction.tsx";
 const Header = () => {
   const { toggleDesktop, openMobile } = useSidebarStore();
 
