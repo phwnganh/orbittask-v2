@@ -1,9 +1,12 @@
 import {cloneElement, isValidElement, type ReactNode, useState} from "react";
 import {autoUpdate, flip, offset, shift, useClick, useDismiss, useFloating, useInteractions} from "@floating-ui/react";
 
+type DropdownRenderProps = {
+    close: () => void;
+}
 type DropdownProps = {
     trigger: (props: any) => ReactNode;
-    children: ReactNode;
+    children: ReactNode | ((props: DropdownRenderProps) => ReactNode);
     className?: string;
     placement?: | "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "right";
     offsetValue?: number;
@@ -45,7 +48,10 @@ const Dropdown = ({trigger, children, className, placement = "bottom-end", offse
                 <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()} className={`
             min-w-52 rounded-xl border border-bg-secondary/50 bg-bg-elevated/95 backdrop-blur-md shadow-2xl p-1.5
             ${className}
-          `} data-state={isOpenDropdown ? "open" : "closed"}>{children}</div>
+          `} data-state={isOpenDropdown ? "open" : "closed"}>
+                    {typeof children === "function" ? children({close: () => setOpenDropdown(false)}) : children
+                    }
+                </div>
             )}
         </>
     );
