@@ -1,76 +1,94 @@
 # OrbitTask - Lightweight Task Management for Small Teams
-A lightweight task management web app designed for students and small teams, focusing on simplicity, controlled collaboration, and essential workflows only.
+A lightweight task management web app designed to prevent "free-riding" in student teams (3-5 members) by focusing on accountability, visibility, and centralized communication.
 
-1. Live Demo:
-2. Source Code:
+1. Live Demo: https://orbittask-v2.vercel.app/
+2. Source Code: https://github.com/phwnganh/orbittask-v2.git
 
 ## Key Highlights
-- Designed and built a full product flow: Authentication -> Project -> Collaboration -> Task Management.
+- Built a product that enforces accountability in small student teams (typically 3-5 members).
+- Designed an end-to-end product flow: Authentication -> Project -> Task -> Collaboration.
+- Centralized task-based communication to reduce scattered discussions.
 - Applied feature-based architecture for scalability and maintainability.
-- Focused on solving real problems of student teams (complex tools and lack of control).
-- Implemented collaboration features: invitation flow, task discussion, attachments.
+- Used modern frontend practices: React + Zustand + TanStak Query.
 
 ## User Problem
 
-Students and small teams often struggle with existing task management tools:
-- Tools like Jira are too complex and heavy.
-- Tools like Trello are too limited without paid features.
-- Collaboration control (who can do what) is often unclear or restricted.
+Students working in small teams (typically 3-5 members) often face difficulties when managing group assignments.\
+From my experience working in student projects:
+- Tasks are assigned informally (via chat), making in unclear who is responsible for what.
+- Progress is rarely updated, leading to last-minute rushes before deadlines.
+- Communication is fragmented across platforms (Messenger / Zalo), causing loss of context.
+- Some members become inactive, but there is no visibility into contribution.\
 
-From my experience working in small teams, these tools either create friction in setup or lack essential collaboration features, making project management inefficient.
+While tools like Jira provide strong structure, they are too complex for short-term student projects. Meanwhile, Trello offers simplicity but lacks mechanisms to enforce accountability.\
 
-** There is a need for a simple, accessible, and structured solution tailored for small teams. **
+=> Core problem: Small student teams lack a lightweight system that ensures clear ownership, visible progress, and centralized communication.
 
 
 
 ## Solution
-OrbitTask simplifies task management by focusing on:
-- Minimal setup: users can start collaborating in seconds.
-- Controlled collaboration: invitation and approval flow for better project control.
-- Essential features only: no clutter, no paywall basics.
+OrbitTask is designed to enforce accountability and clarity while keeping the system lightweight.
+1. Clear Ownership
+- Each task is assigned to 1 member.
+- Responsibility is visible at all times.
 
-** The goal is to balance simplicity (like Trello) and structure (like Jira).
+2. Progress Visibility
+- Task status and deadlines are clearly tracked.
+- Overdue tasks are highlighted.
+
+3. Task-based Communication
+- Comments are tied directly to tasks.
+- Supports replies, tagging, and reactions.
+
+4. Minimal Onboarding
+- Users can create projects and invite teammates quickly.
+- No complex setup like Jira.
 
 ## MVP Scope
-The MVP focuses on delivering core functionalities to support end-to-end project and task management:
+The MVP focuses on solving the core accountability and collaboration problems:
 1. User authentication (email/password, Google Oauth).
 2. Project Management (create, update, delete project).
 3. Team collaboration within projects (invite existing users, manage membership, join/leave project).
-4. Task Management within projects (create, update, and track task status).
+4. Task Management within projects (create and assign tasks, track task status and deadlines, task filtering).
 
 ## Product Roadmap
-### Phase 1: Core Collaboration
-1. Goal: Enable users to access the system and collaborate on projects.
+### Phase 1: Accountability Core
+1. Goal: Establish clear ownership and task visibility.
 2. Features:
 - Authentication system.
 - Project and team management.
-- Task creation and status tracking.
-- Task filtering and organization.
-3. Outcome: Users can fully manage projects and collaborate efficiently.
+- Task creation with required assignee.
+- Task status tracking.
+- Task filtering.
+- "My Tasks" view.
+3. Outcome: Users know exactly who is responsible for what.
 
-### Phase 2: Task Collaboration
-1. Goal: Improve communication within tasks.
+### Phase 2: Task-based Communication
+1. Goal: Centralized communication within tasks.
 2. Features:
-- Comment system (replies, reactions, edit permissions).
-- Attachment handling (upload/delete, limit 5 per task).
-- Label management.
-3. Outcome: Enhance feedback loops between team members.
+- Comment system (replies, reactions, tagging).
+- Attachment support (for design files, reports).
+- Edit/delete permissions.
+3. Outcome: Reduced fragmented communication and keep discussions within context.
 
 ### Phase 3: Workflow & Visibility
-1. Goal: Improve control and task visibility
+1. Goal: Improve transparency without adding complexity
 2. Features:
-- Task update request workflow (approval-based editing).
+- Activity log (track who made changes to tasks).
 - Calendar view for task visualization.
 - Notification system.
-3. Outcome: Better tracking and collaboration control.
+3. Outcome: Users can easily track progress and changes.
 
-### Phase 4: Analytics & Insights Dashboard
-1. Goal: Provide data-driven insights.
+### Phase 4: Insights and Accountability Metrics
+1. Goal: Provide visibility into team contribution.
 2. Features:
-- Task distribution by status.
-- Project progress tracking.
-- Member performance metrics.
-3. Outcome: Support better decision-making for project owners.
+- Task distribution per member.
+- Overdue tracking.
+- Contribution/activity metrics.
+3. Outcome: Teams can identify:
+- Bottlenecks.
+- Inactive members.
+- Workload imbalance.
 
 ## System Design
 ### Tech Stack
@@ -109,19 +127,18 @@ Supabase Authentication is used to handle:
 
 
 ## Design Decisions
-- Prioritized authentication as the foundation for all user flows.
-- Adopted feature-based architecture to support scalability and code organization.
-- Focused on MVP-first development before adding advanced features.
+- Prioritized accountability over feature quantity.
+- Avoid complex workflows (e.g., approval system) to maintain simplicity.
+- Focused on MVP-first development.
 - Designed system to support incremental development across phases.
 
 ## Future Improvements
-- Role-based access control (RBAC) -> support more complex team structures.
-- Refresh token & session management -> enhance security.
-- Real-time updates (WebSocket) -> improve collaboration responsiveness.
-- Notifications system -> improve user engagement.
+AI-assisted task summaries (to highlight key discussions instead of validating comments).- Improved onboarding experience.
+- Real-time updates (WebSocket).
+- Smarter notifications.
 
 ## What I Learned
-- How to design a product from problem -> solution -> roadmap.
-- Structuring a scalable frontend with feature-based architecture.
+- How to translate real user problems -> product decisions.
+- Designing systems that enforce user behavior, not just provide features.
 - Balancing simplicity vs functionality in product design.
-- Thinking beyond coding: user experience and collaboration flow.
+- Structuring scalable frontend architecture.
