@@ -1,4 +1,4 @@
-import Avatar from "@/shared/components/Avatar.tsx";
+import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import ChevronIcon from "@/assets/icons/chevron-icon.svg?react";
 import {useProfile} from "@/features/profile/hooks/useProfile.ts";
@@ -18,7 +18,7 @@ const SidebarFooter = forwardRef<HTMLDivElement, SidebarFooterProps>(({open, cla
         <div
             className={`flex items-center h-10 ${desktopCollapsed ? "justify-center" : "gap-2"}`}
         >
-          <Avatar avatarUrl={profile?.avatar_url}/>
+          <Avatar size={"sm"} avatarUrl={profile?.avatar_url}/>
           {!desktopCollapsed && (
               <span className={"text-sm font-medium truncate"}>{profile?.first_name} {profile?.last_name}</span>
           )}

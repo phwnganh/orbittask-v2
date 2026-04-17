@@ -9,9 +9,9 @@ A lightweight task management web app designed to prevent "free-riding" in stude
 - Designed an end-to-end product flow: Authentication -> Project -> Task -> Collaboration.
 - Centralized task-based communication to reduce scattered discussions.
 - Applied feature-based architecture for scalability and maintainability.
-- Used modern frontend practices: React + Zustand + TanStak Query.
+- Used modern frontend practices: React + Zustand + TanStack Query.
 
-## User Problem
+**## User Problem
 
 Students working in small teams (typically 3-5 members) often face difficulties when managing group assignments.\
 From my experience working in student projects:
@@ -88,7 +88,7 @@ The MVP focuses on solving the core accountability and collaboration problems:
 3. Outcome: Teams can identify:
 - Bottlenecks.
 - Inactive members.
-- Workload imbalance.
+- Workload imbalance.**
 
 ## System Design
 ### Tech Stack

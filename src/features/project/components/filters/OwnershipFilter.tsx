@@ -8,7 +8,7 @@ const OwnershipFilter = () => {
             <span className={"text-xs text-text-muted font-medium"}>Ownership</span>
             <SegmentedControl options={[
                 {label: "All", value: "all"},
-                {label: "Created", value: "created"},
+                {label: "Owned", value: "owned"},
                 {label: "Joined", value: "joined"}
             ]} value={ownership} onChange={setOwnership}/>
         </div>

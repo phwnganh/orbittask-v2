@@ -2,7 +2,7 @@ import ActiveFilterSummary from "@/features/project/components/filters/ActiveFil
 import ProjectSearch from "@/features/project/components/uis/ProjectSearch.tsx";
 import SortButton from "@/features/project/components/filters/SortButton.tsx";
 import OwnershipFilter from "@/features/project/components/filters/OwnershipFilter.tsx";
-import StatusFilter from "@/features/project/components/filters/StatusFilter.tsx";
+import RelevanceFilter from "@/features/project/components/filters/RelevanceFilter.tsx";
 import {useProjectFilterStore} from "@/features/project/stores/project-filter.store.ts";
 import {SORT_OPTIONS} from "@/features/project/constants/project-filter.constant.ts";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
@@ -26,7 +26,7 @@ const ProjectsFilterSection = () => {
         </div>
             <div className={"flex items-start gap-6 flex-wrap"}>
                 <OwnershipFilter/>
-                <StatusFilter/>
+                <RelevanceFilter/>
             </div>
         <ActiveFilterSummary/>
         </div>

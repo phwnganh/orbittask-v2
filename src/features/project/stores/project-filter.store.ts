@@ -1,13 +1,13 @@
-import type {OwnershipFilter, SortFilter, StatusFilter} from "@/features/project/types/project-filter.type.ts";
+import type {OwnershipFilter, RelevanceFilter, SortFilter} from "@/features/project/types/project-filter.type.ts";
 import {create} from "zustand";
 
 type ProjectFilterState = {
     ownership: OwnershipFilter;
-    status: StatusFilter;
+    relevance: RelevanceFilter;
     sort: SortFilter;
 
     setOwnership: (value: OwnershipFilter) => void;
-    setStatus: (status: StatusFilter) => void;
+    setRelevance: (relevance: RelevanceFilter) => void;
     setSort: (sort: SortFilter) => void;
 
     reset: () => void;
@@ -15,14 +15,14 @@ type ProjectFilterState = {
 
 export const useProjectFilterStore = create<ProjectFilterState>((set) => ({
     ownership: "all",
-    status: "active",
-    sort: "newest",
+    relevance: "all",
+    sort: "smart",
     setOwnership: (ownership) => set({ownership}),
-    setStatus: (status) => set({status}),
+    setRelevance: (relevance) => set({relevance}),
     setSort: (sort) => set({sort}),
     reset: () => set({
         ownership: "all",
-        status: "active",
+        relevance: "all",
         sort: "newest",
     })
 }))
