@@ -1,24 +1,27 @@
-import type {ReactNode} from "react";
+import type {FormEvent, ReactNode} from "react";
 import {BaseModal} from "@/shared/components/modal/index.tsx";
 import Button from "@/shared/components/Button.tsx";
 
 type FormModalProps = {
-    open: boolean;
+    isOpen: boolean;
     title: string;
-    onSubmit: () => void;
+    onSubmit: (e?: FormEvent) => void;
     onClose: () => void;
     children: ReactNode;
+    isLoading?: boolean;
 }
-const FormModal = ({open, title, onSubmit, onClose, children}: FormModalProps) => {
+const FormModal = ({isOpen, title, onSubmit, onClose, children, isLoading}: FormModalProps) => {
     return (
-        <BaseModal open={open} onClose={onClose}>
+        <BaseModal isOpen={isOpen} onClose={onClose}>
             <BaseModal.Content>
                 <BaseModal.Header title={title} onClose={onClose}/>
-                <BaseModal.Body>{children}</BaseModal.Body>
-                <BaseModal.Footer>
-                    <Button variant={"secondary"} fullWidth={false} onClick={onClose}>Cancel</Button>
-                    <Button fullWidth={false} onClick={onSubmit}>Save</Button>
-                </BaseModal.Footer>
+                <form onSubmit={onSubmit}>
+                    <BaseModal.Body>{children}</BaseModal.Body>
+                    <BaseModal.Footer>
+                        <Button variant={"secondary"} fullWidth={false} onClick={onClose}>Cancel</Button>
+                        <Button type={"submit"} fullWidth={false}>{isLoading ? "Saving..." : "Save"}</Button>
+                    </BaseModal.Footer>
+                </form>
             </BaseModal.Content>
         </BaseModal>
     );

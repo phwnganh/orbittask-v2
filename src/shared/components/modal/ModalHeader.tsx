@@ -1,4 +1,4 @@
-import CloseIcon from '@/assets/icons/close-icon.svg'
+import CloseIcon from '@/assets/icons/close-icon.svg?react'
 type ModalHeaderProps = {
     title: string;
     onClose?: () => void
@@ -12,7 +12,7 @@ const ModalHeader = ({title, onClose}: ModalHeaderProps) => {
 
             {onClose && (
                 <button onClick={onClose} className={"text-text-muted hover:text-text-primary"}>
-                    <CloseIcon/>
+                    <CloseIcon className={"w-5 h-5"}/>
                 </button>
             )}
         </div>

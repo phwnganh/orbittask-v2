@@ -2,7 +2,7 @@ import {BaseModal} from "@/shared/components/modal/index.tsx";
 import Button from "@/shared/components/Button.tsx";
 
 type ConfirmModalProps = {
-    open: boolean;
+    isOpen: boolean;
     title: string;
     description?: string;
     confirmText?: string;
@@ -10,9 +10,9 @@ type ConfirmModalProps = {
     onConfirm: () => void;
     onClose: () => void;
 }
-const ConfirmModal = ({open, title, description, confirmText = "Confirm", cancelText = "Cancel", onConfirm, onClose}: ConfirmModalProps) => {
+const ConfirmModal = ({isOpen, title, description, confirmText = "Confirm", cancelText = "Cancel", onConfirm, onClose}: ConfirmModalProps) => {
     return (
-        <BaseModal open={open} onClose={onClose}>
+        <BaseModal isOpen={isOpen} onClose={onClose}>
             <BaseModal.Header title={title} onClose={onClose}/>
             <BaseModal.Body>
                 <p className="text-sm text-text-secondary">
