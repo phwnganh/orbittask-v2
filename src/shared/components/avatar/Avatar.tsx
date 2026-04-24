@@ -1,4 +1,4 @@
-import {type HTMLAttributes} from "react";
+import {type HTMLAttributes, useState} from "react";
 import UserIcon from '@/assets/icons/user-icon.svg?react'
 type AvatarProps = {
     avatarUrl?: string;
@@ -6,6 +6,7 @@ type AvatarProps = {
     size?: "xs" | "sm" | "md" | "lg";
 } & HTMLAttributes<HTMLDivElement>;
 const Avatar = ({avatarUrl, name, size="sm", className, ...props}: AvatarProps) => {
+    const [error, setError] = useState(false)
     const sizeClass = {
         xs: "w-6 h-6 text-[10px]",
         sm: "w-7 h-7 text-xs",
@@ -14,8 +15,9 @@ const Avatar = ({avatarUrl, name, size="sm", className, ...props}: AvatarProps) 
     }
     return (
         <div className={`flex justify-center items-center shrink-0 rounded-full overflow-hidden bg-bg-tertiary border border-border-primary ${sizeClass[size]} ${className}`} {...props}>
-            {avatarUrl ?
-                <img src={avatarUrl} alt={"avatar"} className={"w-full h-full object-cover"}/> :
+            {avatarUrl && !error ?
+                <img src={avatarUrl} alt={"avatar"} className={"w-full h-full object-cover"}
+                onError={() => setError(true)}/> :
                 <UserIcon className={`text-text-muted ${sizeClass[size]}`}/>
             }
 

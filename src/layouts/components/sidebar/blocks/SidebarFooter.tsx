@@ -10,6 +10,7 @@ type SidebarFooterProps = {
 const SidebarFooter = forwardRef<HTMLDivElement, SidebarFooterProps>(({open, className, ...props}, ref) => {
   const { desktopCollapsed } = useSidebarStore();
   const {data: profile} = useProfile()
+  console.log(profile?.avatar_url)
   return (
       <div ref={ref}
            {...props}
