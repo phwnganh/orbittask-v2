@@ -1,12 +1,20 @@
+import Card from "@/shared/components/Card.tsx";
+import Badge from "@/shared/components/Badge.tsx";
+import type {Project} from "@/features/project/types/project.type.ts";
 
-const ProjectCardItem = () => {
+type ProjectCardItemProps = {
+    project: Project
+}
+const ProjectCardItem = ({project}: ProjectCardItemProps) => {
     return (
-        <section className={"flex flex-col gap-4"}>
+        <Card className={"flex flex-col gap-4"}>
             <div className={"flex items-center justify-between"}>
-                <p>Your Project Name</p>
-                <span></span>
+                <p>{project.title}</p>
+                <Badge/>
             </div>
-        </section>
+            <span className={"-mt-1"}>{project.description}</span>
+            {/*<Progress value={}/>*/}
+        </Card>
     );
 };
 
