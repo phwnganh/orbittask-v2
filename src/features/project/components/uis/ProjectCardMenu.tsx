@@ -9,7 +9,7 @@ type ProjectCardMenuProps = {
     close: () => void;
 }
 const ProjectCardMenu = ({project, close}: ProjectCardMenuProps) => {
-    const {onOpenEditProjectModal} = useProjectStore()
+    const {onOpenEditProjectModal, onOpenDeleteProjectModal} = useProjectStore()
 
     const handleSelectMenuItem = (value: ProjectCardItemMenu) => {
         switch (value){
@@ -17,6 +17,7 @@ const ProjectCardMenu = ({project, close}: ProjectCardMenuProps) => {
                 onOpenEditProjectModal(project);
                 break;
             case "delete":
+                onOpenDeleteProjectModal(project);
                 break;
         }
         close();

@@ -14,7 +14,7 @@ type DropdownProps = {
     onOpenChange?: (open: boolean) => void;
     disabled?: boolean;
 };
-const Dropdown = ({trigger, children, className, placement = "bottom-end", offsetValue = 8, open, onOpenChange, disabled = false}: DropdownProps) => {
+const Dropdown = ({trigger, children, className, placement, offsetValue = 8, open, onOpenChange, disabled = false}: DropdownProps) => {
     const [internalOpen, setInternalOpen] = useState(false);
     const isOpenDropdown = open ?? internalOpen;
     const setOpenDropdown = onOpenChange ?? setInternalOpen;
@@ -22,7 +22,7 @@ const Dropdown = ({trigger, children, className, placement = "bottom-end", offse
         open: isOpenDropdown,
         onOpenChange: setOpenDropdown,
         placement,
-        strategy: "fixed",
+        strategy: "absolute",
         middleware: [
             offset(offsetValue),
             flip(),
