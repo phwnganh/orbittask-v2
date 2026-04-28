@@ -1,4 +1,4 @@
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../shared/components/button/Button.tsx";
 import EmailIcon from '@/assets/icons/email-icon.svg'
 import {Link, useLocation} from "react-router-dom";
 import {LOGIN} from "@/shared/constants/route.constant.ts";

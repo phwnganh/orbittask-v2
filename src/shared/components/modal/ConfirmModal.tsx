@@ -1,5 +1,5 @@
 import {BaseModal} from "@/shared/components/modal/index.tsx";
-import Button from "@/shared/components/Button.tsx";
+import Button from "../button/Button.tsx";
 
 type ConfirmModalProps = {
     isOpen: boolean;

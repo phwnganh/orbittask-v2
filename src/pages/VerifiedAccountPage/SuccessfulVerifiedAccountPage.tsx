@@ -1,4 +1,4 @@
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../shared/components/button/Button.tsx";
 import {useNavigate} from "react-router-dom";
 import SuccessIcon from '@/assets/icons/verified-icon.svg'
 const SuccessfulVerifiedAccountPage = () => {

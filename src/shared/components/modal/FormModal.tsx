@@ -1,6 +1,6 @@
 import type {FormEvent, ReactNode} from "react";
 import {BaseModal} from "@/shared/components/modal/index.tsx";
-import Button from "@/shared/components/Button.tsx";
+import Button from "../button/Button.tsx";
 
 type FormModalProps = {
     isOpen: boolean;

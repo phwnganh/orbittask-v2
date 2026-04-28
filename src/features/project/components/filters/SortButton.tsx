@@ -1,4 +1,4 @@
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../../../shared/components/button/Button.tsx";
 import SortIcon from '@/assets/icons/sort-icon.svg?react'
 import ChevronDownIcon from '@/assets/icons/chevron-icon.svg?react'
 import {SORT_OPTIONS} from "@/features/project/constants/project-filter.constant.ts";

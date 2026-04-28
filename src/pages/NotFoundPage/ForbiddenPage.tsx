@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../shared/components/button/Button.tsx";
 
 const ForbiddenPage = () => {
     const navigate = useNavigate();

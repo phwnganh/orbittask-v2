@@ -1,7 +1,7 @@
 import Input from "@/shared/components/Input.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {FORGOT_PASSWORD} from "@/shared/constants/route.constant.ts";
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../../shared/components/button/Button.tsx";
 import {type ChangeEvent, type FormEvent, useState} from "react";
 import {useLogin} from "@/features/auth/hooks/useLogin.ts";
 import type {LoginPayload} from "@/features/auth/types/auth.type.ts";

@@ -1,5 +1,5 @@
 import Input from "@/shared/components/Input.tsx";
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../../shared/components/button/Button.tsx";
 import {type ChangeEvent, type FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {VERIFIED_ACCOUNT} from "@/shared/constants/route.constant.ts";

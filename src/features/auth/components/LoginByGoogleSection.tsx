@@ -1,4 +1,4 @@
-import Button from "@/shared/components/Button.tsx";
+import Button from "../../../shared/components/button/Button.tsx";
 import GoogleIcon from '@/assets/icons/google-icon.svg'
 import {useLoginWithGoogle} from "@/features/auth/hooks/useLogin.ts";
 const LoginByGoogleSection = () => {

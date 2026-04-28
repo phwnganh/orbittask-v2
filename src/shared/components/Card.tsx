@@ -5,7 +5,7 @@ type CardProps = {
     className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 const Card = ({children, className, ...props}: CardProps) => {
-    const baseClass = "bg-bg-secondary rounded-xl p-4 border border-border-primary transition-all hover:bg-bg-tertiary"
+    const baseClass = "bg-bg-secondary rounded-xl p-4 border border-border-primary transition-all"
     return (
         <div className={`${baseClass} ${className}`} {...props}>
             {children}
