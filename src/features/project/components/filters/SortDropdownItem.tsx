@@ -4,16 +4,14 @@ import {useProjectFilterStore} from "@/features/project/stores/project-filter.st
 import SuccessIcon from '@/assets/icons/success-icon.svg?react'
 
 type SortDropdownItemProps = {
-    close: () => void;
 }
-const SortDropdownItem = ({close}: SortDropdownItemProps) => {
+const SortDropdownItem = ({}: SortDropdownItemProps) => {
     const {sort, setSort} = useProjectFilterStore()
     return (
         <>
             {SORT_OPTIONS.map(option => (
                 <DropdownItem key={option.value} onClick={() => {
                     setSort(option.value)
-                    close();
                 }}>
                     <span className={"flex items-center justify-between w-full"}>
                         {option.label}

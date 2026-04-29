@@ -6,11 +6,9 @@ import type {ProjectCardItemMenu} from "@/features/project/types/project-card-it
 
 type ProjectCardMenuProps = {
     project: Project;
-    close: () => void;
 }
-const ProjectCardMenu = ({project, close}: ProjectCardMenuProps) => {
+const ProjectCardMenu = ({project}: ProjectCardMenuProps) => {
     const {onOpenEditProjectModal, onOpenDeleteProjectModal} = useProjectStore()
-
     const handleSelectMenuItem = (value: ProjectCardItemMenu) => {
         switch (value){
             case "edit":
@@ -20,7 +18,6 @@ const ProjectCardMenu = ({project, close}: ProjectCardMenuProps) => {
                 onOpenDeleteProjectModal(project);
                 break;
         }
-        close();
     }
     return (
         <>

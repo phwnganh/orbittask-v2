@@ -7,6 +7,8 @@ import {useProjectFilterStore} from "@/features/project/stores/project-filter.st
 import {SORT_OPTIONS} from "@/features/project/constants/project-filter.constant.ts";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import SortDropdownItem from "@/features/project/components/filters/SortDropdownItem.tsx";
+import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
+import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 const ProjectsFilterSection = () => {
     const {sort, setSort} = useProjectFilterStore()
     const currentSort = SORT_OPTIONS.find(option => option.value === sort)
@@ -17,11 +19,15 @@ const ProjectsFilterSection = () => {
             <div className={"flex-1 min-w-0"}>
                 <ProjectSearch />
             </div>
-        <Dropdown placement={"bottom-end"} trigger={({open, ref, ...props}) => <SortButton ref={ref} open={open} {...props}/>}>
-            {({close}) =>
-                <SortDropdownItem close={close}/>
-            }
-        </Dropdown>
+
+            <Dropdown>
+                <DropdownTrigger>
+                    {(props) =>  <SortButton {...props}/>}
+                </DropdownTrigger>
+                <DropdownContent>
+                    <SortDropdownItem/>
+                </DropdownContent>
+            </Dropdown>
 
         </div>
             <div className={"flex items-start gap-6 flex-wrap"}>
