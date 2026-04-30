@@ -5,8 +5,11 @@ type ProjectFilterState = {
     ownership: OwnershipFilter;
     relevance: RelevanceFilter;
     sort: SortFilter;
+    search: string;
     page: number;
     pageSize: number;
+
+    setSearch: (search: string) => void;
 
     setPage: (page: number) => void;
     setPageSize: (pageSize: number) => void;
@@ -26,11 +29,13 @@ export const useProjectFilterStore = create<ProjectFilterState>((set) => ({
     ownership: "all",
     relevance: "all",
     sort: "smart",
+    search: "",
     page: 1,
     pageSize: 6,
     setOwnership: (ownership) => set({ownership, page: 1}),
     setRelevance: (relevance) => set({relevance, page: 1}),
     setSort: (sort) => set({sort, page: 1}),
+    setSearch: (search) => set({search, page: 1}),
     setPage: (page) => set({page}),
     setPageSize: (pageSize) => set({pageSize, page: 1}),
     nextPage: () => set(s => ({page: s.page + 1})),

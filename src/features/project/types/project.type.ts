@@ -6,3 +6,8 @@ export type Project = {
     is_archived: boolean;
     created_at: string;
 }
+
+export type ProjectResponse = {
+    data: Project[];
+    total: number;
+}

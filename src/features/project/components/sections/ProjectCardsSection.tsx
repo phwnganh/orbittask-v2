@@ -5,13 +5,13 @@ import DeleteProjectModal from "@/features/project/components/delete-project/Del
 import {useProjectStore} from "@/features/project/stores/project.store.ts";
 
 const ProjectCardsSection = () => {
-    const {data: projects} = useViewAllProjects()
     const {isEditModalOpen, isDeleteModalOpen, onCloseEditProjectModal, onCloseDeleteProjectModal} = useProjectStore()
+    const {data: projects} = useViewAllProjects()
 
     return (
         <>
             <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-start"}>
-                {projects?.map((project) => (
+                {projects?.data.map((project) => (
                     <ProjectCardItem key={project.id}  project={project}/>
                 ))}
 

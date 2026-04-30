@@ -1,7 +1,7 @@
 import type {ProjectFormValues} from "@/features/project/components/project-form/project.schema.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
 import {getCurrentUserApi} from "@/features/auth/services/auth.api.ts";
-import type {Project} from "@/features/project/types/project.type.ts";
+import type {ProjectResponse} from "@/features/project/types/project.type.ts";
 
 export const createProjectApi = async (payload: ProjectFormValues) => {
     const user = await getCurrentUserApi()
@@ -37,10 +37,21 @@ export const deleteProjectApi = async (project_id: string) => {
     return project;
 }
 
-export const getAllProjectsApi = async (): Promise<Project[]> => {
-    const {data, error} = await supabase.from("Projects").select("*");
+export const getAllProjectsApi = async ({search, page, pageSize}: {search?: string; page: number; pageSize: number}): Promise<ProjectResponse> => {
+    const {data, error} = await supabase.rpc("get_all_projects", {
+        p_search: search ?? null,
+        p_page: page,
+        p_page_size: pageSize,
+    })
     if(error){
         throw error;
     }
-    return data;
+
+    const projects = data ?? [];
+    const total = projects[0]?.total_count ?? 0;
+
+    return {
+        data: projects,
+        total
+    };
 }
