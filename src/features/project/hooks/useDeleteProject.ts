@@ -9,13 +9,13 @@ export const useDeleteProject = () => {
     return useMutation({
         mutationFn: ({projectId}: {projectId: string}) => deleteProjectApi(projectId),
         onMutate: async ({projectId}) => {
-            await cancel(projectKeys.all)
-            const previous = get<Project[]>(projectKeys.all)
-            set<Project[]>(projectKeys.all, (old = []) => old.filter(p => p.id !== projectId))
+            await cancel(projectKeys.lists())
+            const previous = get<Project[]>(projectKeys.lists())
+            set<Project[]>(projectKeys.lists(), (old = []) => old.filter(p => p.id !== projectId))
             return {previous}
         },
         onError: (_err, _vars, context) => {
-            set(projectKeys.all, () => context?.previous ?? [])
+            set(projectKeys.lists(), () => context?.previous ?? [])
         }
     })
 }

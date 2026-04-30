@@ -5,7 +5,7 @@ import {projectKeys} from "@/features/project/constants/project-query-key.consta
 
 export const useViewAllProjects = () => {
     return useQuery<Project[]>({
-        queryKey: projectKeys.all,
+        queryKey: projectKeys.lists(),
         queryFn: getAllProjectsApi
     })
 }

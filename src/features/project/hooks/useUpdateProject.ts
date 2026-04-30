@@ -10,20 +10,20 @@ export const useUpdateProject = () => {
     return useMutation({
         mutationFn: ({projectId, payload}: {projectId: string; payload: ProjectFormValues}) => updateProjectApi(projectId, payload),
         onMutate: async ({projectId, payload}) => {
-            await cancel(projectKeys.all)
+            await cancel(projectKeys.lists())
 
-            const previous = get<Project[]>(projectKeys.all);
+            const previous = get<Project[]>(projectKeys.lists());
 
-            set<Project[]>(projectKeys.all, (old = []) => old.map(p => p.id === projectId ? {...p, ...payload} : p))
+            set<Project[]>(projectKeys.lists(), (old = []) => old.map(p => p.id === projectId ? {...p, ...payload} : p))
 
             return {previous, projectId};
         },
 
         onError: (_err, _vars, context) => {
-            set(projectKeys.all, () => context?.previous ?? [])
+            set(projectKeys.lists(), () => context?.previous ?? [])
         },
         onSuccess: (updatedProject, _vars, context) => {
-            set<Project[]>(projectKeys.all, (old = []) => old.map(p => p.id === context?.projectId ? updatedProject : p))
+            set<Project[]>(projectKeys.lists(), (old = []) => old.map(p => p.id === context?.projectId ? updatedProject : p))
         },
     })
 }

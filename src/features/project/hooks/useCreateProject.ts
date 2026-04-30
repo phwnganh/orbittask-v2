@@ -14,9 +14,9 @@ export const useCreateProject = () => {
         mutationFn: createProjectApi,
         onMutate: async (payload) => {
             if(!user) throw new Error("Unauthenticated")
-            await cancel(projectKeys.all)
+            await cancel(projectKeys.lists())
 
-            const previous = get<Project[]>(projectKeys.all);
+            const previous = get<Project[]>(projectKeys.lists());
             const tempId = crypto.randomUUID()
             const optimisticProject = {
                 id: tempId,
@@ -27,7 +27,7 @@ export const useCreateProject = () => {
                 created_at: new Date().toISOString(),
             }
 
-            set<Project[]>(projectKeys.all, (old = []) => [
+            set<Project[]>(projectKeys.lists(), (old = []) => [
                 ...old,
                 optimisticProject
             ]);
@@ -35,10 +35,10 @@ export const useCreateProject = () => {
             return {previous, tempId}
         },
         onError: (_err, _vars, context) => {
-            set(projectKeys.all, () => context?.previous ?? [])
+            set(projectKeys.lists(), () => context?.previous ?? [])
         },
         onSuccess: (result, _vars, context) => {
-            set<Project[]>(projectKeys.all, (old = []) => old.map(p => p.id === context?.tempId ? result : p))
+            set<Project[]>(projectKeys.lists(), (old = []) => old.map(p => p.id === context?.tempId ? result : p))
         }
     })
 }
