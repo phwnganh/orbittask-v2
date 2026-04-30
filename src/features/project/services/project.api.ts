@@ -48,7 +48,7 @@ export const getAllProjectsApi = async ({search, page, pageSize}: {search?: stri
     }
 
     const projects = data ?? [];
-    const total = projects[0]?.total_count ?? 0;
+    const total = data && data.length > 0 ? data[0].total_count : 0;
 
     return {
         data: projects,

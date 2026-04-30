@@ -1,12 +1,12 @@
-import {useViewAllProjects} from "@/features/project/hooks/useViewProjects.ts";
 import ProjectCardItem from "@/features/project/components/uis/ProjectCardItem.tsx";
 import EditProjectModal from "@/features/project/components/edit-project/EditProjectModal.tsx";
 import DeleteProjectModal from "@/features/project/components/delete-project/DeleteProjectModal.tsx";
 import {useProjectStore} from "@/features/project/stores/project.store.ts";
+import type {ProjectResponse} from "@/features/project/types/project.type.ts";
 
-const ProjectCardsSection = () => {
+const ProjectCardsSection = ({projects}: {projects?: ProjectResponse}) => {
     const {isEditModalOpen, isDeleteModalOpen, onCloseEditProjectModal, onCloseDeleteProjectModal} = useProjectStore()
-    const {data: projects} = useViewAllProjects()
+
 
     return (
         <>

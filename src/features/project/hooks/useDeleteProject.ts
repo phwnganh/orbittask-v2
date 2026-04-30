@@ -2,20 +2,31 @@ import {useMutation} from "@tanstack/react-query";
 import {deleteProjectApi} from "@/features/project/services/project.api.ts";
 import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
 import {projectKeys} from "@/features/project/constants/project-query-key.constant.ts";
-import type {Project} from "@/features/project/types/project.type.ts";
+import type {ProjectResponse} from "@/features/project/types/project.type.ts";
 
 export const useDeleteProject = () => {
-    const {get, set, cancel} = useReactQueryClient()
+    const {setMany, invalidate, cancel} = useReactQueryClient()
     return useMutation({
         mutationFn: ({projectId}: {projectId: string}) => deleteProjectApi(projectId),
         onMutate: async ({projectId}) => {
             await cancel(projectKeys.lists())
-            const previous = get<Project[]>(projectKeys.lists())
-            set<Project[]>(projectKeys.lists(), (old = []) => old.filter(p => p.id !== projectId))
-            return {previous}
+            setMany(projectKeys.lists(), (old: ProjectResponse | undefined) => {
+                if(!old) return old
+
+                return {
+                    ...old,
+                    data: old.data.filter(p => p.id !== projectId),
+                    total: old.total - 1
+                }
+            })
+            return {projectId}
         },
-        onError: (_err, _vars, context) => {
-            set(projectKeys.lists(), () => context?.previous ?? [])
-        }
+        onError: () => {
+            void invalidate(projectKeys.lists());
+        },
+
+        onSettled: () => {
+            void invalidate(projectKeys.lists());
+        },
     })
 }

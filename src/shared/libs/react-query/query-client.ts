@@ -11,14 +11,24 @@ export const useReactQueryClient = () => {
         queryClient.setQueryData<T>(key, updater)
     }
 
+    const setMany = <T>(key: readonly unknown[], updater: (old: T | undefined) => T | undefined) => {
+        queryClient.setQueriesData<T>({queryKey: key}, updater)
+    }
+
     const cancel = (key: readonly unknown[]) => {
         return queryClient.cancelQueries({queryKey: key})
+    }
+
+    const invalidate = (key: readonly unknown[]) => {
+        return queryClient.invalidateQueries({queryKey: key})
     }
 
     return {
         queryClient,
         get,
         set,
+        setMany,
         cancel,
+        invalidate,
     }
 }

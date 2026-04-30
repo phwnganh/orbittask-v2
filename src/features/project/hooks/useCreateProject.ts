@@ -2,11 +2,11 @@ import {useMutation} from "@tanstack/react-query";
 import {createProjectApi} from "@/features/project/services/project.api.ts";
 import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
 import {projectKeys} from "@/features/project/constants/project-query-key.constant.ts";
-import type {Project} from "@/features/project/types/project.type.ts";
+import type { ProjectResponse} from "@/features/project/types/project.type.ts";
 import {useSession} from "@/features/auth/hooks/useSession.ts";
 
 export const useCreateProject = () => {
-    const {get, set, cancel} = useReactQueryClient()
+    const {setMany, cancel, invalidate} = useReactQueryClient()
     const {data: session} = useSession()
     const user = session?.user
 
@@ -16,7 +16,6 @@ export const useCreateProject = () => {
             if(!user) throw new Error("Unauthenticated")
             await cancel(projectKeys.lists())
 
-            const previous = get<Project[]>(projectKeys.lists());
             const tempId = crypto.randomUUID()
             const optimisticProject = {
                 id: tempId,
@@ -27,18 +26,33 @@ export const useCreateProject = () => {
                 created_at: new Date().toISOString(),
             }
 
-            set<Project[]>(projectKeys.lists(), (old = []) => [
-                ...old,
-                optimisticProject
-            ]);
+            setMany(projectKeys.lists(), (old: ProjectResponse | undefined) => {
+                if(!old) return old
 
-            return {previous, tempId}
+                return {
+                    ...old,
+                    data: [optimisticProject, ...old.data],
+                    total: old.total + 1
+                }
+            })
+
+            return {tempId}
         },
-        onError: (_err, _vars, context) => {
-            set(projectKeys.lists(), () => context?.previous ?? [])
+        onError: (_err, _vars) => {
+            void invalidate(projectKeys.lists())
         },
         onSuccess: (result, _vars, context) => {
-            set<Project[]>(projectKeys.lists(), (old = []) => old.map(p => p.id === context?.tempId ? result : p))
+            setMany(projectKeys.lists(), (old: ProjectResponse | undefined) => {
+                if(!old) return old
+
+                return {
+                    ...old,
+                    data: old.data.map(p => p.id === context.tempId ? result : p)
+                }
+            })
+        },
+        onSettled: () => {
+            void invalidate(projectKeys.lists())
         }
     })
 }
