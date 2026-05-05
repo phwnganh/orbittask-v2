@@ -34,7 +34,9 @@ const ProjectsFilterSection = () => {
                 <OwnershipFilter/>
                 <RelevanceFilter/>
             </div>
-        <ActiveFilterSummary/>
+        <div className={"min-h-8"}>
+            <ActiveFilterSummary/>
+        </div>
         </div>
     );
 };
