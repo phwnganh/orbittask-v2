@@ -1,4 +1,4 @@
-import Input from "@/shared/components/Input.tsx";
+import Input from "../../../../shared/components/inputs/Input.tsx";
 import SearchIcon from '@/assets/icons/search-icon.svg?react'
 import {useEffect, useState} from "react";
 import {useDebounce} from "@/shared/hooks/useDebounce.ts";

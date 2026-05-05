@@ -1,5 +1,5 @@
-import Card from "@/shared/components/Card.tsx";
-import Badge from "@/shared/components/Badge.tsx";
+import Card from "../../../../shared/components/data-display/Card.tsx";
+import Badge from "../../../../shared/components/data-display/Badge.tsx";
 import type {Project} from "@/features/project/types/project.type.ts";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import ProjectCardMenu from "./ProjectCardMenu.tsx";

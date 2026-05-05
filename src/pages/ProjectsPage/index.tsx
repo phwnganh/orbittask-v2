@@ -5,12 +5,12 @@ import ProjectCardsSection from "@/features/project/components/sections/ProjectC
 import {useViewAllProjects} from "@/features/project/hooks/useViewProjects.ts";
 
 const ProjectsPage = () => {
-    const {data: projects} = useViewAllProjects()
+    const {data: projects, isLoading} = useViewAllProjects()
     return (
         <div className={"flex flex-col gap-6"}>
             <ProjectTitleSection/>
             <ProjectsFilterSection/>
-            <ProjectCardsSection projects={projects}/>
+            <ProjectCardsSection projects={projects} isLoading={isLoading}/>
             <ProjectPaginationSection projects={projects}/>
         </div>
     );

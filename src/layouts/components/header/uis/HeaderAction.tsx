@@ -1,6 +1,6 @@
 import NotificationIcon from "@/assets/icons/notification-icon.svg?react";
 import LanguageIcon from "@/assets/icons/language-icon.svg?react";
-import Badge from "@/shared/components/Badge.tsx";
+import Badge from "../../../../shared/components/data-display/Badge.tsx";
 const HeaderAction = () => {
     const unreadCount = 33;
   return (
