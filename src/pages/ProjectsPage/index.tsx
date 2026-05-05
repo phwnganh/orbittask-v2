@@ -7,10 +7,12 @@ import {useViewAllProjects} from "@/features/project/hooks/useViewProjects.ts";
 const ProjectsPage = () => {
     const {data: projects, isLoading} = useViewAllProjects()
     return (
-        <div className={"flex flex-col gap-6"}>
+        <div className={"flex flex-col gap-6 h-full"}>
             <ProjectTitleSection/>
             <ProjectsFilterSection/>
-            <ProjectCardsSection projects={projects} isLoading={isLoading}/>
+            <div className={"flex-1 min-h-0 overflow-y-auto p-1"}>
+                <ProjectCardsSection projects={projects} isLoading={isLoading}/>
+            </div>
             <ProjectPaginationSection projects={projects}/>
         </div>
     );
