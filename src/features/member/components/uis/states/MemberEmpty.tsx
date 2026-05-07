@@ -1,4 +1,4 @@
-import EmptyState from "@/shared/components/feedback/EmptyState.tsx";
+import EmptyState from "src/shared/components/feedback/EmptyState.tsx";
 
 const MemberEmpty = () => {
     return (

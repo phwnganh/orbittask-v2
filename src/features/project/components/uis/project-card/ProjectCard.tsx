@@ -1,5 +1,5 @@
-import Card from "../../../../shared/components/data-display/Card.tsx";
-import Badge from "../../../../shared/components/data-display/Badge.tsx";
+import Card from "@/shared/components/data-display/Card.tsx";
+import Badge from "../../../../../shared/components/data-display/Badge.tsx";
 import type {Project} from "@/features/project/types/project.type.ts";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import ProjectCardMenu from "./ProjectCardMenu.tsx";
@@ -9,15 +9,18 @@ import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 import {useNavigate} from "react-router-dom";
 import {PROJECT_DETAILS} from "@/shared/constants/route.constant.ts";
 
-type ProjectCardItemProps = {
+type ProjectCardProps = {
     project: Project
 }
-const ProjectCardItem = ({project}: ProjectCardItemProps) => {
+const ProjectCard = ({project}: ProjectCardProps) => {
     const navigate = useNavigate()
+    const handleClickProjectDetail = () => {
+        navigate(`${PROJECT_DETAILS}/${project.id}`)
+    }
     return (
         <Card key={project.id} className={"flex flex-col justify-between h-full"}>
             <div className={"flex items-center justify-between"}>
-                <p>{project.title}</p>
+                <p className={"cursor-pointer hover:text-primary-hover"} onClick={handleClickProjectDetail}>{project.title}</p>
 
                 <Dropdown>
                     <DropdownTrigger>
@@ -38,4 +41,4 @@ const ProjectCardItem = ({project}: ProjectCardItemProps) => {
     );
 };
 
-export default ProjectCardItem;
+export default ProjectCard;

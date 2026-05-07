@@ -55,3 +55,12 @@ export const getAllProjectsApi = async ({search, page, pageSize}: {search?: stri
         total
     };
 }
+
+export const getProjectDetailApi = async (project_id: string)=> {
+    const {data, error} = await supabase.from("Projects").select("*").eq("id", project_id).single();
+
+    if(error){
+        throw error;
+    }
+    return data;
+}

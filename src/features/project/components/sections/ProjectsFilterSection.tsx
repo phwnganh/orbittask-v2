@@ -1,5 +1,5 @@
 import ActiveFilterSummary from "@/features/project/components/filters/ActiveFilterSummary.tsx";
-import ProjectSearch from "@/features/project/components/uis/ProjectSearch.tsx";
+import ProjectSearch from "../uis/search/ProjectSearch.tsx";
 import SortButton from "@/features/project/components/filters/SortButton.tsx";
 import OwnershipFilter from "@/features/project/components/filters/OwnershipFilter.tsx";
 import RelevanceFilter from "@/features/project/components/filters/RelevanceFilter.tsx";

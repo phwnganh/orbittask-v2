@@ -38,7 +38,7 @@ const AppRoute = () => {
                 <Route path={DASHBOARD} element={<DashboardPage/>}/>
                 <Route path={INBOX} element={<InboxPage/>}/>
                 <Route path={MY_TASKS} element={<TasksPage/>}/>
-                <Route path={`${PROJECT_DETAILS}/:project-id`} element={<ProjectDetailPage/>}/>
+                <Route path={`${PROJECT_DETAILS}/:id`} element={<ProjectDetailPage/>}/>
                 <Route path={LABELS} element={<LabelPage/>}/>
                 <Route index element={<DashboardPage/>} />
             </Route>

@@ -1,6 +1,6 @@
 import Button from "../../../../shared/components/button/Button.tsx";
 import {useProjectStore} from "@/features/project/stores/project.store.ts";
-import AddProjectModal from "@/features/project/components/add-project/AddProjectModal.tsx";
+import AddProjectModal from "../modals/add-project/AddProjectModal.tsx";
 
 const ProjectTitleSection = () => {
     const {isAddModalOpen, onOpenAddProjectModal, onCloseAddProjectModal} = useProjectStore()

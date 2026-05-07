@@ -23,6 +23,17 @@ export const useReactQueryClient = () => {
         return queryClient.invalidateQueries({queryKey: key})
     }
 
+    const getOne = <T extends {id: string}>(key: readonly unknown[], id: string): T | undefined => {
+        const queries = queryClient.getQueriesData<{data: T[]}>({queryKey: key})
+        for(const [, value] of queries) {
+            if(!value?.data) continue;
+
+            const found = value.data.find(item => item.id === id);
+            if(found) return found;
+        }
+        return undefined;
+    }
+
     return {
         queryClient,
         get,
@@ -30,5 +41,6 @@ export const useReactQueryClient = () => {
         setMany,
         cancel,
         invalidate,
+        getOne
     }
 }
