@@ -3,7 +3,7 @@ import {
     autoUpdate,
     flip,
     offset,
-    shift,
+    shift, size,
     useClick,
     useDismiss,
     useFloating,
@@ -32,15 +32,26 @@ type DropdownProps = {
     children: ReactNode;
     placement?: "top" | "top-start" | "top-end" | "bottom" | "bottom-start" | "bottom-end" | "left" | "right";
     offsetValue?: number;
+    matchTriggerWidth?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
 }
-const Dropdown = ({children, placement = "bottom-end", offsetValue = 8, open, onOpenChange}: DropdownProps) => {
+const Dropdown = ({children, placement = "bottom-end", offsetValue = 8, open, onOpenChange, matchTriggerWidth = false}: DropdownProps) => {
     const [internalOpen, setInternalOpen] = useState(false)
 
     const isOpen = open ?? internalOpen;
     const setOpen = onOpenChange ?? setInternalOpen
-    const {refs, floatingStyles, context} = useFloating({open: isOpen, onOpenChange: setOpen, placement, strategy: "fixed", middleware: [offset(offsetValue), flip(), shift({ padding: 8 })],
+    const {refs, floatingStyles, context} = useFloating({open: isOpen, onOpenChange: setOpen, placement, strategy: "fixed", middleware: [offset(offsetValue), flip(), shift({ padding: 8 }),  ...(matchTriggerWidth
+            ? [
+                size({
+                    apply({rects, elements}) {
+                        Object.assign(elements.floating.style, {
+                            width: `${rects.reference.width}px`,
+                        });
+                    },
+                }),
+            ]
+            : []),],
         whileElementsMounted: autoUpdate});
     const click = useClick(context)
     const dismiss = useDismiss(context)

@@ -1,9 +1,9 @@
-import {type ReactNode} from "react";
-import Input from "@/shared/components/inputs/Input.tsx";
+import {type ChangeEvent, type ReactNode} from "react";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 import SearchSelectList from "@/shared/components/inputs/search-select/SearchSelectList.tsx";
+import MembersSearch from "../../../../features/member/components/uis/search/MembersSearch.tsx";
 
 type SearchSelectProps<T> = {
     selected: T | null;
@@ -19,16 +19,14 @@ type SearchSelectProps<T> = {
 const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, renderItem, getKey, placeholder}: SearchSelectProps<T>) => {
 
     return (
-        <Dropdown>
+        <Dropdown matchTriggerWidth>
             <DropdownTrigger>
                 {(props) => (
-                    <Input {...props} value={keyword}
-                    placeholder={placeholder}
-                    onChange={e => onSearch(e.target.value)}/>
+                    <MembersSearch {...props} placeholder={placeholder} keyword={keyword} onChange={(e: ChangeEvent<HTMLInputElement>) => onSearch(e.target.value)}/>
                 )}
             </DropdownTrigger>
 
-            <DropdownContent className={"w-full max-h-60 overflow-auto"}>
+            <DropdownContent className={"max-h-60 overflow-auto"}>
                 <SearchSelectList items={items} getKey={getKey} renderItem={renderItem} onSelect={onSelected} selectedItem={selected}/>
             </DropdownContent>
         </Dropdown>

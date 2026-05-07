@@ -7,7 +7,7 @@ type SearchSelectItemProps = {
 }
 const SearchSelectItem = ({selected, onClick, children}: SearchSelectItemProps) => {
     return (
-        <div onClick={onClick} className={`px-3 py-2 cursor-pointer hover:bg-primary-hover ${selected ? "bg-primary-hover" : ""}`}>
+        <div onClick={onClick} className={`px-3 py-2 cursor-pointer rounded-md hover:bg-primary-hover ${selected ? "bg-primary-hover " : ""} group`}>
             {children}
         </div>
     );

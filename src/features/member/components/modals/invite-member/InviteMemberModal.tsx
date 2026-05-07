@@ -21,7 +21,7 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                             <Avatar avatarUrl={user?.avatar_url} size={"sm"}/>
                             <div>
                                 <p>{user?.first_name} {user?.last_name}</p>
-                                <p className={"text-sm text-text-muted"}>{user?.email}</p>
+                                <p className={`text-sm text-text-muted group-hover:text-text-primary`}>{user?.email}</p>
                             </div>
                         </div>
                     )} getKey={user => user.user_id}/>
