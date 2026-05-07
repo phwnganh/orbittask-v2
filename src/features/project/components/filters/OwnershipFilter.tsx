@@ -1,4 +1,4 @@
-import SegmentedControl from "../../../../shared/components/inputs/SegmentedControl.tsx";
+import SegmentedControl from "@/shared/components/inputs/SegmentedControl.tsx";
 import {useProjectFilterStore} from "@/features/project/stores/project-filter.store.ts";
 
 const OwnershipFilter = () => {

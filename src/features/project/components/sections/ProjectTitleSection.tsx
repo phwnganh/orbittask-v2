@@ -1,4 +1,4 @@
-import Button from "../../../../shared/components/button/Button.tsx";
+import Button from "@/shared/components/button/Button.tsx";
 import {useProjectStore} from "@/features/project/stores/project.store.ts";
 import AddProjectModal from "../modals/add-project/AddProjectModal.tsx";
 

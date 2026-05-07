@@ -1,6 +1,6 @@
 import {type FieldErrors, type UseFormRegister} from "react-hook-form";
 import {type ProjectFormValues} from "@/features/project/components/project-form/project.schema.ts";
-import Input from "../../../../shared/components/inputs/Input.tsx";
+import Input from "@/shared/components/inputs/Input.tsx";
 
 type ProjectFormProps = {
     register: UseFormRegister<ProjectFormValues>;

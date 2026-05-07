@@ -1,5 +1,5 @@
 import {useProjectFilterStore} from "@/features/project/stores/project-filter.store.ts";
-import SegmentedControl from "../../../../shared/components/inputs/SegmentedControl.tsx";
+import SegmentedControl from "@/shared/components/inputs/SegmentedControl.tsx";
 
 const RelevanceFilter = () => {
     const {relevance, setRelevance} = useProjectFilterStore()
