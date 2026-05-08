@@ -16,7 +16,6 @@ export const useInviteMember = () => {
             const {selectedUsers} = useMemberStore.getState()
             const optimisticMembers: MemberResponse[] = payload.user_ids.map(userId => {
                 const selectedUser = selectedUsers.find(user => user.user_id === userId)!;
-
                 return {
                     user_id: selectedUser.user_id,
                     avatar_url: selectedUser.avatar_url,

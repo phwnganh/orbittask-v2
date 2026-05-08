@@ -42,13 +42,14 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                 <BaseModal.Header title={"Invite Members To The Project"} onClose={onCloseInviteMemberModal}/>
                 <BaseModal.Body>
                     <SearchSelect selected={selectedUsers} keyword={keyword} onSelected={addSelectedUsers}
-                                  onSearch={setKeyword} items={users ?? []} renderItem={user => (
+                                  onSearch={setKeyword} items={users ?? []} isDisabled={user =>
+                    user.invite_status === "pending" || user.invite_status === "accepted"} renderItem={(user, isDisabled) => (
                         <div className={"flex items-center gap-3"}>
                             <Avatar avatarUrl={user.avatar_url} size={"sm"}/>
                             <div>
-                                <p>{user.first_name} {user.last_name}</p>
-                                <p className={`text-sm text-text-muted group-hover:text-text-primary`}>{user.email}</p>
-                                <p className={"text-sm text-text-muted group-hover:text-text-primary"}>{getInviteStatusLabel(user.invite_status)}</p>
+                                <p className={"text-text-primary"}>{user.first_name} {user.last_name}</p>
+                                <p className={`text-sm ${isDisabled ? "text-text-secondary" : "text-text-muted group-hover:text-text-primary"}`}>{user.email}</p>
+                                <p className={`text-sm font-medium ${user.invite_status === "accepted" ? "text-success" : user.invite_status === "pending" ? "text-warning" : "text-text-muted group-hover:text-text-primary"}`}>{getInviteStatusLabel(user.invite_status)}</p>
                             </div>
                         </div>
                     )} getKey={user => user.user_id}/>
@@ -64,7 +65,6 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                                     <Button variant={"secondary"} fullWidth={false} size={"md"}
                                             onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
                                 </div>
-
                             ))}
                         </div>
                     )}

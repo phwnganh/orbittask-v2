@@ -10,13 +10,13 @@ type SearchSelectProps<T> = {
     keyword: string;
     onSelected: (value: T) => void;
     onSearch: (keyword: string) => void;
-
+    isDisabled?: (item: T) => boolean;
     items: T[];
-    renderItem: (item: T) => ReactNode;
+    renderItem: (item: T, isDisabled: boolean) => ReactNode;
     getKey: (item: T) => string;
     placeholder?: string;
 }
-const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, renderItem, getKey, placeholder}: SearchSelectProps<T>) => {
+const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, renderItem, getKey, placeholder, isDisabled}: SearchSelectProps<T>) => {
     const [open, setOpen] = useState(false)
 
     const filteredItem = items.filter(item => !selected.some(selectedItem => getKey(selectedItem) === getKey(item)))
@@ -40,7 +40,7 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
             </DropdownTrigger>
 
             <DropdownContent className={"max-h-60 overflow-auto"}>
-                <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect}/>
+                <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect} isDisabled={isDisabled}/>
             </DropdownContent>
         </Dropdown>
     );

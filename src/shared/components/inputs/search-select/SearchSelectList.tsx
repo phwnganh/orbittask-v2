@@ -6,17 +6,23 @@ type SearchSelectListProps<T> = {
     onSelect: (item: T) => void;
 
     getKey: (item: T) => string;
-    renderItem: (item: T) => ReactNode;
+    renderItem: (item: T, isDisabled: boolean) => ReactNode;
+
+    isDisabled?: (item: T) => boolean;
 }
-const SearchSelectList = <T, >({items, onSelect, getKey, renderItem}: SearchSelectListProps<T>) => {
+const SearchSelectList = <T, >({items, onSelect, getKey, renderItem, isDisabled}: SearchSelectListProps<T>) => {
     return (
         <>
             {items.map(item => {
                const key = getKey(item);
+               const disabled = isDisabled?.(item) ?? false
 
                return (
-                   <SearchSelectItem key={key} onClick={() => onSelect(item)}>
-                       {renderItem(item)}
+                   <SearchSelectItem key={key} onClick={() => {
+                       if(disabled) return;
+                       onSelect(item)
+                   }} disabled={disabled}>
+                       {renderItem(item, disabled)}
                    </SearchSelectItem>
                )
             })}
