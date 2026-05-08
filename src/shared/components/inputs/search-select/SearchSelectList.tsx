@@ -3,13 +3,12 @@ import SearchSelectItem from "@/shared/components/inputs/search-select/SearchSel
 
 type SearchSelectListProps<T> = {
     items: T[];
-    selectedItem: T[];
     onSelect: (item: T) => void;
 
     getKey: (item: T) => string;
     renderItem: (item: T) => ReactNode;
 }
-const SearchSelectList = <T, >({items, selectedItem, onSelect, getKey, renderItem}: SearchSelectListProps<T>) => {
+const SearchSelectList = <T, >({items, onSelect, getKey, renderItem}: SearchSelectListProps<T>) => {
     return (
         <>
             {items.map(item => {

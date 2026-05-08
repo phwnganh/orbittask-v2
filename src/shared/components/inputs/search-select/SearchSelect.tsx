@@ -40,7 +40,7 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
             </DropdownTrigger>
 
             <DropdownContent className={"max-h-60 overflow-auto"}>
-                <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect} selectedItem={selected}/>
+                <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect}/>
             </DropdownContent>
         </Dropdown>
     );

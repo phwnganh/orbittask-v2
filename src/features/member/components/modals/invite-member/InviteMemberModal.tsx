@@ -6,21 +6,43 @@ import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {useDebounce} from "@/shared/hooks/useDebounce.ts";
 import {getInviteStatusLabel} from "@/features/member/utils/member.util.ts";
 import Button from "@/shared/components/button/Button.tsx";
+import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
 
 type InviteMemberModalProps = {
     projectId: string;
 }
 const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
-    const {keyword, selectedUsers, setKeyword, addSelectedUsers, removeSelectUsers, openInviteMember, onCloseInviteMemberModal} = useMemberStore()
+    const {
+        keyword,
+        selectedUsers,
+        setKeyword,
+        addSelectedUsers,
+        removeSelectUsers,
+        openInviteMember,
+        onCloseInviteMemberModal
+    } = useMemberStore()
     const debouncedKeyword = useDebounce(keyword, 500);
-    const {data: users, isLoading} = useViewProjectUsers({project_id: projectId, search: debouncedKeyword})
+    const {data: users} = useViewProjectUsers({project_id: projectId, search: debouncedKeyword})
+    const {mutate, isPending} = useInviteMember()
 
+    const handleInviteMembers = () => {
+        mutate({
+            project_id: projectId,
+            user_ids: selectedUsers.map(user => user.user_id)
+        },
+            {
+                onSuccess: () => {
+                    onCloseInviteMemberModal()
+                }
+            })
+    }
     return (
         <BaseModal isOpen={openInviteMember} onClose={onCloseInviteMemberModal}>
             <BaseModal.Content>
                 <BaseModal.Header title={"Invite Members To The Project"} onClose={onCloseInviteMemberModal}/>
                 <BaseModal.Body>
-                    <SearchSelect selected={selectedUsers} keyword={keyword} onSelected={addSelectedUsers} onSearch={setKeyword} items={users ?? []} renderItem={user => (
+                    <SearchSelect selected={selectedUsers} keyword={keyword} onSelected={addSelectedUsers}
+                                  onSearch={setKeyword} items={users ?? []} renderItem={user => (
                         <div className={"flex items-center gap-3"}>
                             <Avatar avatarUrl={user.avatar_url} size={"sm"}/>
                             <div>
@@ -35,17 +57,23 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                         <div className={"mt-4 flex flex-col gap-2"}>
                             {selectedUsers.map(user => (
                                 <div key={user.user_id} className={"flex items-center justify-between"}>
-                                    <div  className={"flex items-center gap-2 px-3 py-2 rounded-full"}>
+                                    <div className={"flex items-center gap-2 px-3 py-2 rounded-full"}>
                                         <Avatar avatarUrl={user.avatar_url} size={"xs"}/>
                                         <span className={"text-sm"}>{user.first_name} {user.last_name}</span>
                                     </div>
-                                    <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
+                                    <Button variant={"secondary"} fullWidth={false} size={"md"}
+                                            onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
                                 </div>
 
                             ))}
                         </div>
                     )}
                 </BaseModal.Body>
+                <BaseModal.Footer>
+                    <Button variant={"secondary"} fullWidth={false} onClick={onCloseInviteMemberModal}>Cancel</Button>
+                    <Button type={"button"} fullWidth={false} onClick={handleInviteMembers}
+                            disabled={selectedUsers.length === 0 || isPending}>{isPending ? "Inviting..." : "Invite"}</Button>
+                </BaseModal.Footer>
             </BaseModal.Content>
         </BaseModal>
     );
