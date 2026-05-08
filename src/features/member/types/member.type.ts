@@ -26,3 +26,5 @@ export type MemberResponse = {
     role: string;
     invite_status: string;
 }
+
+export type InviteStatus = "pending" | "accepted";

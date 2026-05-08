@@ -4,17 +4,20 @@ import {useParams} from "react-router-dom";
 import {useViewProjectDetail} from "@/features/project/hooks/useViewProjects.ts";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import InviteMemberModal from "@/features/member/components/modals/invite-member/InviteMemberModal.tsx";
+import {useViewProjectMembers} from "@/features/member/hooks/useViewProjectUsers.ts";
 
 const ProjectDetailPage = () => {
     const {id} = useParams()
     if(!id) return null;
     const {data: project} = useViewProjectDetail(id)
+    const {data: members} = useViewProjectMembers(id, "accepted")
     const {onOpenInviteMemberModal} = useMemberStore()
     return (
         <div className={"flex flex-col gap-4"}>
             <div className={"flex justify-between items-center"}>
                 <Button variant={"secondary"} fullWidth={false} size={"md"}>Back to Projects</Button>
                 <div className={"flex items-center gap-3"}>
+                    <AvatarGroup users={members ?? []}/>
                     <Button variant={"primary"} fullWidth={false} size={"md"} onClick={onOpenInviteMemberModal}>Invite</Button>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import type {InviteMemberPayload, RemoveMemberPayload} from "@/features/member/types/member.type.ts";
+import type {InviteMemberPayload, InviteStatus, RemoveMemberPayload} from "@/features/member/types/member.type.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
 
 export const inviteMemberApi = async ({project_id, user_ids}: InviteMemberPayload) => {
@@ -35,4 +35,16 @@ export const getProjectUsersApi = async ({project_id, search}: {project_id: stri
         throw error;
     }
     return users;
+}
+
+export const getProjectMembersApi = async (project_id: string, invite_status: InviteStatus) => {
+    const {data: members, error} = await supabase.rpc("get_project_members", {
+        p_project_id: project_id,
+        p_invite_status: invite_status,
+    })
+
+    if(error){
+        throw error;
+    }
+    return members;
 }

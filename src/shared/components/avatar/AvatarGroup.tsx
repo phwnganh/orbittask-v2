@@ -1,8 +1,8 @@
-import type {Profile} from "@/features/auth/types/auth.type.ts";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
+import type {MemberResponse} from "@/features/member/types/member.type.ts";
 
 type AvatarGroupProps = {
-    users: Profile[];
+    users: MemberResponse[];
     max?: number;
     size?: "xs" | "sm" | "md";
 }
@@ -13,7 +13,7 @@ const AvatarGroup = ({users, max = 3, size = "xs"}: AvatarGroupProps) => {
         <div className={"flex items-center"}>
             <div className={"flex -space-x-2"}>
                 {visibleUsers.map(user =>
-                <Avatar key={user.id} avatarUrl={user.avatar_url} name={user.last_name} size={size} className={"border border-bg-secondary"}/>)}
+                <Avatar key={user.user_id} avatarUrl={user.avatar_url} name={user.last_name} size={size} className={"border border-bg-secondary"}/>)}
             </div>
 
             {remaining > 0 && (
