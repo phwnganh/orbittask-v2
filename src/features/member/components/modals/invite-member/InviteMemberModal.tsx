@@ -8,6 +8,7 @@ import {getInviteStatusLabel} from "@/features/member/utils/member.util.ts";
 import Button from "@/shared/components/button/Button.tsx";
 import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
 import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
+import UserEmpty from "@/features/member/components/uis/states/UserEmpty.tsx";
 
 type InviteMemberModalProps = {
     projectId: string;
@@ -41,7 +42,7 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
         <BaseModal isOpen={openInviteMember} onClose={onCloseInviteMemberModal}>
             <BaseModal.Content>
                 <BaseModal.Header title={"Invite Members To The Project"} onClose={onCloseInviteMemberModal}/>
-                <BaseModal.Body>
+                <BaseModal.Body className={"max-h-80"}>
                     <SearchSelect selected={selectedUsers} keyword={keyword} onSelected={addSelectedUsers}
                                   onSearch={setKeyword} items={users ?? []} isDisabled={user =>
                     user.invite_status === "pending" || user.invite_status === "accepted"} renderItem={(user, isDisabled) => (
@@ -55,11 +56,21 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                         </div>
                     )} getKey={user => user.user_id}/>
 
-                    {selectedUsers.length > 0 && (
-                        <MemberList users={selectedUsers} renderAction={user => (
-                            <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
-                        )}/>
-                    )}
+                    <div className={"min-h-48 mt-4"}>
+                        {selectedUsers.length > 0 ? (
+                            <div className={"h-48 overflow-y-auto"}>
+                            <MemberList users={selectedUsers} renderAction={user => (
+                                <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
+                            )}/>
+                            </div>
+                        ) : (
+                            <div className={"h-48"}>
+                                <UserEmpty/>
+
+                            </div>
+                        )}
+                    </div>
+
                 </BaseModal.Body>
                 <BaseModal.Footer>
                     <Button variant={"secondary"} fullWidth={false} onClick={onCloseInviteMemberModal}>Cancel</Button>

@@ -5,7 +5,7 @@ type ModalContentProps = {
 }
 const ModalContent = ({children}: ModalContentProps) => {
     return (
-        <div className={"p-4"}>
+        <div className={`p-4`}>
             {children}
         </div>
     );

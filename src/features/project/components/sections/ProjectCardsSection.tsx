@@ -25,7 +25,7 @@ const ProjectCardsSection = ({projects, isLoading}: {projects?: ProjectResponse,
                         <ProjectCard key={project.id} project={project}/>
                     ))}
 
-                </div> : <div className={"h-full flex items-center justify-center"}><ProjectEmpty/></div>}
+                </div> : <div className={"h-full"}><ProjectEmpty/></div>}
 
             <EditProjectModal isOpen={isEditModalOpen} onClose={onCloseEditProjectModal}/>
             <DeleteProjectModal isOpen={isDeleteModalOpen} onClose={onCloseDeleteProjectModal}/>
