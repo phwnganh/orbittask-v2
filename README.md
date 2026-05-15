@@ -1,56 +1,73 @@
 # OrbitTask - Lightweight Task Management for Small Teams
-A lightweight task management web app designed to prevent "free-riding" in student teams (3-5 members) by focusing on accountability, visibility, and centralized communication.
+A lightweight task management web app designed to reduce "free-riding" in student teams (typically 3-5 members) by improving accountability, task visibility, and centralized communication.
 
 1. Live Demo: https://orbittask-v2.vercel.app/
 2. Source Code: https://github.com/phwnganh/orbittask-v2.git
 
 ## Key Highlights
-- Built a product that enforces accountability in small student teams (typically 3-5 members).
+- Built a product focused on accountability in small student teams.
 - Designed an end-to-end product flow: Authentication -> Project -> Task -> Collaboration.
-- Centralized task-based communication to reduce scattered discussions.
-- Applied feature-based architecture for scalability and maintainability.
+- Centralized task-based communication to reduce fragmented discussions across chat platforms.
+- Applied feature-based FE architecture for scalability and maintainability.
 - Used modern frontend practices: React + Zustand + TanStack Query.
+- Focused on MVP-first product development instead of feature-heavy project management.
 
 **## User Problem
 
-Students working in small teams (typically 3-5 members) often face difficulties when managing group assignments.\
-From my experience working in student projects:
-- Tasks are assigned informally (via chat), making in unclear who is responsible for what.
-- Progress is rarely updated, leading to last-minute rushes before deadlines.
-- Communication is fragmented across platforms (Messenger / Zalo), causing loss of context.
-- Some members become inactive, but there is no visibility into contribution.\
+Students working in small teams (typically 3-5 members) often struggle to coordinate group assignments effectively.\
+From my experience working on student projects, several recurring problems appear:
+- Tasks are assigned informally through chat, making ownership unclear.
+- Team leaders often need to manually follow up because progress is not updated consistently.
+- Communication is fragmented across platforms (Messenger / Zalo), causing important context to be lost.
+- Some members become inactive, but contribution visibility is limited until deadlines are close.
+- Workload distribution becomes uneven, leading to frustration and last-minute rushes.\
 
-While tools like Jira provide strong structure, they are too complex for short-term student projects. Meanwhile, Trello offers simplicity but lacks mechanisms to enforce accountability.\
+Existing tools do not fully fit this environment:\
+- Jira provides strong structure but feels too complex for short-term student projects.
+- Trello is simple and easy to use, but it lacks mechanisms that encourage accountability and progress visibility.\
 
-=> Core problem: Small student teams lack a lightweight system that ensures clear ownership, visible progress, and centralized communication.
+=> Core problem: Small student teams lack a lightweight collaboration that provides clear ownership, visible progress tracking, centralized communication, and better accountability within the team.
 
 
 
 ## Solution
-OrbitTask is designed to enforce accountability and clarity while keeping the system lightweight.
+OrbitTask is designed to improve accountability and collaboration while keeping the experience lightweight and easy to adopt.
 1. Clear Ownership
-- Each task is assigned to 1 member.
-- Responsibility is visible at all times.
+- Each task is assigned to a single member.
+- Responsibility remains visible throughout the project lifecycle.
+- Teams can quickly identify who is responsible for each deliverable.
 
 2. Progress Visibility
 - Task status and deadlines are clearly tracked.
 - Overdue tasks are highlighted.
+- Team members can monitor project progress without repeatedly asking for updates.
 
 3. Task-based Communication
-- Comments are tied directly to tasks.
+- Discussions are attached directly to tasks.
 - Supports replies, tagging, and reactions.
+- Reduces fragmented communication across external messaging platforms.
 
-4. Minimal Onboarding
-- Users can create projects and invite teammates quickly.
-- No complex setup like Jira.
+4. Lightweight Collaboration
+- Users can quickly create projects and invite teammates.
+- Minimal onboarding without complex configuration.
+- Designed specifically for short-term academic collaboration.
 
 ## MVP Scope
 The MVP focuses on solving the core accountability and collaboration problems:
 1. User authentication (email/password, Google Oauth).
-2. Project Management (create, update, delete project).
-3. Team collaboration within projects (invite existing users, manage membership, join/leave project).
-4. Task Management within projects (create and assign tasks, track task status and deadlines, task filtering).
-
+2. Project Management:\
+  - Create, update, and delete projects.
+  - Invite and manage project members.
+  - Join and leave projects functionality.\
+3. Task Management within projects:\
+  - Create and assign tasks.
+  - Track task status and deadlines.
+  - Filter tasks by status and assignee.
+  - "My Tasks" view for personal accountability.\
+4. Collaboration:\
+  - Task-based comments.
+  - Replies and reactions.
+  - Centralized discussion flow.\
 ## Product Roadmap
 ### Phase 1: Accountability Core
 1. Goal: Establish clear ownership and task visibility.
@@ -61,30 +78,31 @@ The MVP focuses on solving the core accountability and collaboration problems:
 - Task status tracking.
 - Task filtering.
 - "My Tasks" view.
-3. Outcome: Users know exactly who is responsible for what.
+3. Outcome: Team members know exactly who is responsible for what.
 
 ### Phase 2: Task-based Communication
-1. Goal: Centralized communication within tasks.
+1. Goal: Centralized communication within project tasks.
 2. Features:
-- Comment system (replies, reactions, tagging).
+- Comment system.
+- Replies, reactions, and tagging.
 - Attachment support (for design files, reports).
 - Edit/delete permissions.
-3. Outcome: Reduced fragmented communication and keep discussions within context.
+3. Outcome: Reduced fragmented communication and preserved discussion context.
 
 ### Phase 3: Workflow & Visibility
-1. Goal: Improve transparency without adding complexity
+1. Goal: Improve transparency without introducing enterprise-level complexity.
 2. Features:
 - Activity log (track who made changes to tasks).
 - Calendar view for task visualization.
 - Notification system.
-3. Outcome: Users can easily track progress and changes.
+3. Outcome: Teams can easily track project changes and deadlines more effectively.
 
-### Phase 4: Insights and Accountability Metrics
-1. Goal: Provide visibility into team contribution.
+### Phase 4: Accountability Insights
+1. Goal: Provide lightweight visibility into team contribution and workload balance.
 2. Features:
 - Task distribution per member.
 - Overdue tracking.
-- Contribution/activity metrics.
+- Contribution/activity insights.
 3. Outcome: Teams can identify:
 - Bottlenecks.
 - Inactive members.
@@ -96,8 +114,8 @@ The MVP focuses on solving the core accountability and collaboration problems:
 - State: Zustand (client state), Tanstack Query (server state).
 - Backend: Supabase (Auth, Postgres, Storage, Row Level Security).
 ### Frontend Structure
-The project follows a feature-based architecture to improve scalability and maintainability.\
-Instead of organizing code by technical type (components, hooks, services), the app is structured by business features, where each feature encapsulates its own logic, UI, and data handling.\
+The application follows a feature-based architecture to improve scalability and maintainability.\
+Instead of organizing code by technical type (components, hooks, services), the project is structured around business features, where each feature encapsulates its own logic, UI, and data handling.\
 Structure:
 1. assets/: static resources
 2. features/: core business logic (auth, project, task, etc)
@@ -111,7 +129,7 @@ API (Supabase) -> Tanstack Query -> UI Rendering -> Zustand (if needed) -> UI Up
 
 ** This separation ensures:
 - Better performance (caching & reduced re-fetching).
-- Cleaner state management.
+- Cleaner state management between server state and UI state.
 - Predictable data flow.
 
 ### Authentication
@@ -142,3 +160,4 @@ AI-assisted task summaries (to highlight key discussions instead of validating c
 - Designing systems that enforce user behavior, not just provide features.
 - Balancing simplicity vs functionality in product design.
 - Structuring scalable frontend architecture.
+- Thinking beyond CRUD features toward product usability and collaboration workflows.
