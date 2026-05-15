@@ -1,8 +1,8 @@
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
-import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {Member, MemberResponse} from "@/features/member/types/member.type.ts";
 
 type AvatarGroupProps = {
-    users: MemberResponse[];
+    users: MemberResponse[] | Member[];
     max?: number;
     size?: "xs" | "sm" | "md";
 }

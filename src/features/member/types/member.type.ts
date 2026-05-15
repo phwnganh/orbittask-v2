@@ -1,10 +1,14 @@
 export type Member = {
-    id: string;
-    invited_at: string;
-    project_id: string;
     user_id: string;
-    invite_status: "pending" | "accepted" | "rejected";
-    role: "owner" | "member";
+    avatar_url: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    project_id: string;
+    project_title: string;
+    project_description: string;
+    invite_status: string;
+    roles: string;
 }
 
 export type InviteMemberPayload = {

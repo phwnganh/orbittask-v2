@@ -7,6 +7,7 @@ import {useDebounce} from "@/shared/hooks/useDebounce.ts";
 import {getInviteStatusLabel} from "@/features/member/utils/member.util.ts";
 import Button from "@/shared/components/button/Button.tsx";
 import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
+import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
 
 type InviteMemberModalProps = {
     projectId: string;
@@ -55,18 +56,9 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
                     )} getKey={user => user.user_id}/>
 
                     {selectedUsers.length > 0 && (
-                        <div className={"mt-4 flex flex-col gap-2"}>
-                            {selectedUsers.map(user => (
-                                <div key={user.user_id} className={"flex items-center justify-between"}>
-                                    <div className={"flex items-center gap-2 px-3 py-2 rounded-full"}>
-                                        <Avatar avatarUrl={user.avatar_url} size={"xs"}/>
-                                        <span className={"text-sm"}>{user.first_name} {user.last_name}</span>
-                                    </div>
-                                    <Button variant={"secondary"} fullWidth={false} size={"md"}
-                                            onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
-                                </div>
-                            ))}
-                        </div>
+                        <MemberList users={selectedUsers} renderAction={user => (
+                            <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
+                        )}/>
                     )}
                 </BaseModal.Body>
                 <BaseModal.Footer>

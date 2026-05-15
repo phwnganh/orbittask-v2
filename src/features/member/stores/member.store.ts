@@ -5,8 +5,11 @@ type MemberState = {
     keyword: string;
     selectedUsers: MemberResponse[];
     openInviteMember: boolean;
+    openManageMember: boolean;
     onOpenInviteMemberModal: () => void;
     onCloseInviteMemberModal: () => void;
+    onOpenManageMemberModal: () => void;
+    onCloseManageMemberModal: () => void;
     setKeyword: (keyword: string) => void;
     addSelectedUsers: (user: MemberResponse) => void;
     removeSelectUsers: (userId: string) => void;
@@ -16,8 +19,11 @@ export const useMemberStore = create<MemberState>((set) => ({
     keyword: "",
     selectedUsers: [],
     openInviteMember: false,
+    openManageMember: false,
     onOpenInviteMemberModal: () => set({openInviteMember: true}),
     onCloseInviteMemberModal: () => set({openInviteMember: false}),
+    onOpenManageMemberModal: () => set({openManageMember: true}),
+    onCloseManageMemberModal: () => set({openManageMember: false}),
     setKeyword: (keyword) => set({keyword}),
     addSelectedUsers: (user) => set((state) => {
         const exists = state.selectedUsers.some(item => item.user_id === user.user_id)
