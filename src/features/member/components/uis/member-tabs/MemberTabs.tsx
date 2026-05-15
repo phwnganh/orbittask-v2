@@ -6,6 +6,7 @@ import TabsContent from "@/shared/components/tabs/TabsContent.tsx";
 import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
 import Button from "@/shared/components/button/Button.tsx";
 import MemberEmpty from "@/features/member/components/uis/states/MemberEmpty.tsx";
+import MembersSearch from "@/features/member/components/uis/search/MembersSearch.tsx";
 
 type MemberTabsProps = {
     members?: Member[];
@@ -19,6 +20,9 @@ const MemberTabs = ({members, pendingUsers}: MemberTabsProps) => {
                 <TabsTrigger value={"pending"}>Pending</TabsTrigger>
             </TabsList>
 
+            <div className={"mt-3"}>
+                <MembersSearch/>
+            </div>
             <div className={"min-h-48 mt-3"}>
                 <TabsContent value={"member"}>
                     {members && members?.length > 0 ? (

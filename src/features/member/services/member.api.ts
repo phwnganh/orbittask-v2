@@ -37,10 +37,11 @@ export const getProjectUsersApi = async ({project_id, search}: {project_id: stri
     return users;
 }
 
-export const getProjectMembersApi = async (project_id: string, invite_status: InviteStatus) => {
+export const getProjectMembersApi = async (project_id: string, invite_status: InviteStatus, search?: string) => {
     const {data: members, error} = await supabase.rpc("get_project_members", {
         p_project_id: project_id,
         p_invite_status: invite_status,
+        p_search: search ?? null
     })
 
     if(error){
