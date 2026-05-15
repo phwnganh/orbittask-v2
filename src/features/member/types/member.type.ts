@@ -8,7 +8,7 @@ export type Member = {
     project_title: string;
     project_description: string;
     invite_status: string;
-    roles: string;
+    role: string;
 }
 
 export type InviteMemberPayload = {

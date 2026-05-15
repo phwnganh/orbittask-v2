@@ -28,7 +28,7 @@ const MemberTabs = ({members, pendingUsers}: MemberTabsProps) => {
                     {members && members?.length > 0 ? (
                             <div className={"h-48 overflow-y-auto"}>
                                 <p className={"text-sm text-text-secondary mb-3"}>{members?.length} members in this project</p>
-                                    <MemberList users={members} renderAction={user => (
+                                    <MemberList showRole users={members} renderAction={user => (
                                         <Button variant={"secondary"} fullWidth={false} size={"md"}>Remove</Button>
                                     )}/>
                             </div>

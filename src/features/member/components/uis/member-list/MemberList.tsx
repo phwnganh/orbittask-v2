@@ -5,12 +5,13 @@ import MemberItem from "@/features/member/components/uis/member-list/MemberItem.
 type MemberListProps = {
     users?: Member[] | MemberResponse[];
     renderAction?: (user: Member | MemberResponse) => ReactNode;
+    showRole?: boolean;
 }
-const MemberList = ({users, renderAction}: MemberListProps) => {
+const MemberList = ({users, renderAction, showRole}: MemberListProps) => {
     return (
         <div className={"flex flex-col gap-3"}>
             {users?.map((user) =>
-            <MemberItem key={user.user_id} user={user} action={renderAction?.(user)} />)}
+            <MemberItem showRole={showRole} key={user.user_id} user={user} action={renderAction?.(user)} />)}
         </div>
     );
 };
