@@ -7,7 +7,7 @@ type TaskColumnProps = {
 }
 const TaskColumn = ({status}: TaskColumnProps) => {
     return (
-        <div className={"flex h-full flex-col gap-4 w-150 bg-bg-tertiary rounded-lg"}>
+        <div className={"flex h-full flex-col gap-4 max-w-88 w-full shrink-0 bg-bg-tertiary rounded-lg p-4"}>
             <TaskColumnHeader status={status}/>
             <div className={"flex-1 overflow-y-auto"}>
                 <TaskColumnList/>

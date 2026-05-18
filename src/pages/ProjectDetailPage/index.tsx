@@ -11,7 +11,7 @@ const ProjectDetailPage = () => {
     const {data: members} = useViewProjectMembers(id, "accepted")
     const {data: pendingUsers} = useViewProjectMembers(id, "pending")
     return (
-        <div className={"flex flex-col gap-4"}>
+        <div className={"flex flex-col gap-4 h-full overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>
             <ProjectContent/>
             <InviteMemberModal projectId={id}/>

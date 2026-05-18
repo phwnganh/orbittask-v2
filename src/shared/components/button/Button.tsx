@@ -2,7 +2,7 @@ import {type ButtonHTMLAttributes, forwardRef, type ReactNode} from "react";
 
 type ButtonProps = {
     children: ReactNode;
-    variant?: "primary" | "secondary";
+    variant?: "primary" | "secondary" | "tertiary";
     size?: "sm" | "md" | "lg";
     fullWidth?: boolean;
     className?: string;
@@ -18,6 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({children, variant = 
     const variants = {
         primary: "bg-primary text-text-primary hover:bg-primary-hover focus:ring-primary",
         secondary: "bg-bg-secondary text-text-secondary hover:bg-secondary-hover focus:ring-bg-secondary",
+        tertiary: "bg-bg-elevated text-text-secondary hover:bg-elevated-hover focus:ring-bg-elevated"
     };
 
     return (

@@ -50,7 +50,7 @@ const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
                                     <MemberList showRole users={members} renderAction={user => (
                                         <>
                                             {user.role !== "owner" &&
-                                                <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
+                                                <Button variant={"tertiary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
                                             }
 
                                         </>
@@ -73,8 +73,8 @@ const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
                                     <>
                                         {pendingUsers.role !== "owner" &&
                                             <div className={"flex items-center gap-3"}>
-                                                <Button variant={"secondary"} fullWidth={false} size={"md"}>Resend</Button>
-                                                <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
+                                                <Button variant={"tertiary"} fullWidth={false} size={"md"}>Resend</Button>
+                                                <Button variant={"tertiary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
                                             </div>
                                         }
                                     </>
