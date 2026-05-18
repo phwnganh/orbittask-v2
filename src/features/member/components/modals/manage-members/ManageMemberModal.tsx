@@ -16,7 +16,7 @@ const ManageMemberModal = ({projectId, members, pendingUsers}: ManageMemberModal
             <BaseModal.Content>
                 <BaseModal.Header title={"Manage Members In Project"} onClose={onCloseManageMemberModal}/>
                 <BaseModal.Body className={"max-h-80"}>
-                    <MemberTabs members={members} pendingUsers={pendingUsers}/>
+                    <MemberTabs projectId={projectId} members={members} pendingUsers={pendingUsers}/>
                 </BaseModal.Body>
                 <BaseModal.Footer>
                     <Button variant={"secondary"} fullWidth={false} onClick={onCloseManageMemberModal}>Cancel</Button>

@@ -13,7 +13,7 @@ export const inviteMemberApi = async ({project_id, user_ids}: InviteMemberPayloa
     return member;
 }
 
-export const removeMemberApi = async ({project_id, member_id}: RemoveMemberPayload) => {
+export const removeMemberFromProjectApi = async ({project_id, member_id}: RemoveMemberPayload) => {
     const {data: member, error} = await supabase.rpc("remove_member", {
         p_project_id: project_id,
         p_member_id: member_id,
@@ -48,4 +48,29 @@ export const getProjectMembersApi = async (project_id: string, invite_status: In
         throw error;
     }
     return members;
+}
+
+export const resendInvitationApi = async (project_id: string, user_id: string) => {
+    const {data: member, error} = await supabase.from("ProjectMembers").update({
+        invited_at: new Date().toISOString(),
+    }).eq("project_id", project_id)
+        .eq("user_id", user_id);
+
+    if(error){
+        throw error;
+    }
+    return member;
+}
+
+export const revokeInvitationApi = async (project_id: string, user_id: string) => {
+    const {data: member, error} = await supabase.rpc("revoke_invitation", {
+        p_project_id: project_id,
+        p_user_id: user_id,
+    });
+
+    if(error){
+        throw error;
+    }
+
+    return member;
 }

@@ -7,12 +7,31 @@ import MemberList from "@/features/member/components/uis/member-list/MemberList.
 import Button from "@/shared/components/button/Button.tsx";
 import MemberEmpty from "@/features/member/components/uis/states/MemberEmpty.tsx";
 import MembersSearch from "@/features/member/components/uis/search/MembersSearch.tsx";
+import {useRemoveMemberFromProject} from "@/features/member/hooks/useRemoveMemberFromProject.ts";
+import {useRevokeInvitation} from "@/features/member/hooks/useRevokeInvitation.ts";
 
 type MemberTabsProps = {
+    projectId: string;
     members?: Member[];
     pendingUsers?: Member[];
 }
-const MemberTabs = ({members, pendingUsers}: MemberTabsProps) => {
+const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
+    const {mutate: removeMember} = useRemoveMemberFromProject();
+    const {mutate: removePendingUser} = useRevokeInvitation()
+
+    const handleRemoveMemberFromProject = async (project_id: string, member_id: string) => {
+        removeMember({
+            project_id: project_id,
+            member_id: member_id,
+        })
+    }
+
+    const handleRemovePendingUser = async (project_id: string, user_id: string) => {
+        removePendingUser({
+            project_id: project_id,
+            user_id: user_id,
+        })
+    }
     return (
         <Tabs defaultValue={"member"}>
             <TabsList>
@@ -29,7 +48,7 @@ const MemberTabs = ({members, pendingUsers}: MemberTabsProps) => {
                             <div className={"h-48 overflow-y-auto"}>
                                 <p className={"text-sm text-text-secondary mb-3"}>{members?.length} members in this project</p>
                                     <MemberList showRole users={members} renderAction={user => (
-                                        <Button variant={"secondary"} fullWidth={false} size={"md"}>Remove</Button>
+                                        <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
                                     )}/>
                             </div>
                         ) :
@@ -48,7 +67,7 @@ const MemberTabs = ({members, pendingUsers}: MemberTabsProps) => {
                                 <MemberList users={pendingUsers} renderAction={pendingUsers => (
                                     <div className={"flex items-center gap-3"}>
                                         <Button variant={"secondary"} fullWidth={false} size={"md"}>Resend</Button>
-                                        <Button variant={"secondary"} fullWidth={false} size={"md"}>Revoke</Button>
+                                        <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
                                     </div>
                                 )}/>
                         </div>
