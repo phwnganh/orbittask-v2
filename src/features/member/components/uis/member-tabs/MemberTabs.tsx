@@ -48,7 +48,12 @@ const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
                             <div className={"h-48 overflow-y-auto"}>
                                 <p className={"text-sm text-text-secondary mb-3"}>{members?.length} members in this project</p>
                                     <MemberList showRole users={members} renderAction={user => (
-                                        <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
+                                        <>
+                                            {user.role !== "owner" &&
+                                                <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
+                                            }
+
+                                        </>
                                     )}/>
                             </div>
                         ) :
@@ -65,10 +70,14 @@ const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
                         <div className={"h-48 overflow-y-auto"}>
                             <p className={"text-sm text-text-secondary mb-3"}>{pendingUsers?.length} pending invitations</p>
                                 <MemberList users={pendingUsers} renderAction={pendingUsers => (
-                                    <div className={"flex items-center gap-3"}>
-                                        <Button variant={"secondary"} fullWidth={false} size={"md"}>Resend</Button>
-                                        <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
-                                    </div>
+                                    <>
+                                        {pendingUsers.role !== "owner" &&
+                                            <div className={"flex items-center gap-3"}>
+                                                <Button variant={"secondary"} fullWidth={false} size={"md"}>Resend</Button>
+                                                <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
+                                            </div>
+                                        }
+                                    </>
                                 )}/>
                         </div>
                     ) : (
