@@ -1,4 +1,4 @@
-import TaskColumn from "@/features/task-board/components/TaskColumn.tsx";
+import TaskColumn from "@/features/task-board/components/task-column/TaskColumn.tsx";
 
 const TaskBoard = () => {
     return (

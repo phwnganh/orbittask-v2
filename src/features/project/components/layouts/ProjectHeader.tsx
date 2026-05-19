@@ -3,7 +3,7 @@ import AvatarGroup from "@/shared/components/avatar/AvatarGroup.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
 import {useViewProjectDetail} from "@/features/project/hooks/useViewProjects.ts";
-
+import InviteUserIcon from '@/assets/icons/invite-user-icon.svg?react'
 type ProjectHeaderProps = {
     projectId: string;
     members?: Member[];
@@ -20,7 +20,12 @@ const ProjectHeader = ({projectId, members}: ProjectHeaderProps) => {
                     <button type={"button"} onClick={onOpenManageMemberModal} className={"hover:opacity-80 transition cursor-pointer"}>
                         <AvatarGroup users={members ?? []} max={3}/>
                     </button>
-                    <Button variant={"primary"} fullWidth={false} size={"md"} onClick={onOpenInviteMemberModal}>Invite</Button>
+                    <Button variant={"primary"} fullWidth={false} size={"md"} className={"flex items-center gap-2"} onClick={onOpenInviteMemberModal}>
+                        <div className={"flex justify-center items-center w-4 h-4 shrink-0"}>
+                            <InviteUserIcon className={"text-text-primary"}/>
+                        </div>
+                        <span>Invite</span>
+                    </Button>
                 </section>
             </header>
 

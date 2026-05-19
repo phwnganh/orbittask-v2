@@ -39,7 +39,7 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
                 )}
             </DropdownTrigger>
 
-            <DropdownContent className={"max-h-60 overflow-auto"}>
+            <DropdownContent className={"max-h-60 overflow-auto scrollbar-custom"}>
                 <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect} isDisabled={isDisabled}/>
             </DropdownContent>
         </Dropdown>

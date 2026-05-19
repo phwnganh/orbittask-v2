@@ -1,4 +1,4 @@
-import TaskBoard from "@/features/task-board/components/TaskBoard.tsx";
+import TaskBoard from "@/features/task-board/components/task-board/TaskBoard.tsx";
 
 const ProjectContent = () => {
     return (

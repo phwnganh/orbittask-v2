@@ -58,7 +58,7 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
 
                     <div className={"min-h-48 mt-4"}>
                         {selectedUsers.length > 0 ? (
-                            <div className={"h-48 overflow-y-auto"}>
+                            <div className={"h-48 overflow-y-auto scrollbar-custom"}>
                             <MemberList users={selectedUsers} renderAction={user => (
                                 <Button variant={"secondary"} fullWidth={false} size={"md"} onClick={() => removeSelectUsers(user.user_id)}>Remove</Button>
                             )}/>

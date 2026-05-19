@@ -14,8 +14,8 @@
   --color-primary-hover: #7c97ff;
   --color-primary-active: #4c6ef5;
 
-  --color-scrollbar-thumb: rgba(148, 163, 184, 0.25);
-
+  --color-scrollbar-thumb: rgba(148, 163, 184, 0.14);
+  --color-scrollbar-thumb-hover: rgba(148, 163, 184, 0.3);
   --color-secondary-hover: #263449;
   --color-elevated-hover: #344765;
 
@@ -101,12 +101,12 @@ body{
     }
 
     &::-webkit-scrollbar-thumb{
-      background: var(--color-text-muted);
+      background: var(--color-scrollbar-thumb);
       border-radius: 999px;
     }
 
     &::-webkit-scrollbar-thumb:hover{
-      background-color: var(--color-text-secondary);
+      background-color: var(--color-scrollbar-thumb-hover);
     }
 
   }

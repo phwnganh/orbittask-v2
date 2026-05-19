@@ -13,7 +13,7 @@ const HeaderAction = () => {
         <NotificationIcon className={"w-6 h-6"} />
 
           {unreadCount > 0 && (
-              <Badge count={unreadCount} variant={"error"} className={"absolute top-1 right-0 ring-2 ring-bg-primary"}/>
+              <Badge size={"sm"} count={unreadCount} variant={"error"} className={"absolute top-1 right-0 ring-2 ring-bg-primary"}/>
           )}
       </button>
       <button
