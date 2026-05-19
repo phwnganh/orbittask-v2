@@ -2,7 +2,6 @@ import {useQuery} from "@tanstack/react-query";
 import type {InviteStatus, Member, MemberResponse} from "@/features/member/types/member.type.ts";
 import {memberKeys} from "@/features/member/constants/member-query-key.constant.ts";
 import {getProjectMembersApi, getProjectUsersApi} from "@/features/member/services/member.api.ts";
-import {useMemberFilterStore} from "@/features/member/stores/member-filter.store.ts";
 
 export const useViewProjectUsers = ({project_id, search}: {project_id: string, search?: string}) => {
     return useQuery<MemberResponse[]>({
@@ -11,8 +10,8 @@ export const useViewProjectUsers = ({project_id, search}: {project_id: string, s
     })
 }
 
-export const useViewProjectMembers = (project_id: string, invite_status: InviteStatus)=> {
-    const {search} = useMemberFilterStore()
+export const useViewProjectMembers = ({project_id, invite_status, search}: {project_id: string; invite_status: InviteStatus; search?: string;
+})=> {
     return useQuery<Member[]>({
         queryKey: memberKeys.list({project_id, invite_status, search}),
         queryFn: () => getProjectMembersApi(project_id, invite_status, search)

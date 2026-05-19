@@ -3,18 +3,16 @@ import {useMutation} from "@tanstack/react-query";
 import {removeMemberFromProjectApi} from "@/features/member/services/member.api.ts";
 import {memberKeys} from "@/features/member/constants/member-query-key.constant.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
-import {useMemberFilterStore} from "@/features/member/stores/member-filter.store.ts";
 
 export const useRemoveMemberFromProject = () => {
     const {get, set, invalidate, cancel} = useReactQueryClient()
-    const {search} = useMemberFilterStore()
     return useMutation({
         mutationFn: ({project_id, member_id}: {project_id: string, member_id: string}) => removeMemberFromProjectApi({
             project_id,
             member_id
         }),
         onMutate: async ({project_id, member_id}) => {
-            const queryKey = memberKeys.list({project_id, invite_status: "accepted", search})
+            const queryKey = memberKeys.lists(project_id);
             await cancel(queryKey);
 
             const previousMembers = get<Member[]>(queryKey)
@@ -37,11 +35,7 @@ export const useRemoveMemberFromProject = () => {
             set(context.queryKey, context.previousMembers)
         },
         onSettled: (_data, _error, vars) => {
-            void invalidate(memberKeys.list({
-                project_id: vars.project_id,
-                invite_status: "accepted",
-                search,
-            }))
+            void invalidate(memberKeys.lists(vars.project_id))
         }
     })
 }

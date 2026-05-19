@@ -1,24 +1,22 @@
 import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
-import {useMemberFilterStore} from "@/features/member/stores/member-filter.store.ts";
 import {useMutation} from "@tanstack/react-query";
 import {revokeInvitationApi} from "@/features/member/services/member.api.ts";
 import {memberKeys} from "@/features/member/constants/member-query-key.constant.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
 
 export const useRevokeInvitation = () => {
-    const {get, set, cancel, invalidate} = useReactQueryClient()
-    const {search} = useMemberFilterStore()
+    const {getMany, setMany, cancel, invalidate, queryClient} = useReactQueryClient()
 
     return useMutation({
         mutationFn: ({project_id, user_id}: {project_id: string, user_id: string}) => revokeInvitationApi(project_id, user_id),
         onMutate: async ({project_id, user_id}) => {
-            const queryKey = memberKeys.list({project_id, invite_status: "pending", search})
+            const queryKey = memberKeys.lists(project_id);
 
             await cancel(queryKey);
 
-            const previousMembers = get<Member[]>(queryKey);
+            const previousMembers = getMany<Member[]>(queryKey);
 
-            set<Member[]>(
+            setMany<Member[]>(
                 queryKey,
                 (old) => {
 
@@ -31,19 +29,20 @@ export const useRevokeInvitation = () => {
                 }
             );
 
-            return {previousMembers, queryKey};
+            return {previousMembers};
         },
         onError: (_error, _var, context) => {
-            if(!context?.previousMembers) return;
-
-            set(context.queryKey, context.previousMembers)
+            context?.previousMembers?.forEach(
+                ([queryKey, data]) => {
+                    queryClient.setQueryData(
+                        queryKey,
+                        data
+                    );
+                }
+            );
         },
         onSettled: (_data, _error, vars) => {
-            void invalidate(memberKeys.list({
-                project_id: vars.project_id,
-                invite_status: "pending",
-                search,
-            }))
+            void invalidate(memberKeys.lists(vars.project_id));
         }
     })
 }

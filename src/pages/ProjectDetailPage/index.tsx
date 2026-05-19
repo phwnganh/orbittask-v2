@@ -8,8 +8,8 @@ import ProjectContent from "@/features/project/components/layouts/ProjectContent
 const ProjectDetailPage = () => {
     const {id} = useParams()
     if(!id) return null;
-    const {data: members} = useViewProjectMembers(id, "accepted")
-    const {data: pendingUsers} = useViewProjectMembers(id, "pending")
+    const {data: members} = useViewProjectMembers({project_id: id, invite_status: "accepted"})
+    const {data: pendingUsers} = useViewProjectMembers({project_id: id, invite_status: "pending"})
     return (
         <div className={"flex flex-col gap-4 h-full overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>

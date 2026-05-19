@@ -11,6 +11,12 @@ export const useReactQueryClient = () => {
         queryClient.setQueryData<T>(key, updater)
     }
 
+    const getMany = <T>(key: readonly unknown[]) => {
+        return queryClient.getQueriesData<T>({
+            queryKey: key
+        })
+    }
+
     const setMany = <T>(key: readonly unknown[], updater: (old: T | undefined) => T | undefined) => {
         queryClient.setQueriesData<T>({queryKey: key}, updater)
     }
@@ -38,6 +44,7 @@ export const useReactQueryClient = () => {
         queryClient,
         get,
         set,
+        getMany,
         setMany,
         cancel,
         invalidate,

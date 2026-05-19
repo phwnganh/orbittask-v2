@@ -21,7 +21,8 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
         addSelectedUsers,
         removeSelectUsers,
         openInviteMember,
-        onCloseInviteMemberModal
+        onCloseInviteMemberModal,
+        clearSelectedUsers
     } = useMemberStore()
     const debouncedKeyword = useDebounce(keyword, 500);
     const {data: users} = useViewProjectUsers({project_id: projectId, search: debouncedKeyword})
@@ -34,12 +35,18 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
         },
             {
                 onSuccess: () => {
+                    clearSelectedUsers()
                     onCloseInviteMemberModal()
                 }
             })
     }
+
+    const handleCloseInviteMemberModal = () => {
+        clearSelectedUsers()
+        onCloseInviteMemberModal()
+    }
     return (
-        <BaseModal isOpen={openInviteMember} onClose={onCloseInviteMemberModal}>
+        <BaseModal isOpen={openInviteMember} onClose={handleCloseInviteMemberModal}>
             <BaseModal.Content>
                 <BaseModal.Header title={"Invite Members To The Project"} onClose={onCloseInviteMemberModal}/>
                 <BaseModal.Body className={"max-h-80"}>
@@ -73,7 +80,7 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
 
                 </BaseModal.Body>
                 <BaseModal.Footer>
-                    <Button variant={"secondary"} fullWidth={false} onClick={onCloseInviteMemberModal}>Cancel</Button>
+                    <Button variant={"secondary"} fullWidth={false} onClick={handleCloseInviteMemberModal}>Cancel</Button>
                     <Button type={"button"} fullWidth={false} onClick={handleInviteMembers}
                             disabled={selectedUsers.length === 0 || isPending}>{isPending ? "Inviting..." : "Invite"}</Button>
                 </BaseModal.Footer>

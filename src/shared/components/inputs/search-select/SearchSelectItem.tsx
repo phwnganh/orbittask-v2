@@ -7,7 +7,7 @@ type SearchSelectItemProps = {
 }
 const SearchSelectItem = ({ onClick, children, disabled = false}: SearchSelectItemProps) => {
     return (
-        <div onClick={disabled ? undefined : onClick} className={`px-3 py-2 cursor-pointer rounded-md ${disabled ? "bg-bg-elevated cursor-not-allowed text-text-secondary" : "bg-secondary-hover cursor-pointer hover:bg-primary-hover"} group`}>
+        <div onClick={disabled ? undefined : onClick} className={`px-3 py-2 transition-colors duration-150 rounded-md ${disabled ? "bg-transparent opacity-50 cursor-not-allowed text-text-muted" : "text-text-primary cursor-pointer bg-bg-secondary/60 hover:bg-bg-tertiary"} group`}>
             {children}
         </div>
     );

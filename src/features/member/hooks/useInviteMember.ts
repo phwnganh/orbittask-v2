@@ -6,13 +6,13 @@ import type {MemberResponse} from "@/features/member/types/member.type.ts";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 
 export const useInviteMember = () => {
-    const {get, setMany, cancel, invalidate} = useReactQueryClient()
+    const {getMany, setMany, cancel, invalidate, queryClient} = useReactQueryClient()
 
     return useMutation({
         mutationFn: inviteMemberApi,
         onMutate: async (payload) => {
-            await cancel(memberKeys.lists())
-            const previousMembers = get<MemberResponse>(memberKeys.lists())
+            await cancel(memberKeys.lists(payload.project_id))
+            const previousMembers = getMany<MemberResponse[]>(memberKeys.lists(payload.project_id))
             const {selectedUsers} = useMemberStore.getState()
             const optimisticMembers: MemberResponse[] = payload.user_ids.map(userId => {
                 const selectedUser = selectedUsers.find(user => user.user_id === userId)!;
@@ -28,7 +28,7 @@ export const useInviteMember = () => {
                 }
             )
 
-            setMany<MemberResponse[]>(memberKeys.lists(), old => {
+            setMany<MemberResponse[]>(memberKeys.lists(payload.project_id), old => {
                 if(!old) return old;
                 const filteredOptimisticMembers = optimisticMembers.filter(member => !old.some(m => m.user_id === member.user_id))
 
@@ -41,15 +41,17 @@ export const useInviteMember = () => {
             return {previousMembers}
         },
         onError: (_err, _vars, context) => {
-            if(!context?.previousMembers) return;
-
-            setMany(
-                memberKeys.lists(),
-                () => context.previousMembers
+            context?.previousMembers?.forEach(
+                ([queryKey, data]) => {
+                    queryClient.setQueryData(
+                        queryKey,
+                        data
+                    );
+                }
             );
         },
-        onSettled: () => {
-            void invalidate(memberKeys.lists())
+        onSettled: (_data, _err, vars) => {
+            void invalidate(memberKeys.lists(vars.project_id))
         }
     })
 }

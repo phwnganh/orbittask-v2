@@ -13,6 +13,7 @@ type MemberState = {
     setKeyword: (keyword: string) => void;
     addSelectedUsers: (user: MemberResponse) => void;
     removeSelectUsers: (userId: string) => void;
+    clearSelectedUsers: () => void;
 }
 
 export const useMemberStore = create<MemberState>((set) => ({
@@ -34,5 +35,6 @@ export const useMemberStore = create<MemberState>((set) => ({
     }),
     removeSelectUsers: (userId) => set((state) => ({
         selectedUsers: state.selectedUsers.filter(user => user.user_id !== userId)
-    }))
+    })),
+    clearSelectedUsers: () => set({selectedUsers: []}),
 }))
