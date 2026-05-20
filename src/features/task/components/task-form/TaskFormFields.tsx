@@ -1,15 +1,22 @@
-import type {FieldErrors, UseFormRegister} from "react-hook-form";
+import {type Control, Controller, type FieldErrors, type UseFormRegister} from "react-hook-form";
 import type {TaskFormValues} from "@/features/task/components/task-form/task.schema.ts";
 import Input from "@/shared/components/inputs/Input.tsx";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
+import SearchSelect from "@/shared/components/inputs/search-select/SearchSelect.tsx";
+import Avatar from "@/shared/components/avatar/Avatar.tsx";
+import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import {useMemberStore} from "@/features/member/stores/member.store.ts";
 
 type TaskFormProps = {
     register: UseFormRegister<TaskFormValues>;
+    control: Control<TaskFormValues>;
     errors: FieldErrors<TaskFormValues>;
     status: Task["status"];
+    users?: MemberResponse[]
 }
-const TaskFormFields = ({register, errors, status}: TaskFormProps) => {
+const TaskFormFields = ({register, control, errors, status, users}: TaskFormProps) => {
+    const {keyword, setKeyword} = useMemberStore()
     return (
         <div className={"flex flex-col gap-5"}>
             <div className={"flex flex-col gap-1.5"}>
@@ -32,7 +39,32 @@ const TaskFormFields = ({register, errors, status}: TaskFormProps) => {
 
             <div className={"flex flex-col gap-1.5"}>
                 <label className={"text-sm text-text-secondary font-medium"}>Assignee</label>
-
+                <Controller control={control} render={({field}) => {
+                    const selectedUser = users?.find(user => user.user_id === field.value)
+                    return (
+                        <SearchSelect placeholder={"Select assignee"} selected={selectedUser ? [selectedUser]: []} keyword={keyword} onSelected={(user) => {
+                            field.onChange(user.user_id);
+                        }} onSearch={setKeyword} items={users ?? []} renderItem={user => (
+                            <div className={"flex items-center gap-3"}>
+                                <Avatar avatarUrl={user.avatar_url} size={"sm"}/>
+                                <div>
+                                    <p className={"text-text-primary"}>{user.first_name} {user.last_name}</p>
+                                    <p className={"text-sm text-text-muted"}>{user.email}</p>
+                                </div>
+                            </div>
+                        )} getKey={user => user.user_id}
+                        selectedContent={selectedUser && (
+                            <div className={"flex items-center gap-3"}>
+                                <Avatar avatarUrl={selectedUser.avatar_url} size={"sm"}/>
+                                <span className={"text-text-primary"}>
+                                    {selectedUser.first_name} {selectedUser.last_name}
+                                </span>
+                            </div>
+                        )} onClearSelected={() => {
+                            field.onChange("")
+                        }} hideSelectedItem={false} isDisabled={user => user.user_id === field.value}/>
+                    )
+                }} name={"assignee_id"}/>
             </div>
 
             <div className={"flex items-center gap-3"}>

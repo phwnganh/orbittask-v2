@@ -15,11 +15,14 @@ type SearchSelectProps<T> = {
     renderItem: (item: T, isDisabled: boolean) => ReactNode;
     getKey: (item: T) => string;
     placeholder?: string;
+    selectedContent?: ReactNode;
+    onClearSelected?: () => void;
+    hideSelectedItem?: boolean;
 }
-const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, renderItem, getKey, placeholder, isDisabled}: SearchSelectProps<T>) => {
+const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, renderItem, getKey, placeholder, isDisabled, selectedContent, onClearSelected, hideSelectedItem = true}: SearchSelectProps<T>) => {
     const [open, setOpen] = useState(false)
 
-    const filteredItem = items.filter(item => !selected.some(selectedItem => getKey(selectedItem) === getKey(item)))
+    const filteredItem = hideSelectedItem ? items.filter(item => !selected.some(selectedItem => getKey(selectedItem) === getKey(item))) : items;
 
     const handleSelect = (item: T) => {
         onSelected(item)
@@ -30,11 +33,13 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
         <Dropdown matchTriggerWidth open={open} onOpenChange={setOpen}>
             <DropdownTrigger>
                 {(props) => (
-                    <SearchSelectInput {...props} placeholder={placeholder} keyword={keyword} onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    <SearchSelectInput {...props} selectedContent={selectedContent} onClearSelected={onClearSelected} placeholder={placeholder} keyword={keyword} onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         onSearch(e.target.value)
                         if(!open){
                             setOpen(true)
                         }
+                    }} onContentClick={() => {
+                        setOpen(true)
                     }}/>
                 )}
             </DropdownTrigger>

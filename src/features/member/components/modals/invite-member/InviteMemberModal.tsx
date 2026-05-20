@@ -1,19 +1,19 @@
 import {BaseModal} from "@/shared/components/modal";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
-import {useViewProjectUsers} from "@/features/member/hooks/useViewProjectUsers.ts";
 import SearchSelect from "@/shared/components/inputs/search-select/SearchSelect.tsx";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
-import {useDebounce} from "@/shared/hooks/useDebounce.ts";
 import {getInviteStatusLabel} from "@/features/member/utils/member.util.ts";
 import Button from "@/shared/components/button/Button.tsx";
 import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
 import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
 import UserEmpty from "@/features/member/components/uis/states/UserEmpty.tsx";
+import type {MemberResponse} from "@/features/member/types/member.type.ts";
 
 type InviteMemberModalProps = {
     projectId: string;
+    users?: MemberResponse[]
 }
-const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
+const InviteMemberModal = ({projectId, users}: InviteMemberModalProps) => {
     const {
         keyword,
         selectedUsers,
@@ -24,8 +24,6 @@ const InviteMemberModal = ({projectId}: InviteMemberModalProps) => {
         onCloseInviteMemberModal,
         clearSelectedUsers
     } = useMemberStore()
-    const debouncedKeyword = useDebounce(keyword, 500);
-    const {data: users} = useViewProjectUsers({project_id: projectId, search: debouncedKeyword})
     const {mutate, isPending} = useInviteMember()
 
     const handleInviteMembers = () => {

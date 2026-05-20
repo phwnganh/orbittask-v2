@@ -8,13 +8,15 @@ import FormModal from "@/shared/components/modal/FormModal.tsx";
 import TaskFormFields from "@/features/task/components/task-form/TaskFormFields.tsx";
 import {addDays} from "date-fns";
 import type {Task} from "@/features/task/types/task.type.ts";
+import type {MemberResponse} from "@/features/member/types/member.type.ts";
 
 type AddTaskModalProps = {
     isOpen: boolean;
     onClose: () => void;
     status: Task["status"];
+    users?: MemberResponse[]
 }
-const AddTaskModal = ({isOpen, onClose, status}: AddTaskModalProps) => {
+const AddTaskModal = ({isOpen, onClose, status, users}: AddTaskModalProps) => {
     const form = useForm<TaskFormValues>({
         resolver: zodResolver(taskSchema),
         defaultValues: {
@@ -32,7 +34,7 @@ const AddTaskModal = ({isOpen, onClose, status}: AddTaskModalProps) => {
     })
     return (
         <FormModal isOpen={isOpen} title={"Create Task"} onSubmit={handleSubmit} onClose={onClose}>
-            <TaskFormFields register={form.register} errors={form.formState.errors} status={status}/>
+            <TaskFormFields register={form.register} control={form.control} errors={form.formState.errors} status={status} users={users}/>
         </FormModal>
     );
 };

@@ -15,6 +15,8 @@ type TaskState = {
     onCloseAddTaskModal: () => void;
     onCloseEditTaskModal: () => void;
     onCloseDeleteTaskModal: () => void;
+    keyword: string;
+    setKeyword: (keyword: string) => void;
 }
 
 export const useTaskStore = create<TaskState>((set) => ({
@@ -35,4 +37,6 @@ export const useTaskStore = create<TaskState>((set) => ({
         }}),
     onCloseEditTaskModal: () => set({editTaskModal: null}),
     onCloseDeleteTaskModal: () => set({deleteTaskModal: null}),
+    keyword: "",
+    setKeyword: (keyword) => set({keyword}),
 }))
