@@ -1,12 +1,14 @@
 import {type Control, Controller, type FieldErrors, type UseFormRegister} from "react-hook-form";
-import type {TaskFormValues} from "@/features/task/components/task-form/task.schema.ts";
+import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
 import Input from "@/shared/components/inputs/Input.tsx";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
-import SearchSelect from "@/shared/components/inputs/search-select/SearchSelect.tsx";
+import SearchSelect from "@/shared/components/inputs/base-select/search-select/SearchSelect.tsx";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
+import SingleSelect from "@/shared/components/inputs/base-select/single-select/SingleSelect.tsx";
+import {TASK_PRIORITIES} from "@/features/task/constants/task-priority.constant.ts";
 
 type TaskFormProps = {
     register: UseFormRegister<TaskFormValues>;
@@ -77,6 +79,24 @@ const TaskFormFields = ({register, control, errors, status, users}: TaskFormProp
             </div>
             <div className={"flex flex-col gap-1.5"}>
                 <label className={"text-sm text-secondary font-medium"}>Priority</label>
+                <Controller control={control} render={({field}) => {
+                    const selectedPriority = TASK_PRIORITIES.find(priority => priority.value === field.value) ?? null;
+
+                    return (
+                        <SingleSelect value={selectedPriority} items={[...TASK_PRIORITIES]} onChange={priority => {
+                            field.onChange(priority?.value ?? "")
+                        }} getKey={priority => priority.value} renderItem={(priority) => (
+                            <div className={"flex items-center gap-3"}>
+                                <Badge size={"sm"} variant={priority.variant}>{priority.label}</Badge>
+                            </div>
+                        )} renderValue={(priority) => {
+                            if(!priority) return null;
+                            return (
+                                <Badge size={"sm"} variant={priority.variant}>{priority.label}</Badge>
+                            )
+                        }} placeholder={"Select priority"}/>
+                    )
+                }} name={"priority"}/>
             </div>
             <div className={"flex items-center gap-3"}>
                 <label className={"text-sm text-secondary font-medium"}>Status</label>

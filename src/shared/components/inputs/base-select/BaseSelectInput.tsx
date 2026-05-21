@@ -11,7 +11,7 @@ type SearchSelectInputProps = {
     onClearSelected?: () => void;
     onContentClick?: () => void;
 } & InputHTMLAttributes<HTMLInputElement>
-const SearchSelectInput = ({keyword, onChange, placeholder, selectedContent, onClearSelected, onContentClick, ...props}: SearchSelectInputProps) => {
+const BaseSelectInput = ({keyword, onChange, placeholder, selectedContent, onClearSelected, onContentClick, ...props}: SearchSelectInputProps) => {
     const hasSelected = !!selectedContent && !keyword;
     return (
         <div className={"relative w-full group"}>
@@ -38,4 +38,4 @@ const SearchSelectInput = ({keyword, onChange, placeholder, selectedContent, onC
     );
 };
 
-export default SearchSelectInput;
+export default BaseSelectInput;

@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form";
 import {
     type TaskFormValues,
     taskSchema
-} from "@/features/task/components/task-form/task.schema.ts";
+} from "@/features/task/schemas/task.schema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import FormModal from "@/shared/components/modal/FormModal.tsx";
 import TaskFormFields from "@/features/task/components/task-form/TaskFormFields.tsx";

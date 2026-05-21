@@ -2,8 +2,8 @@ import {type ChangeEvent, type ReactNode, useState} from "react";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
-import SearchSelectList from "@/shared/components/inputs/search-select/SearchSelectList.tsx";
-import SearchSelectInput from "@/shared/components/inputs/search-select/SearchSelectInput.tsx";
+import BaseSelectList from "@/shared/components/inputs/base-select/BaseSelectList.tsx";
+import BaseSelectInput from "@/shared/components/inputs/base-select/BaseSelectInput.tsx";
 
 type SearchSelectProps<T> = {
     selected: T[];
@@ -33,7 +33,7 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
         <Dropdown matchTriggerWidth open={open} onOpenChange={setOpen}>
             <DropdownTrigger>
                 {(props) => (
-                    <SearchSelectInput {...props} selectedContent={selectedContent} onClearSelected={onClearSelected} placeholder={placeholder} keyword={keyword} onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    <BaseSelectInput {...props} selectedContent={selectedContent} onClearSelected={onClearSelected} placeholder={placeholder} keyword={keyword} onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         onSearch(e.target.value)
                         if(!open){
                             setOpen(true)
@@ -45,7 +45,7 @@ const SearchSelect = <T,>({selected, keyword, onSelected, onSearch, items, rende
             </DropdownTrigger>
 
             <DropdownContent className={"max-h-60 overflow-auto scrollbar-custom"}>
-                <SearchSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect} isDisabled={isDisabled}/>
+                <BaseSelectList items={filteredItem} getKey={getKey} renderItem={renderItem} onSelect={handleSelect} isDisabled={isDisabled}/>
             </DropdownContent>
         </Dropdown>
     );

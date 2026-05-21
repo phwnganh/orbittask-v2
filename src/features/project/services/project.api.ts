@@ -1,4 +1,4 @@
-import type {ProjectFormValues} from "@/features/project/components/project-form/project.schema.ts";
+import type {ProjectFormValues} from "@/features/project/schemas/project.schema.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
 import {getCurrentUserApi} from "@/features/auth/services/auth.api.ts";
 import type {ProjectResponse} from "@/features/project/types/project.type.ts";

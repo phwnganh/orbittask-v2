@@ -20,7 +20,7 @@ export const useCreateProject = () => {
             const optimisticProject = {
                 id: tempId,
                 title: payload.title,
-                description: payload.description,
+                description: payload.description ?? "",
                 owner_id: user.id,
                 is_archived: false,
                 created_at: new Date().toISOString(),

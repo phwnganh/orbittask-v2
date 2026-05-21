@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {type ProjectFormValues, projectSchema} from "@/features/project/components/project-form/project.schema.ts";
+import {type ProjectFormValues, projectSchema} from "@/features/project/schemas/project.schema.ts";
 import FormModal from "@/shared/components/modal/FormModal.tsx";
 import ProjectFormFields from "@/features/project/components/project-form/ProjectFormFields.tsx";
 import {useProjectStore} from "@/features/project/stores/project.store.ts";

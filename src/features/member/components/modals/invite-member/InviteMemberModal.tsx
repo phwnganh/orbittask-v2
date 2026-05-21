@@ -1,6 +1,6 @@
 import {BaseModal} from "@/shared/components/modal";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
-import SearchSelect from "@/shared/components/inputs/search-select/SearchSelect.tsx";
+import SearchSelect from "@/shared/components/inputs/base-select/search-select/SearchSelect.tsx";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {getInviteStatusLabel} from "@/features/member/utils/member.util.ts";
 import Button from "@/shared/components/button/Button.tsx";

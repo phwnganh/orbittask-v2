@@ -1,5 +1,5 @@
 import type {ReactNode} from "react";
-import SearchSelectItem from "@/shared/components/inputs/search-select/SearchSelectItem.tsx";
+import BaseSelectItem from "@/shared/components/inputs/base-select/BaseSelectItem.tsx";
 
 type SearchSelectListProps<T> = {
     items: T[];
@@ -10,7 +10,7 @@ type SearchSelectListProps<T> = {
 
     isDisabled?: (item: T) => boolean;
 }
-const SearchSelectList = <T, >({items, onSelect, getKey, renderItem, isDisabled}: SearchSelectListProps<T>) => {
+const BaseSelectList = <T, >({items, onSelect, getKey, renderItem, isDisabled}: SearchSelectListProps<T>) => {
     return (
         <>
             {items.map(item => {
@@ -18,16 +18,16 @@ const SearchSelectList = <T, >({items, onSelect, getKey, renderItem, isDisabled}
                const disabled = isDisabled?.(item) ?? false
 
                return (
-                   <SearchSelectItem key={key} onClick={() => {
+                   <BaseSelectItem key={key} onClick={() => {
                        if(disabled) return;
                        onSelect(item)
                    }} disabled={disabled}>
                        {renderItem(item, disabled)}
-                   </SearchSelectItem>
+                   </BaseSelectItem>
                )
             })}
         </>
     );
 };
 
-export default SearchSelectList;
+export default BaseSelectList;

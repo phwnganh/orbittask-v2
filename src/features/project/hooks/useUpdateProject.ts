@@ -1,6 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
 import {updateProjectApi} from "@/features/project/services/project.api.ts";
-import type {ProjectFormValues} from "@/features/project/components/project-form/project.schema.ts";
+import type {ProjectFormValues} from "@/features/project/schemas/project.schema.ts";
 import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
 import {projectKeys} from "@/features/project/constants/project-query-key.constant.ts";
 import type {ProjectResponse} from "@/features/project/types/project.type.ts";
