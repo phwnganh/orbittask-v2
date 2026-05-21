@@ -15,9 +15,9 @@ const Badge = ({children, count, max = 99, variant = "default", size="md", class
 
     const variants = {
         default: "bg-bg-secondary text-text-primary",
-        error: "bg-error text-text-primary border border-border-error",
-        success: "bg-success text-text-primary border border-border-success",
-        warning: "bg-warning text-text-primary border border-border-warning",
+        error: "bg-bg-error text-error border border-border-error",
+        success: "bg-bg-success text-success border border-border-success",
+        warning: "bg-bg-warning text-warning border border-border-warning",
         info: "bg-bg-info text-text-primary border border-border-info"
     }
 
