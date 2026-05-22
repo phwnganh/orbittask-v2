@@ -20,7 +20,8 @@ type MemberTabsProps = {
 const MemberTabs = ({projectId, members, pendingUsers, me}: MemberTabsProps) => {
     const {mutate: removeMember} = useRemoveMemberFromProject();
     const {mutate: removePendingUser} = useRevokeInvitation()
-
+    const currentUser = members?.find(member => member.user_id === me?.id);
+    const isOwner = currentUser?.role === "owner";
     const handleRemoveMemberFromProject = async (project_id: string, member_id: string) => {
         removeMember({
             project_id: project_id,
@@ -51,7 +52,7 @@ const MemberTabs = ({projectId, members, pendingUsers, me}: MemberTabsProps) => 
                                 <p className={"text-sm text-text-secondary mb-3"}>{members?.length} members in this project</p>
                                     <MemberList me={me} showRole users={members} renderAction={user => (
                                         <>
-                                            {user.role !== "owner" &&
+                                            {(isOwner && user.role !== "owner") &&
                                                 <Button variant={"tertiary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>
                                             }
 
@@ -73,7 +74,7 @@ const MemberTabs = ({projectId, members, pendingUsers, me}: MemberTabsProps) => 
                             <p className={"text-sm text-text-secondary mb-3"}>{pendingUsers?.length} pending invitations</p>
                                 <MemberList users={pendingUsers} renderAction={pendingUsers => (
                                     <>
-                                        {pendingUsers.role !== "owner" &&
+                                        {(isOwner && pendingUsers.role !== "owner") &&
                                             <div className={"flex items-center gap-3"}>
                                                 <Button variant={"tertiary"} fullWidth={false} size={"md"}>Resend</Button>
                                                 <Button variant={"tertiary"} fullWidth={false} size={"md"} onClick={() => handleRemovePendingUser(projectId, pendingUsers.user_id)}>Revoke</Button>
