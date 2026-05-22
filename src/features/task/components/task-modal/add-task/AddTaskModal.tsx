@@ -6,7 +6,6 @@ import {
 import {zodResolver} from "@hookform/resolvers/zod";
 import FormModal from "@/shared/components/modal/FormModal.tsx";
 import TaskFormFields from "@/features/task/components/task-form/TaskFormFields.tsx";
-import {addDays} from "date-fns";
 import type {Task} from "@/features/task/types/task.type.ts";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
 import {useAddTask} from "@/features/task/hooks/useAddTask.ts";
@@ -35,7 +34,7 @@ const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskMo
             description: "",
             assignee_id: "",
             start_date: new Date(),
-            due_date: addDays(new Date(), 1),
+            due_date: new Date(),
             priority: "medium",
             project_id: projectId,
             status: status
@@ -45,6 +44,7 @@ const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskMo
     const {mutate, isPending} = useAddTask()
 
     const handleSubmit = form.handleSubmit((data) => {
+        console.log(data)
         mutate(data, {
             onSuccess: () => {
                 form.reset()

@@ -1,3 +1,5 @@
+import type {Profile} from "@/features/auth/types/auth.type.ts";
+
 export type Task = {
     id: string;
     project_id: string;
@@ -6,6 +8,7 @@ export type Task = {
     start_date: string;
     due_date: string;
     assignee_id: string;
+    assignee?: Profile;
     status: TaskStatus;
     priority: "low" | "medium" | "high";
 }

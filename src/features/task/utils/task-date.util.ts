@@ -1,55 +1,57 @@
-import {differenceInCalendarDays, format, startOfDay} from "date-fns";
+import {differenceInCalendarDays, format, isToday, startOfDay} from "date-fns";
 
 type DueDateStatus = {
-    variant: string;
+    variant: "default" | "error" | "success" | "warning" | "info";
     label: string;
-    fullDate?: string;
+    fullDate: string;
 }
-export const getDueDateStatus = (dueDate?: Date, completed?: boolean): DueDateStatus => {
+export const getDueDateStatus = (dueDate?: string, completed?: boolean): DueDateStatus => {
     if(!dueDate){
         return {
             variant: "default",
-            label: "No Due Date"
+            label: "No Due Date",
+            fullDate: ""
         };
     }
 
     const today = startOfDay(new Date());
-    const target = startOfDay(dueDate);
+    const target = startOfDay(new Date(dueDate));
     const diffDays = differenceInCalendarDays(target, today);
+    const fullDate = format(target, "MMM d");
     if(completed){
         return {
             variant: "success",
-            label: "Completed",
-            fullDate: format(target, "MMM d")
+            label: fullDate,
+            fullDate: fullDate,
         };
     }
 
-    if(today){
+    if(isToday(target)){
         return {
             variant: "warning",
             label: "Today",
-            fullDate: format(target, "MMM d")
+            fullDate: fullDate,
         }
     }
 
     if(diffDays > 0){
-        if(diffDays === 1){
+        if (diffDays === 1) {
             return {
                 variant: "warning",
                 label: "Tomorrow",
-                fullDate: format(target, "MMM d")
-            }
+                fullDate: fullDate,
+            };
         }
         return {
             variant: "warning",
             label: `${diffDays}d left`,
-            fullDate: format(target, "MMM d")
-        }
+            fullDate: fullDate,
+        };
     }
 
     return {
         variant: "error",
         label: `Overdue ${Math.abs(diffDays)}d`,
-        fullDate: format(target, "MMM d")
+        fullDate: fullDate,
     };
 }

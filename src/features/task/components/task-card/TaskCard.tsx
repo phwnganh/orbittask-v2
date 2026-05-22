@@ -14,6 +14,7 @@ type TaskCardProps = {
     task: Task;
 }
 const TaskCard = ({task}: TaskCardProps) => {
+    const dueDateStatus = getDueDateStatus(task.due_date, task.status === "completed")
     return (
         <Card className={"flex flex-col gap-4"}>
             <div className={"flex items-center justify-between"}>
@@ -34,9 +35,9 @@ const TaskCard = ({task}: TaskCardProps) => {
             <div className={"flex items-center justify-between"}>
                 <div className={"flex items-center gap-1.5"}>
                     <Badge size={"sm"} className={"capitalize"} variant={getTaskPriorityBadgeVariant(task.priority)}>{task.priority}</Badge>
-                    {/*<Badge variant={getDueDateStatus}></Badge>*/}
+                    <Badge size={"sm"} variant={dueDateStatus.variant}>{dueDateStatus.label}</Badge>
                 </div>
-                <Avatar size={"xs"}/>
+                <Avatar size={"xs"} avatarUrl={task.assignee?.avatar_url}/>
             </div>
 
 
