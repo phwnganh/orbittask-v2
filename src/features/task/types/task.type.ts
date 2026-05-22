@@ -5,7 +5,6 @@ export type Task = {
     description: string;
     start_date: string;
     due_date: string;
-    is_archived: boolean;
     assignee_id: string;
     status: "todo" | "in_progress" | "completed";
     priority: "low" | "medium" | "high";

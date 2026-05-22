@@ -7,7 +7,9 @@ export const taskSchema = z.object({
     start_date: z.date(),
     due_date: z.date().refine(date => isAfter(date, new Date()), "Due date must be in the future"),
     assignee_id: z.string(),
-    priority: z.string().optional()
+    priority: z.string().optional(),
+    project_id: z.string(),
+    status: z.string()
 })
 
 export type TaskFormValues = z.infer<typeof taskSchema>

@@ -8,9 +8,10 @@ import type {MemberResponse} from "@/features/member/types/member.type.ts";
 
 type TaskColumnProps = {
     status: Task["status"];
-    users?: MemberResponse[]
+    users?: MemberResponse[];
+    projectId?: string;
 }
-const TaskColumn = ({status, users}: TaskColumnProps) => {
+const TaskColumn = ({status, users, projectId}: TaskColumnProps) => {
     const {addTaskModal, onCloseAddTaskModal} = useTaskStore()
     return (
         <div className={"flex h-full overflow-y-auto scrollbar-custom flex-col gap-4 max-w-88 w-full shrink-0 bg-bg-secondary/80 border border-border-primary shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-md rounded-lg p-4"}>
@@ -19,7 +20,7 @@ const TaskColumn = ({status, users}: TaskColumnProps) => {
                 <TaskColumnList/>
             </div>
             <AddTaskButton status={status}/>
-            <AddTaskModal isOpen={addTaskModal.isOpen} onClose={onCloseAddTaskModal} status={status} users={users}/>
+            <AddTaskModal isOpen={addTaskModal.isOpen} onClose={onCloseAddTaskModal} status={status} users={users} projectId={projectId}/>
         </div>
     );
 };

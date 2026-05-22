@@ -3,11 +3,12 @@ import type {MemberResponse} from "@/features/member/types/member.type.ts";
 
 type ProjectContentProps = {
     users?: MemberResponse[]
+    projectId?: string
 }
-const ProjectContent = ({users}: ProjectContentProps) => {
+const ProjectContent = ({users, projectId}: ProjectContentProps) => {
     return (
         <main className={"flex-1 min-h-0"}>
-            <TaskBoard users={users}/>
+            <TaskBoard users={users} projectId={projectId}/>
         </main>
     );
 };
