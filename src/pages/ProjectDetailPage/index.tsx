@@ -7,13 +7,15 @@ import ProjectContent from "@/features/project/components/layouts/ProjectContent
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import {useDebounce} from "@/shared/hooks/useDebounce.ts";
 import {useSession} from "@/features/auth/hooks/useSession.ts";
+import {useMemberFilterStore} from "@/features/member/stores/member-filter.store.ts";
 
 const ProjectDetailPage = () => {
     const {id} = useParams()
     if(!id) return null;
     const {keyword} = useMemberStore()
-    const {data: members} = useViewProjectMembers({project_id: id, invite_status: "accepted"})
-    const {data: pendingUsers} = useViewProjectMembers({project_id: id, invite_status: "pending"})
+    const {search} = useMemberFilterStore()
+    const {data: members} = useViewProjectMembers({project_id: id, invite_status: "accepted", search: search})
+    const {data: pendingUsers} = useViewProjectMembers({project_id: id, invite_status: "pending", search: search})
     const debouncedKeyword = useDebounce(keyword, 500);
     const {data: users} = useViewProjectUsers({project_id: id, search: debouncedKeyword})
 
