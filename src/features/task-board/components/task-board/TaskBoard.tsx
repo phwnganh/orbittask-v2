@@ -12,7 +12,7 @@ type TaskBoardProps = {
 const TaskBoard = ({users, projectId, me}: TaskBoardProps) => {
     const {addTaskModal, onCloseAddTaskModal} = useTaskStore()
     return (
-        <div className={"h-full overflow-x-auto flex gap-4 pb-2 scrollbar-custom"}>
+        <div className={"h-full min-h-0 overflow-x-auto flex gap-4 pb-2 scrollbar-custom"}>
             <TaskColumn projectId={projectId} status={"todo"}/>
             <TaskColumn projectId={projectId} status={"in_progress"}/>
             <TaskColumn projectId={projectId} status={"completed"}/>

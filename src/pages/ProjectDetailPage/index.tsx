@@ -22,7 +22,7 @@ const ProjectDetailPage = () => {
     const {data: session} = useSession()
     const me = session?.user;
     return (
-        <div className={"flex flex-col gap-4 h-full overflow-hidden"}>
+        <div className={"flex flex-col gap-4 h-full min-h-0 overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>
             <ProjectContent me={me} users={members} projectId={id}/>
             <InviteMemberModal me={me} projectId={id} users={users}/>
