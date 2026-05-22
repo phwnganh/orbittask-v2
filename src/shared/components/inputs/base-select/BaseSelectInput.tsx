@@ -12,7 +12,7 @@ type SearchSelectInputProps = {
     onContentClick?: () => void;
 } & InputHTMLAttributes<HTMLInputElement>
 const BaseSelectInput = ({keyword, onChange, placeholder, selectedContent, onClearSelected, onContentClick, ...props}: SearchSelectInputProps) => {
-    const hasSelected = !!selectedContent && !keyword;
+    const hasSelected = !!selectedContent;
     return (
         <div className={"relative w-full group"}>
             <Input {...props} value={keyword} placeholder={hasSelected ? "" : placeholder} onChange={onChange} className={"pr-10"}/>

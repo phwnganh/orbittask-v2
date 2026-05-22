@@ -4,13 +4,15 @@ import SearchSelect from "@/shared/components/inputs/base-select/search-select/S
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {User} from "@supabase/supabase-js";
 
 type TaskAssigneeFieldProps = {
     control: Control<TaskFormValues>;
     errors: FieldErrors<TaskFormValues>;
     users?: MemberResponse[];
+    me?: User;
 }
-const TaskAssigneeField = ({control, errors, users}: TaskAssigneeFieldProps) => {
+const TaskAssigneeField = ({control, errors, users, me}: TaskAssigneeFieldProps) => {
     const {keyword, setKeyword} = useMemberStore()
     return (
         <div className={"flex flex-col gap-1.5"}>
@@ -24,7 +26,7 @@ const TaskAssigneeField = ({control, errors, users}: TaskAssigneeFieldProps) => 
                         <div className={"flex items-center gap-3"}>
                             <Avatar avatarUrl={user.avatar_url} size={"sm"}/>
                             <div>
-                                <p className={"text-text-primary"}>{user.first_name} {user.last_name}</p>
+                                <p className={"text-text-primary"}>{(me?.id === user?.user_id) ? "Me" : `${user.first_name} ${user.last_name}`}</p>
                                 <p className={"text-sm text-text-muted"}>{user.email}</p>
                             </div>
                         </div>
@@ -33,7 +35,7 @@ const TaskAssigneeField = ({control, errors, users}: TaskAssigneeFieldProps) => 
                                       <div className={"flex items-center gap-3"}>
                                           <Avatar avatarUrl={selectedUser.avatar_url} size={"sm"}/>
                                           <span className={"text-text-primary"}>
-                                    {selectedUser.first_name} {selectedUser.last_name}
+                                    {(me?.id === selectedUser?.user_id) ? "Me" : `${selectedUser.first_name} ${selectedUser.last_name}`}
                                 </span>
                                       </div>
                                   )} onClearSelected={() => {

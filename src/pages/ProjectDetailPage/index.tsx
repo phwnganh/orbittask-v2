@@ -6,6 +6,7 @@ import ProjectHeader from "@/features/project/components/layouts/ProjectHeader.t
 import ProjectContent from "@/features/project/components/layouts/ProjectContent.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import {useDebounce} from "@/shared/hooks/useDebounce.ts";
+import {useSession} from "@/features/auth/hooks/useSession.ts";
 
 const ProjectDetailPage = () => {
     const {id} = useParams()
@@ -16,12 +17,14 @@ const ProjectDetailPage = () => {
     const debouncedKeyword = useDebounce(keyword, 500);
     const {data: users} = useViewProjectUsers({project_id: id, search: debouncedKeyword})
 
+    const {data: session} = useSession()
+    const me = session?.user;
     return (
         <div className={"flex flex-col gap-4 h-full overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>
-            <ProjectContent users={members} projectId={id}/>
+            <ProjectContent me={me} users={members} projectId={id}/>
             <InviteMemberModal projectId={id} users={users}/>
-            <ManageMemberModal projectId={id} members={members} pendingUsers={pendingUsers}/>
+            <ManageMemberModal me={me} projectId={id} members={members} pendingUsers={pendingUsers}/>
         </div>
     );
 };

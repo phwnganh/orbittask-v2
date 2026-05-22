@@ -10,6 +10,8 @@ import {addDays} from "date-fns";
 import type {Task} from "@/features/task/types/task.type.ts";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
 import {useAddTask} from "@/features/task/hooks/useAddTask.ts";
+import {useEffect} from "react";
+import type {User} from "@supabase/supabase-js";
 
 type AddTaskModalProps = {
     isOpen: boolean;
@@ -17,8 +19,15 @@ type AddTaskModalProps = {
     status: Task["status"];
     users?: MemberResponse[];
     projectId?: string;
+    me?: User;
 }
-const AddTaskModal = ({isOpen, onClose, status, users, projectId}: AddTaskModalProps) => {
+const AddTaskModal = ({isOpen, onClose, status, users, projectId, me}: AddTaskModalProps) => {
+
+    useEffect(() => {
+        if(me?.id){
+            form.setValue("assignee_id", me.id)
+        }
+    }, [me?.id]);
     const form = useForm<TaskFormValues>({
         resolver: zodResolver(taskSchema),
         defaultValues: {
@@ -45,7 +54,7 @@ const AddTaskModal = ({isOpen, onClose, status, users, projectId}: AddTaskModalP
     })
     return (
         <FormModal isOpen={isOpen} title={"Create Task"} onSubmit={handleSubmit} onClose={onClose} isLoading={isPending}>
-            <TaskFormFields register={form.register} control={form.control} errors={form.formState.errors} status={status} users={users}/>
+            <TaskFormFields me={me} register={form.register} control={form.control} errors={form.formState.errors} status={status} users={users}/>
         </FormModal>
     );
 };

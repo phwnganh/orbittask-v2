@@ -6,6 +6,8 @@ import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import MenuDotsButton from "@/shared/components/button/MenuDotsButton.tsx";
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
 import {getDueDateStatus} from "@/features/task/utils/task-date.util.ts";
+import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
+import TaskCardMenu from "@/features/task/components/task-card/TaskCardMenu.tsx";
 
 const TaskCard = () => {
     return (
@@ -19,6 +21,9 @@ const TaskCard = () => {
                     <DropdownTrigger>
                         {(props) => <MenuDotsButton {...props}/>}
                     </DropdownTrigger>
+                    <DropdownContent>
+                        <TaskCardMenu/>
+                    </DropdownContent>
                 </Dropdown>
             </div>
 

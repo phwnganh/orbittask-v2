@@ -9,13 +9,15 @@ import MemberEmpty from "@/features/member/components/uis/states/MemberEmpty.tsx
 import MembersSearch from "@/features/member/components/uis/search/MembersSearch.tsx";
 import {useRemoveMemberFromProject} from "@/features/member/hooks/useRemoveMemberFromProject.ts";
 import {useRevokeInvitation} from "@/features/member/hooks/useRevokeInvitation.ts";
+import type {User} from "@supabase/supabase-js";
 
 type MemberTabsProps = {
     projectId: string;
     members?: Member[];
     pendingUsers?: Member[];
+    me?: User;
 }
-const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
+const MemberTabs = ({projectId, members, pendingUsers, me}: MemberTabsProps) => {
     const {mutate: removeMember} = useRemoveMemberFromProject();
     const {mutate: removePendingUser} = useRevokeInvitation()
 
@@ -47,7 +49,7 @@ const MemberTabs = ({projectId, members, pendingUsers}: MemberTabsProps) => {
                     {members && members?.length > 0 ? (
                             <div className={"h-48 overflow-y-auto"}>
                                 <p className={"text-sm text-text-secondary mb-3"}>{members?.length} members in this project</p>
-                                    <MemberList showRole users={members} renderAction={user => (
+                                    <MemberList me={me} showRole users={members} renderAction={user => (
                                         <>
                                             {user.role !== "owner" &&
                                                 <Button variant={"tertiary"} fullWidth={false} size={"md"} onClick={() => handleRemoveMemberFromProject(projectId, user.user_id)}>Remove</Button>

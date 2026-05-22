@@ -9,6 +9,7 @@ import TaskDescriptionField from "@/features/task/components/task-form/TaskDescr
 import TaskStartDateField from "@/features/task/components/task-form/TaskStartDateField.tsx";
 import TaskTitleField from "@/features/task/components/task-form/TaskTitleField.tsx";
 import TaskStatusField from "@/features/task/components/task-form/TaskStatusField.tsx";
+import type {User} from "@supabase/supabase-js";
 
 type TaskFormProps = {
     register: UseFormRegister<TaskFormValues>;
@@ -16,13 +17,14 @@ type TaskFormProps = {
     errors: FieldErrors<TaskFormValues>;
     status: Task["status"];
     users?: MemberResponse[]
+    me?: User;
 }
-const TaskFormFields = ({register, control, errors, status, users}: TaskFormProps) => {
+const TaskFormFields = ({register, control, errors, status, users, me}: TaskFormProps) => {
     return (
         <div className={"flex flex-col gap-5"}>
             <TaskTitleField register={register} errors={errors}/>
             <TaskDescriptionField register={register}/>
-            <TaskAssigneeField control={control} errors={errors} users={users} />
+            <TaskAssigneeField me={me} control={control} errors={errors} users={users} />
             <TaskPriorityField control={control}/>
             <TaskStartDateField/>
             <TaskDueDateField control={control} errors={errors}/>

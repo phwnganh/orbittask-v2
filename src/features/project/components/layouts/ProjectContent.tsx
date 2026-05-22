@@ -1,14 +1,16 @@
 import TaskBoard from "@/features/task-board/components/task-board/TaskBoard.tsx";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {User} from "@supabase/supabase-js";
 
 type ProjectContentProps = {
     users?: MemberResponse[]
-    projectId?: string
+    projectId?: string;
+    me?: User;
 }
-const ProjectContent = ({users, projectId}: ProjectContentProps) => {
+const ProjectContent = ({users, projectId, me}: ProjectContentProps) => {
     return (
         <main className={"flex-1 min-h-0"}>
-            <TaskBoard users={users} projectId={projectId}/>
+            <TaskBoard me={me} users={users} projectId={projectId}/>
         </main>
     );
 };

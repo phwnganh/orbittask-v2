@@ -3,9 +3,9 @@ import type {Task} from "@/features/task/types/task.type.ts";
 import {TASK_CARD_MENU} from "@/features/task/constants/task-card-menu.constant.ts";
 import DropdownItem from "@/shared/components/dropdown/DropdownItem.tsx";
 type TaskCardMenuProps = {
-    task: Task;
+    // task: Task;
 }
-const TaskCardMenu = ({task}: TaskCardMenuProps) => {
+const TaskCardMenu = ({}: TaskCardMenuProps) => {
 
     const handleSelectMenuItem = (value: TaskCardMenuItem)=> {
         switch (value) {
