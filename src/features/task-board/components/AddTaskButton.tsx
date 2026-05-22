@@ -11,7 +11,7 @@ const AddTaskButton = ({status}: AddTaskButtonProps) => {
     return (
         <Button variant={"dashed"} onClick={() => onOpenAddTaskModal(status)}>
             <div className={"flex justify-center items-center w-4 h-4 shrink-0"}>
-                <PlusIcon className={"text-text-primary"}/>
+                <PlusIcon className={"text-text-primary w-4 h-4"}/>
             </div>
             <span>Add Task</span>
         </Button>

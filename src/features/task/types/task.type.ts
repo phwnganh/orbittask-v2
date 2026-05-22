@@ -6,6 +6,8 @@ export type Task = {
     start_date: string;
     due_date: string;
     assignee_id: string;
-    status: "todo" | "in_progress" | "completed";
+    status: TaskStatus;
     priority: "low" | "medium" | "high";
 }
+
+export type TaskStatus = "todo" | "in_progress" | "completed";

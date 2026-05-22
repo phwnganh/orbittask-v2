@@ -8,14 +8,18 @@ import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.u
 import {getDueDateStatus} from "@/features/task/utils/task-date.util.ts";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 import TaskCardMenu from "@/features/task/components/task-card/TaskCardMenu.tsx";
+import type {Task} from "@/features/task/types/task.type.ts";
 
-const TaskCard = () => {
+type TaskCardProps = {
+    task: Task;
+}
+const TaskCard = ({task}: TaskCardProps) => {
     return (
         <Card className={"flex flex-col gap-4"}>
             <div className={"flex items-center justify-between"}>
                 <div className={"space-y-1 min-w-0"}>
-                    <h1 className={"text-text-primary font-bold"}>Title</h1>
-                    <p className={"text-sm text-text-secondary line-clamp-1"}>Description aaaaaaaaaaa</p>
+                    <h1 className={"text-text-primary font-bold"}>{task.title}</h1>
+                    <p className={"text-sm text-text-secondary line-clamp-1"}>{task.description}</p>
                 </div>
                 <Dropdown>
                     <DropdownTrigger>
@@ -29,7 +33,7 @@ const TaskCard = () => {
 
             <div className={"flex items-center justify-between"}>
                 <div className={"flex items-center gap-1.5"}>
-                    <Badge size={"sm"} variant={getTaskPriorityBadgeVariant('medium')}>Medium</Badge>
+                    <Badge size={"sm"} className={"capitalize"} variant={getTaskPriorityBadgeVariant(task.priority)}>{task.priority}</Badge>
                     {/*<Badge variant={getDueDateStatus}></Badge>*/}
                 </div>
                 <Avatar size={"xs"}/>

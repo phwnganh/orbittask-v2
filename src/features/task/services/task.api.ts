@@ -1,5 +1,6 @@
 import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
+import type {TaskStatus} from "@/features/task/types/task.type.ts";
 
 export const addTaskApi = async (payload: TaskFormValues)=> {
     const {data: task, error} = await supabase.rpc("create_task", {
@@ -17,6 +18,17 @@ export const addTaskApi = async (payload: TaskFormValues)=> {
         throw error;
     }
     return task;
+}
+
+export const viewAllTasksByStatusApi = async (status: TaskStatus, projectId?: string) => {
+    const {data: tasks, error} = await supabase.from("Tasks").select(`*, assignee_id:Profile(*)`).eq("project_id", projectId).eq("status", status).order("created_at", {
+        ascending: false
+    })
+
+    if(error){
+        throw error;
+    }
+    return tasks;
 }
 
 export const editTaskApi = async (task_id: string, payload: TaskFormValues) => {
