@@ -16,12 +16,12 @@ import type {User} from "@supabase/supabase-js";
 type AddTaskModalProps = {
     isOpen: boolean;
     onClose: () => void;
-    status: Task["status"];
     users?: MemberResponse[];
     projectId?: string;
     me?: User;
+    status: Task["status"];
 }
-const AddTaskModal = ({isOpen, onClose, status, users, projectId, me}: AddTaskModalProps) => {
+const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskModalProps) => {
 
     useEffect(() => {
         if(me?.id){

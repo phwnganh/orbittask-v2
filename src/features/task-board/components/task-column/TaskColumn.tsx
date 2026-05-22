@@ -2,19 +2,11 @@ import TaskColumnHeader from "@/features/task-board/components/task-column/TaskC
 import TaskColumnList from "@/features/task-board/components/task-column/TaskColumnList.tsx";
 import AddTaskButton from "@/features/task-board/components/AddTaskButton.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
-import AddTaskModal from "@/features/task/components/task-modal/add-task/AddTaskModal.tsx";
-import {useTaskStore} from "@/features/task/stores/task.store.ts";
-import type {MemberResponse} from "@/features/member/types/member.type.ts";
-import type {User} from "@supabase/supabase-js";
 
 type TaskColumnProps = {
     status: Task["status"];
-    users?: MemberResponse[];
-    projectId?: string;
-    me?: User;
 }
-const TaskColumn = ({status, users, projectId, me}: TaskColumnProps) => {
-    const {addTaskModal, onCloseAddTaskModal} = useTaskStore()
+const TaskColumn = ({status}: TaskColumnProps) => {
     return (
         <div className={"flex h-full overflow-y-auto scrollbar-custom flex-col gap-4 max-w-88 w-full shrink-0 bg-bg-secondary/80 border border-border-primary shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-md rounded-lg p-4"}>
             <TaskColumnHeader status={status}/>
@@ -22,7 +14,6 @@ const TaskColumn = ({status, users, projectId, me}: TaskColumnProps) => {
                 <TaskColumnList/>
             </div>
             <AddTaskButton status={status}/>
-            <AddTaskModal me={me} isOpen={addTaskModal.isOpen} onClose={onCloseAddTaskModal} status={status} users={users} projectId={projectId}/>
         </div>
     );
 };

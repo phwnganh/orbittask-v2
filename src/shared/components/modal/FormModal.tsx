@@ -18,7 +18,7 @@ const FormModal = ({isOpen, title, onSubmit, onClose, children, isLoading}: Form
                 <form onSubmit={onSubmit}>
                     <BaseModal.Body>{children}</BaseModal.Body>
                     <BaseModal.Footer>
-                        <Button variant={"secondary"} fullWidth={false} onClick={onClose}>Cancel</Button>
+                        <Button type={"button"} variant={"secondary"} fullWidth={false} onClick={onClose}>Cancel</Button>
                         <Button type={"submit"} fullWidth={false}>{isLoading ? "Saving..." : "Save"}</Button>
                     </BaseModal.Footer>
                 </form>

@@ -3,7 +3,7 @@ import type {Task} from "@/features/task/types/task.type.ts";
 
 type AddTaskModalState = {
     isOpen: boolean;
-    defaultStatus: Task["status"] | null;
+    defaultStatus: Task["status"];
 }
 type TaskState = {
     addTaskModal: AddTaskModalState;
@@ -22,7 +22,7 @@ type TaskState = {
 export const useTaskStore = create<TaskState>((set) => ({
     addTaskModal: {
         isOpen: false,
-        defaultStatus: null
+        defaultStatus: "todo"
     },
     editTaskModal: null,
     deleteTaskModal: null,
@@ -33,7 +33,7 @@ export const useTaskStore = create<TaskState>((set) => ({
     onOpenEditTaskModal: (task: Task) => set({editTaskModal: task}),
     onOpenDeleteTaskModal: (task: Task) => set({deleteTaskModal: task}),
     onCloseAddTaskModal: () => set({addTaskModal: {
-        isOpen: false, defaultStatus: null
+        isOpen: false, defaultStatus: "todo"
         }}),
     onCloseEditTaskModal: () => set({editTaskModal: null}),
     onCloseDeleteTaskModal: () => set({deleteTaskModal: null}),
