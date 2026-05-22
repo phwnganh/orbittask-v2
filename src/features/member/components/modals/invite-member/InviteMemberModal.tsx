@@ -8,12 +8,14 @@ import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
 import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
 import UserEmpty from "@/features/member/components/uis/states/UserEmpty.tsx";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {User} from "@supabase/supabase-js";
 
 type InviteMemberModalProps = {
     projectId: string;
-    users?: MemberResponse[]
+    users?: MemberResponse[];
+    me?: User;
 }
-const InviteMemberModal = ({projectId, users}: InviteMemberModalProps) => {
+const InviteMemberModal = ({projectId, users, me}: InviteMemberModalProps) => {
     const {
         keyword,
         selectedUsers,
@@ -54,7 +56,7 @@ const InviteMemberModal = ({projectId, users}: InviteMemberModalProps) => {
                         <div className={"flex items-center gap-3"}>
                             <Avatar avatarUrl={user.avatar_url} size={"sm"}/>
                             <div>
-                                <p className={"text-text-primary"}>{user.first_name} {user.last_name}</p>
+                                <p className={"text-text-primary"}>{(me?.id === user.user_id) ? "Me" : `${user.first_name} ${user.last_name}`}</p>
                                 <p className={`text-sm ${isDisabled ? "text-text-secondary" : "text-text-muted group-hover:text-text-primary"}`}>{user.email}</p>
                                 <p className={`text-sm font-medium ${user.invite_status === "accepted" ? "text-success" : user.invite_status === "pending" ? "text-warning" : "text-text-muted group-hover:text-text-primary"}`}>{getInviteStatusLabel(user.invite_status)}</p>
                             </div>

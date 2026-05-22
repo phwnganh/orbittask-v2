@@ -25,7 +25,7 @@ const ProjectDetailPage = () => {
         <div className={"flex flex-col gap-4 h-full overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>
             <ProjectContent me={me} users={members} projectId={id}/>
-            <InviteMemberModal projectId={id} users={users}/>
+            <InviteMemberModal me={me} projectId={id} users={users}/>
             <ManageMemberModal me={me} projectId={id} members={members} pendingUsers={pendingUsers}/>
         </div>
     );
