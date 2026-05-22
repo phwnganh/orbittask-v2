@@ -1,23 +1,55 @@
-import {isPast, isToday, startOfDay} from "date-fns";
+import {differenceInCalendarDays, format, startOfDay} from "date-fns";
 
-type BadgeVariant = | "default" | "error" | "success" | "warning" | "info";
-
-export const getDueDateVariant = (dueDate?: Date, completed?: boolean): BadgeVariant => {
+type DueDateStatus = {
+    variant: string;
+    label: string;
+    fullDate?: string;
+}
+export const getDueDateStatus = (dueDate?: Date, completed?: boolean): DueDateStatus => {
     if(!dueDate){
-        return "default";
+        return {
+            variant: "default",
+            label: "No Due Date"
+        };
     }
+
+    const today = startOfDay(new Date());
+    const target = startOfDay(dueDate);
+    const diffDays = differenceInCalendarDays(target, today);
     if(completed){
-        return "success";
+        return {
+            variant: "success",
+            label: "Completed",
+            fullDate: format(target, "MMM d")
+        };
     }
 
-    const target = startOfDay(dueDate)
-
-    if(isPast(target) && !isToday(target)){
-        return "error";
+    if(today){
+        return {
+            variant: "warning",
+            label: "Today",
+            fullDate: format(target, "MMM d")
+        }
     }
-    if(isToday(target)){
-        return "warning";
+
+    if(diffDays > 0){
+        if(diffDays === 1){
+            return {
+                variant: "warning",
+                label: "Tomorrow",
+                fullDate: format(target, "MMM d")
+            }
+        }
+        return {
+            variant: "warning",
+            label: `${diffDays}d left`,
+            fullDate: format(target, "MMM d")
+        }
     }
 
-    return "info";
+    return {
+        variant: "error",
+        label: `Overdue ${Math.abs(diffDays)}d`,
+        fullDate: format(target, "MMM d")
+    };
 }
