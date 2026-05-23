@@ -1,13 +1,13 @@
 import type {Member, MemberResponse} from "@/features/member/types/member.type.ts";
 import type {ReactNode} from "react";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type MemberItemProps = {
     user: MemberResponse | Member;
     action?: ReactNode;
     showRole?: boolean;
-    me?: User;
+    me?: Profile | null;
 }
 const MemberItem = ({user, action, showRole, me}: MemberItemProps) => {
     return (

@@ -2,13 +2,13 @@ import TaskColumn from "@/features/task-board/components/task-column/TaskColumn.
 import type {Member} from "@/features/member/types/member.type.ts";
 import AddTaskModal from "@/features/task/components/task-modal/add-task/AddTaskModal.tsx";
 import {useTaskStore} from "@/features/task/stores/task.store.ts";
-import type {User} from "@supabase/supabase-js";
 import EditTaskModal from "@/features/task/components/task-modal/edit-task/EditTaskModal.tsx";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type TaskBoardProps = {
     users?: Member[]
     projectId?: string;
-    me?: User;
+    me?: Profile | null;
 }
 const TaskBoard = ({users, projectId, me}: TaskBoardProps) => {
     const {addTaskModal, onCloseAddTaskModal, isEditTaskModalOpen, onCloseEditTaskModal} = useTaskStore()

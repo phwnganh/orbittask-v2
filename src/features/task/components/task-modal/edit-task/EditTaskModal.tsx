@@ -1,5 +1,4 @@
 import FormModal from "@/shared/components/modal/FormModal.tsx";
-import type {User} from "@supabase/supabase-js";
 import {useTaskStore} from "@/features/task/stores/task.store.ts";
 import {useForm} from "react-hook-form";
 import {type EditTaskFormValues, editTaskSchema} from "@/features/task/schemas/task.schema.ts";
@@ -9,11 +8,12 @@ import {useEffect} from "react";
 import TaskFormFields from "@/features/task/components/task-form/TaskFormFields.tsx";
 import {format, parseISO} from "date-fns";
 import type {Member} from "@/features/member/types/member.type.ts";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type EditTaskModalProps = {
     isOpen: boolean;
     onClose: () => void;
-    me?: User;
+    me?: Profile | null;
     users?: Member[];
 }
 const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {

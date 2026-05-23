@@ -8,7 +8,7 @@ import TaskDescriptionField from "@/features/task/components/task-form/TaskDescr
 import TaskStartDateField from "@/features/task/components/task-form/TaskStartDateField.tsx";
 import TaskTitleField from "@/features/task/components/task-form/TaskTitleField.tsx";
 import TaskStatusField from "@/features/task/components/task-form/TaskStatusField.tsx";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type TaskFormProps<T extends FieldValues> = {
     register: UseFormRegister<T>;
@@ -16,7 +16,7 @@ type TaskFormProps<T extends FieldValues> = {
     errors: FieldErrors<T>;
     status: Task["status"];
     users?: Member[];
-    me?: User;
+    me?: Profile | null;
 }
 const TaskFormFields = <T extends FieldValues>({register, control, errors, status, users, me}: TaskFormProps<T>) => {
     return (

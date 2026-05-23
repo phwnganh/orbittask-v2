@@ -1,13 +1,13 @@
 import type {Member, MemberResponse} from "@/features/member/types/member.type.ts";
 import {type ReactNode} from "react";
 import MemberItem from "@/features/member/components/uis/member-list/MemberItem.tsx";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type MemberListProps = {
     users?: Member[] | MemberResponse[];
     renderAction?: (user: Member | MemberResponse) => ReactNode;
     showRole?: boolean;
-    me?: User;
+    me?: Profile | null;
 }
 const MemberList = ({users, renderAction, showRole, me}: MemberListProps) => {
     return (

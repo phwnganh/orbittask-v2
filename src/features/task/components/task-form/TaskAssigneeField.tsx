@@ -3,13 +3,13 @@ import SearchSelect from "@/shared/components/inputs/base-select/search-select/S
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type TaskAssigneeFieldProps<T extends FieldValues> = {
     control: Control<T>;
     errors: FieldErrors<T>;
     users?: Member[];
-    me?: User;
+    me?: Profile | null;
 }
 const TaskAssigneeField = <T extends FieldValues>({control, errors, users, me}: TaskAssigneeFieldProps<T>) => {
     const {keyword, setKeyword} = useMemberStore()

@@ -10,30 +10,28 @@ import type {Task} from "@/features/task/types/task.type.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
 import {useAddTask} from "@/features/task/hooks/useAddTask.ts";
 import {useEffect} from "react";
-import type {User} from "@supabase/supabase-js";
 import {format} from "date-fns";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type AddTaskModalProps = {
     isOpen: boolean;
     onClose: () => void;
     users?: Member[];
     projectId?: string;
-    me?: User;
+    me?: Profile | null;
     status: Task["status"];
 }
 const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskModalProps) => {
-
     useEffect(() => {
-        if(me?.id){
-            form.setValue("assignee_id", me.id)
-        }
-    }, [me?.id]);
+        form.setValue("status", status);
+    }, [status]);
+
     const form = useForm<CreateTaskFormValues>({
         resolver: zodResolver(createTaskSchema),
         defaultValues: {
             title: "",
             description: "",
-            assignee_id: "",
+            assignee_id: me?.id ?? "",
             start_date: new Date(),
             due_date: new Date(),
             priority: "medium",
@@ -53,7 +51,16 @@ const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskMo
             due_date: format(data.due_date, 'yyyy-MM-dd')
         }, {
             onSuccess: () => {
-                form.reset()
+                form.reset({
+                    title: "",
+                    description: "",
+                    assignee_id: me?.id ?? "",
+                    start_date: new Date(),
+                    due_date: new Date(),
+                    priority: "medium",
+                    project_id: projectId,
+                    status: status
+                });
                 onClose?.()
             }
         })

@@ -9,13 +9,13 @@ import MemberEmpty from "@/features/member/components/uis/states/MemberEmpty.tsx
 import MembersSearch from "@/features/member/components/uis/search/MembersSearch.tsx";
 import {useRemoveMemberFromProject} from "@/features/member/hooks/useRemoveMemberFromProject.ts";
 import {useRevokeInvitation} from "@/features/member/hooks/useRevokeInvitation.ts";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type MemberTabsProps = {
     projectId: string;
     members?: Member[];
     pendingUsers?: Member[];
-    me?: User;
+    me?: Profile | null;
 }
 const MemberTabs = ({projectId, members, pendingUsers, me}: MemberTabsProps) => {
     const {mutate: removeMember} = useRemoveMemberFromProject();

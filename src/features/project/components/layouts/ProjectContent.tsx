@@ -1,11 +1,11 @@
 import TaskBoard from "@/features/task-board/components/task-board/TaskBoard.tsx";
 import type {Member} from "@/features/member/types/member.type.ts";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type ProjectContentProps = {
     users?: Member[]
     projectId?: string;
-    me?: User;
+    me?: Profile | null;
 }
 const ProjectContent = ({users, projectId, me}: ProjectContentProps) => {
     return (

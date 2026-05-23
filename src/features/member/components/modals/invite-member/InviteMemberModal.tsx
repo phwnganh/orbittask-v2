@@ -8,12 +8,12 @@ import {useInviteMember} from "@/features/member/hooks/useInviteMember.ts";
 import MemberList from "@/features/member/components/uis/member-list/MemberList.tsx";
 import UserEmpty from "@/features/member/components/uis/states/UserEmpty.tsx";
 import type {MemberResponse} from "@/features/member/types/member.type.ts";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type InviteMemberModalProps = {
     projectId: string;
     users?: MemberResponse[];
-    me?: User;
+    me?: Profile | null;
 }
 const InviteMemberModal = ({projectId, users, me}: InviteMemberModalProps) => {
     const {

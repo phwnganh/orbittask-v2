@@ -6,8 +6,8 @@ import ProjectHeader from "@/features/project/components/layouts/ProjectHeader.t
 import ProjectContent from "@/features/project/components/layouts/ProjectContent.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import {useDebounce} from "@/shared/hooks/useDebounce.ts";
-import {useSession} from "@/features/auth/hooks/useSession.ts";
 import {useMemberFilterStore} from "@/features/member/stores/member-filter.store.ts";
+import {useProfile} from "@/features/profile/hooks/useProfile.ts";
 
 const ProjectDetailPage = () => {
     const {id} = useParams()
@@ -18,9 +18,7 @@ const ProjectDetailPage = () => {
     const {data: pendingUsers} = useViewProjectMembers({project_id: id, invite_status: "pending", search: search})
     const debouncedKeyword = useDebounce(keyword, 500);
     const {data: users} = useViewProjectUsers({project_id: id, search: debouncedKeyword})
-
-    const {data: session} = useSession()
-    const me = session?.user;
+    const {data: me} = useProfile()
     return (
         <div className={"flex flex-col gap-4 h-full min-h-0 overflow-hidden"}>
             <ProjectHeader projectId={id} members={members}/>

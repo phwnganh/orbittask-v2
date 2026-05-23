@@ -3,13 +3,13 @@ import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import MemberTabs from "@/features/member/components/uis/member-tabs/MemberTabs.tsx";
 import type {Member} from "@/features/member/types/member.type.ts";
 import Button from "@/shared/components/button/Button.tsx";
-import type {User} from "@supabase/supabase-js";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type ManageMemberModalProps = {
     projectId: string;
     members?: Member[];
     pendingUsers?: Member[];
-    me?: User;
+    me?: Profile | null;
 }
 const ManageMemberModal = ({projectId, members, pendingUsers, me}: ManageMemberModalProps) => {
     const {openManageMember, onCloseManageMemberModal} = useMemberStore()
