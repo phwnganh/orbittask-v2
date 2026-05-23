@@ -59,7 +59,9 @@ export const editTaskApi = async (task_id: string, payload: EditTaskPayload) => 
 }
 
 export const removeTaskApi = async (task_id: string) => {
-    const {data: task, error} = await supabase.from("Tasks").delete().eq("id", task_id).select().single();
+    const {data: task, error} = await supabase.rpc("remove_task", {
+        p_task_id: task_id,
+    });
     if(error){
         throw error;
     }
