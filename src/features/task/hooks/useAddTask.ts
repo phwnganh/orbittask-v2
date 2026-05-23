@@ -22,8 +22,8 @@ export const useAddTask = () => {
                 description: payload.description ?? "",
                 assignee_id: payload.assignee_id,
                 priority: (payload.priority ?? "medium") as Task["priority"],
-                start_date: payload.start_date.toISOString(),
-                due_date: payload.due_date.toISOString(),
+                start_date: payload.start_date,
+                due_date: payload.due_date,
                 status: payload.status as Task["status"],
                 created_by: user.id
             }

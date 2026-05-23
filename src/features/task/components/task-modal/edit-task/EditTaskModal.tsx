@@ -7,14 +7,18 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useEditTask} from "@/features/task/hooks/useEditTask.ts";
 import {useEffect} from "react";
 import TaskFormFields from "@/features/task/components/task-form/TaskFormFields.tsx";
+import {format, parseISO} from "date-fns";
+import type {Member} from "@/features/member/types/member.type.ts";
 
 type EditTaskModalProps = {
     isOpen: boolean;
     onClose: () => void;
     me?: User;
+    users?: Member[];
 }
-const EditTaskModal = ({isOpen, onClose, me}: EditTaskModalProps) => {
+const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     const {selectedTask} = useTaskStore()
+
     const form = useForm<EditTaskFormValues>({
         resolver: zodResolver(editTaskSchema),
         defaultValues: {
@@ -33,8 +37,8 @@ const EditTaskModal = ({isOpen, onClose, me}: EditTaskModalProps) => {
             reset({
                 title: selectedTask.title,
                 description: selectedTask.description ?? "",
-                assignee_id: selectedTask.assignee_id ?? me?.id,
-                due_date: new Date(selectedTask.due_date) ?? new Date(),
+                assignee_id: selectedTask.assignee_id,
+                due_date: parseISO(selectedTask.due_date),
                 priority: selectedTask.priority ?? "medium",
             })
         }
@@ -48,7 +52,10 @@ const EditTaskModal = ({isOpen, onClose, me}: EditTaskModalProps) => {
             task_id: selectedTask.id,
             project_id: selectedTask.project_id,
             status: selectedTask.status,
-            payload: data
+            payload: {
+                ...data,
+                due_date: format(data.due_date, "yyyy-MM-dd")
+            }
         }, {
             onSuccess: () => {
                 form.reset()
@@ -58,7 +65,7 @@ const EditTaskModal = ({isOpen, onClose, me}: EditTaskModalProps) => {
     })
     return (
         <FormModal isOpen={isOpen} title={"Edit Task"} onSubmit={handleSubmit} onClose={onClose} isLoading={isPending}>
-            <TaskFormFields<EditTaskFormValues> register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"}/>
+            <TaskFormFields<EditTaskFormValues> register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"} users={users} me={me}/>
         </FormModal>
     );
 };

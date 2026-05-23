@@ -11,6 +11,7 @@ import type {Member} from "@/features/member/types/member.type.ts";
 import {useAddTask} from "@/features/task/hooks/useAddTask.ts";
 import {useEffect} from "react";
 import type {User} from "@supabase/supabase-js";
+import {format} from "date-fns";
 
 type AddTaskModalProps = {
     isOpen: boolean;
@@ -45,7 +46,12 @@ const AddTaskModal = ({isOpen, onClose, users, projectId, me, status}: AddTaskMo
 
     const handleSubmit = form.handleSubmit((data) => {
         console.log(data)
-        mutate(data, {
+        mutate({
+            ...data,
+
+            start_date: format(data.start_date, 'yyyy-MM-dd'),
+            due_date: format(data.due_date, 'yyyy-MM-dd')
+        }, {
             onSuccess: () => {
                 form.reset()
                 onClose?.()

@@ -15,7 +15,7 @@ type TaskFormProps<T extends FieldValues> = {
     control: Control<T>;
     errors: FieldErrors<T>;
     status: Task["status"];
-    users?: Member[]
+    users?: Member[];
     me?: User;
 }
 const TaskFormFields = <T extends FieldValues>({register, control, errors, status, users, me}: TaskFormProps<T>) => {
