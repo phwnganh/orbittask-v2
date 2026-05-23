@@ -1,7 +1,6 @@
-import {type Control, type FieldErrors, type UseFormRegister} from "react-hook-form";
-import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
+import {type Control, type FieldErrors, type FieldValues, type UseFormRegister} from "react-hook-form";
 import type {Task} from "@/features/task/types/task.type.ts";
-import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {Member} from "@/features/member/types/member.type.ts";
 import TaskDueDateField from "@/features/task/components/task-form/TaskDueDateField.tsx";
 import TaskAssigneeField from "@/features/task/components/task-form/TaskAssigneeField.tsx";
 import TaskPriorityField from "@/features/task/components/task-form/TaskPriorityField.tsx";
@@ -11,15 +10,15 @@ import TaskTitleField from "@/features/task/components/task-form/TaskTitleField.
 import TaskStatusField from "@/features/task/components/task-form/TaskStatusField.tsx";
 import type {User} from "@supabase/supabase-js";
 
-type TaskFormProps = {
-    register: UseFormRegister<TaskFormValues>;
-    control: Control<TaskFormValues>;
-    errors: FieldErrors<TaskFormValues>;
+type TaskFormProps<T extends FieldValues> = {
+    register: UseFormRegister<T>;
+    control: Control<T>;
+    errors: FieldErrors<T>;
     status: Task["status"];
-    users?: MemberResponse[]
+    users?: Member[]
     me?: User;
 }
-const TaskFormFields = ({register, control, errors, status, users, me}: TaskFormProps) => {
+const TaskFormFields = <T extends FieldValues>({register, control, errors, status, users, me}: TaskFormProps<T>) => {
     return (
         <div className={"flex flex-col gap-5"}>
             <TaskTitleField register={register} errors={errors}/>

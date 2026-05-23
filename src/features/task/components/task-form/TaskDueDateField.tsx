@@ -1,19 +1,18 @@
-import {type Control, Controller, type FieldErrors} from "react-hook-form";
+import {type Control, Controller, type FieldErrors, type FieldValues, type Path} from "react-hook-form";
 import DatePicker from "@/shared/components/day-picker/DatePicker.tsx";
 import {format, isToday, startOfDay} from "date-fns";
 import Button from "@/shared/components/button/Button.tsx";
 import CalendarIcon from '@/assets/icons/calendar-icon.svg?react'
-import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 import {useState} from "react";
 
-type TaskDueDateFieldProps = {
-    control: Control<TaskFormValues>;
-    errors: FieldErrors<TaskFormValues>;
+type TaskDueDateFieldProps<T extends FieldValues> = {
+    control: Control<T>;
+    errors: FieldErrors<T>;
 }
-const TaskDueDateField = ({control, errors}: TaskDueDateFieldProps) => {
+const TaskDueDateField = <T extends FieldValues>({control, errors}: TaskDueDateFieldProps<T>) => {
     const [open, setOpen] = useState(false);
     return (
         <div className={"flex flex-col gap-1.5"}>
@@ -44,11 +43,11 @@ const TaskDueDateField = ({control, errors}: TaskDueDateFieldProps) => {
                             </DropdownContent>
                         </Dropdown>
                     )
-                }} name={"due_date"}/>
+                }} name={"due_date" as Path<T>}/>
             </div>
             {errors.due_date && (
                 <span className={"text-xs text-error"}>
-                    {errors.due_date.message}
+                    {String(errors.due_date.message)}
                 </span>
             )}
         </div>

@@ -1,18 +1,17 @@
-import {type Control, Controller, type FieldErrors} from "react-hook-form";
-import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
+import {type Control, Controller, type FieldErrors, type FieldValues, type Path} from "react-hook-form";
 import SearchSelect from "@/shared/components/inputs/base-select/search-select/SearchSelect.tsx";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
-import type {MemberResponse} from "@/features/member/types/member.type.ts";
+import type {Member} from "@/features/member/types/member.type.ts";
 import type {User} from "@supabase/supabase-js";
 
-type TaskAssigneeFieldProps = {
-    control: Control<TaskFormValues>;
-    errors: FieldErrors<TaskFormValues>;
-    users?: MemberResponse[];
+type TaskAssigneeFieldProps<T extends FieldValues> = {
+    control: Control<T>;
+    errors: FieldErrors<T>;
+    users?: Member[];
     me?: User;
 }
-const TaskAssigneeField = ({control, errors, users, me}: TaskAssigneeFieldProps) => {
+const TaskAssigneeField = <T extends FieldValues>({control, errors, users, me}: TaskAssigneeFieldProps<T>) => {
     const {keyword, setKeyword} = useMemberStore()
     return (
         <div className={"flex flex-col gap-1.5"}>
@@ -42,7 +41,7 @@ const TaskAssigneeField = ({control, errors, users, me}: TaskAssigneeFieldProps)
                         field.onChange("")
                     }} hideSelectedItem={false} isDisabled={user => user.user_id === field.value}/>
                 )
-            }} name={"assignee_id"}/>
+            }} name={"assignee_id" as Path<T>}/>
         </div>
     );
 };

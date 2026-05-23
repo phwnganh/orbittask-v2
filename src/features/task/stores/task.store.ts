@@ -7,8 +7,9 @@ type AddTaskModalState = {
 }
 type TaskState = {
     addTaskModal: AddTaskModalState;
-    editTaskModal: Task | null;
-    deleteTaskModal: Task | null;
+    isEditTaskModalOpen: boolean;
+    isDeleteTaskModalOpen: boolean;
+    selectedTask: Task | null;
     onOpenAddTaskModal: (status: Task["status"]) => void;
     onOpenEditTaskModal: (task: Task) => void;
     onOpenDeleteTaskModal: (task: Task) => void;
@@ -24,19 +25,28 @@ export const useTaskStore = create<TaskState>((set) => ({
         isOpen: false,
         defaultStatus: "todo"
     },
-    editTaskModal: null,
-    deleteTaskModal: null,
+    isEditTaskModalOpen: false,
+    isDeleteTaskModalOpen: false,
+    selectedTask: null,
     onOpenAddTaskModal: (status) => set({addTaskModal: {
         isOpen: true,
         defaultStatus: status
         }}),
-    onOpenEditTaskModal: (task: Task) => set({editTaskModal: task}),
-    onOpenDeleteTaskModal: (task: Task) => set({deleteTaskModal: task}),
+    onOpenEditTaskModal: (task: Task) => set({isEditTaskModalOpen: true,
+    selectedTask: task}),
+    onOpenDeleteTaskModal: (task: Task) => set({isDeleteTaskModalOpen: true,
+    selectedTask: task}),
     onCloseAddTaskModal: () => set({addTaskModal: {
         isOpen: false, defaultStatus: "todo"
         }}),
-    onCloseEditTaskModal: () => set({editTaskModal: null}),
-    onCloseDeleteTaskModal: () => set({deleteTaskModal: null}),
+    onCloseEditTaskModal: () => set({
+        isEditTaskModalOpen: false,
+        selectedTask: null
+    }),
+    onCloseDeleteTaskModal: () => set({
+        isDeleteTaskModalOpen: false,
+        selectedTask: null
+    }),
     keyword: "",
     setKeyword: (keyword) => set({keyword}),
 }))

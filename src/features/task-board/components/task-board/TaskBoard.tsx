@@ -1,11 +1,11 @@
 import TaskColumn from "@/features/task-board/components/task-column/TaskColumn.tsx";
-import type {MemberResponse} from "@/features/member/types/member.type.ts";
-import type {User} from "@supabase/supabase-js";
+import type {Member} from "@/features/member/types/member.type.ts";
 import AddTaskModal from "@/features/task/components/task-modal/add-task/AddTaskModal.tsx";
 import {useTaskStore} from "@/features/task/stores/task.store.ts";
+import type {User} from "@supabase/supabase-js";
 
 type TaskBoardProps = {
-    users?: MemberResponse[]
+    users?: Member[]
     projectId?: string;
     me?: User;
 }

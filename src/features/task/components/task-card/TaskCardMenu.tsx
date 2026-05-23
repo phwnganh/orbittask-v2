@@ -2,18 +2,21 @@ import type {TaskCardMenuItem} from "@/features/task/types/task-card-menu-item.t
 import type {Task} from "@/features/task/types/task.type.ts";
 import {TASK_CARD_MENU} from "@/features/task/constants/task-card-menu.constant.ts";
 import DropdownItem from "@/shared/components/dropdown/DropdownItem.tsx";
+import {useTaskStore} from "@/features/task/stores/task.store.ts";
 type TaskCardMenuProps = {
-    // task: Task;
+    task: Task;
 }
-const TaskCardMenu = ({}: TaskCardMenuProps) => {
-
+const TaskCardMenu = ({task}: TaskCardMenuProps) => {
+    const {onOpenEditTaskModal, onOpenDeleteTaskModal} = useTaskStore()
     const handleSelectMenuItem = (value: TaskCardMenuItem)=> {
         switch (value) {
             case "edit":
+                onOpenEditTaskModal(task)
                 break;
             case "move":
                 break;
             case "remove":
+                onOpenDeleteTaskModal(task)
                 break;
         }
     }

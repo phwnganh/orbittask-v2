@@ -1,13 +1,12 @@
-import {type Control, Controller} from "react-hook-form";
-import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
+import {type Control, Controller, type FieldValues, type Path} from "react-hook-form";
 import {TASK_PRIORITIES} from "@/features/task/constants/task-priority.constant.ts";
 import SingleSelect from "@/shared/components/inputs/base-select/single-select/SingleSelect.tsx";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 
-type TaskPriorityFieldProps = {
-    control: Control<TaskFormValues>;
+type TaskPriorityFieldProps<T extends FieldValues> = {
+    control: Control<T>;
 }
-const TaskPriorityField = ({control}: TaskPriorityFieldProps) => {
+const TaskPriorityField = <T extends FieldValues>({control}: TaskPriorityFieldProps<T>) => {
     return (
         <div className={"flex flex-col gap-1.5"}>
             <label className={"text-sm text-secondary font-medium"}>Priority</label>
@@ -28,7 +27,7 @@ const TaskPriorityField = ({control}: TaskPriorityFieldProps) => {
                         )
                     }} placeholder={"Select priority"}/>
                 )
-            }} name={"priority"}/>
+            }} name={"priority" as Path<T>}/>
         </div>
     );
 };

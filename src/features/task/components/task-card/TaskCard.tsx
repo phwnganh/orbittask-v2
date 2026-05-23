@@ -27,7 +27,7 @@ const TaskCard = ({task}: TaskCardProps) => {
                         {(props) => <MenuDotsButton {...props}/>}
                     </DropdownTrigger>
                     <DropdownContent>
-                        <TaskCardMenu/>
+                        <TaskCardMenu task={task}/>
                     </DropdownContent>
                 </Dropdown>
             </div>

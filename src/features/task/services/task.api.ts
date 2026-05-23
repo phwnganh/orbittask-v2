@@ -1,8 +1,8 @@
-import type {TaskFormValues} from "@/features/task/schemas/task.schema.ts";
+import type {CreateTaskFormValues, EditTaskFormValues} from "@/features/task/schemas/task.schema.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
 import type {TaskStatus} from "@/features/task/types/task.type.ts";
 
-export const addTaskApi = async (payload: TaskFormValues)=> {
+export const addTaskApi = async (payload: CreateTaskFormValues)=> {
     const {data: task, error} = await supabase.rpc("create_task", {
         p_title: payload.title,
         p_description: payload.description ?? "",
@@ -31,15 +31,15 @@ export const viewAllTasksByStatusApi = async (status: TaskStatus, projectId?: st
     return tasks;
 }
 
-export const editTaskApi = async (task_id: string, payload: TaskFormValues) => {
-    const {data: task, error} = await supabase.from("Tasks").update({
-        title: payload.title,
-        description: payload.description,
-        assignee_id: payload.assignee_id,
-        priority: payload.priority,
-        start_date: payload.start_date,
-        due_date: payload.due_date,
-    }).eq("id", task_id).select().single();
+export const editTaskApi = async (task_id: string, payload: EditTaskFormValues) => {
+    const {data: task, error} = await supabase.rpc("edit_task", {
+        p_task_id: task_id,
+        p_title: payload.title,
+        p_description: payload.description,
+        p_assignee_id: payload.assignee_id,
+        p_priority: payload.priority,
+        p_due_date: payload.due_date,
+    });
 
     if(error){
         throw error;
