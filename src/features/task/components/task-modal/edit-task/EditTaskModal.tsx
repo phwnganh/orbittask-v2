@@ -18,7 +18,10 @@ type EditTaskModalProps = {
 }
 const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     const {selectedTask} = useTaskStore()
+    const isCreator = me?.id === selectedTask?.created_by;
+    const isOwner = me?.id === selectedTask?.project?.owner_id;
 
+    const canEditTaskFields = isCreator || isOwner
     const form = useForm<EditTaskFormValues>({
         resolver: zodResolver(editTaskSchema),
         defaultValues: {
@@ -65,7 +68,7 @@ const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     })
     return (
         <FormModal isOpen={isOpen} title={"Edit Task"} onSubmit={handleSubmit} onClose={onClose} isLoading={isPending}>
-            <TaskFormFields<EditTaskFormValues> register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"} users={users} me={me}/>
+            <TaskFormFields<EditTaskFormValues> canEditTaskFields={canEditTaskFields} register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"} users={users} me={me}/>
         </FormModal>
     );
 };

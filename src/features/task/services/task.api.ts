@@ -32,7 +32,8 @@ export const addTaskApi = async (payload: CreateTaskPayload)=> {
 }
 
 export const viewAllTasksByStatusApi = async (status: TaskStatus, projectId?: string) => {
-    const {data: tasks, error} = await supabase.from("Tasks").select(`*, assignee:Profile!Tasks_assignee_id_fkey(*)`).eq("project_id", projectId).eq("status", status).order("created_at", {
+    const {data: tasks, error} = await supabase.from("Tasks").select(`*, assignee:Profile!Tasks_assignee_id_fkey(*),
+    project:Projects!Tasks_project_id_fkey(owner_id)`).eq("project_id", projectId).eq("status", status).order("created_at", {
         ascending: false
     })
 

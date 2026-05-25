@@ -7,7 +7,6 @@ import TaskPriorityField from "@/features/task/components/task-form/TaskPriority
 import TaskDescriptionField from "@/features/task/components/task-form/TaskDescriptionField.tsx";
 import TaskStartDateField from "@/features/task/components/task-form/TaskStartDateField.tsx";
 import TaskTitleField from "@/features/task/components/task-form/TaskTitleField.tsx";
-import TaskStatusField from "@/features/task/components/task-form/TaskStatusField.tsx";
 import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type TaskFormProps<T extends FieldValues> = {
@@ -17,17 +16,18 @@ type TaskFormProps<T extends FieldValues> = {
     status: Task["status"];
     users?: Member[];
     me?: Profile | null;
+    canEditTaskFields?: boolean;
 }
-const TaskFormFields = <T extends FieldValues>({register, control, errors, status, users, me}: TaskFormProps<T>) => {
+const TaskFormFields = <T extends FieldValues>({register, control, errors, users, me, canEditTaskFields = true}: TaskFormProps<T>) => {
     return (
         <div className={"flex flex-col gap-5"}>
             <TaskTitleField register={register} errors={errors}/>
             <TaskDescriptionField register={register}/>
-            <TaskAssigneeField me={me} control={control} errors={errors} users={users} />
+            {canEditTaskFields && <TaskAssigneeField me={me} control={control} errors={errors} users={users} />}
             <TaskPriorityField control={control}/>
-            <TaskStartDateField/>
-            <TaskDueDateField control={control} errors={errors}/>
-            <TaskStatusField status={status}/>
+            {canEditTaskFields && <TaskStartDateField/>}
+            {canEditTaskFields && <TaskDueDateField control={control} errors={errors}/>}
+            {/*<TaskStatusField status={status}/>*/}
         </div>
     );
 };
