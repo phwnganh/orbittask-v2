@@ -17,15 +17,16 @@ type TaskFormProps<T extends FieldValues> = {
     users?: Member[];
     me?: Profile | null;
     canEditTaskFields?: boolean;
+    startDate?: string;
 }
-const TaskFormFields = <T extends FieldValues>({register, control, errors, users, me, canEditTaskFields = true}: TaskFormProps<T>) => {
+const TaskFormFields = <T extends FieldValues>({register, control, errors, users, me, canEditTaskFields = true, startDate}: TaskFormProps<T>) => {
     return (
         <div className={"flex flex-col gap-5"}>
             <TaskTitleField register={register} errors={errors}/>
             <TaskDescriptionField register={register}/>
             {canEditTaskFields && <TaskAssigneeField me={me} control={control} errors={errors} users={users} />}
             <TaskPriorityField control={control}/>
-            {canEditTaskFields && <TaskStartDateField/>}
+            {canEditTaskFields && <TaskStartDateField startDate={startDate}/>}
             {canEditTaskFields && <TaskDueDateField control={control} errors={errors}/>}
             {/*<TaskStatusField status={status}/>*/}
         </div>

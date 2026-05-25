@@ -42,6 +42,9 @@ const TaskAssigneeField = <T extends FieldValues>({control, errors, users, me}: 
                     }} hideSelectedItem={false} isDisabled={user => user.user_id === field.value}/>
                 )
             }} name={"assignee_id" as Path<T>}/>
+            {errors.assignee_id && (
+                <span className={"text-xs text-error"}>{String(errors.assignee_id.message)}</span>
+            )}
         </div>
     );
 };

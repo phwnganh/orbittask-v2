@@ -68,7 +68,7 @@ const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     })
     return (
         <FormModal isOpen={isOpen} title={"Edit Task"} onSubmit={handleSubmit} onClose={onClose} isLoading={isPending}>
-            <TaskFormFields<EditTaskFormValues> canEditTaskFields={canEditTaskFields} register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"} users={users} me={me}/>
+            <TaskFormFields<EditTaskFormValues> canEditTaskFields={canEditTaskFields} register={form.register} control={form.control} errors={form.formState.errors} status={selectedTask?.status ?? "todo"} users={users} me={me} startDate={selectedTask?.start_date}/>
         </FormModal>
     );
 };
