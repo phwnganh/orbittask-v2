@@ -37,7 +37,7 @@ const TaskCard = ({task}: TaskCardProps) => {
                     <Badge size={"sm"} className={"capitalize"} variant={getTaskPriorityBadgeVariant(task.priority)}>{task.priority}</Badge>
                     <Badge size={"sm"} variant={dueDateStatus.variant}>{dueDateStatus.label}</Badge>
                 </div>
-                <Avatar size={"xs"} avatarUrl={task.assignee?.avatar_url}/>
+                <Avatar size={"xs"} avatarUrl={task?.avatar_url}/>
             </div>
 
 

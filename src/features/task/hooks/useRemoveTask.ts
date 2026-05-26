@@ -16,11 +16,11 @@ export const useRemoveTask = () => {
             })
             return {task_id, project_id}
         },
-        onError: (_err, _vars) => {
-            void invalidate(taskKeys.lists(_vars.project_id))
+        onError: (_err, vars) => {
+            void invalidate(taskKeys.lists(vars.project_id))
         },
-        onSettled: (_data, _err, context) => {
-            void invalidate(taskKeys.lists(context.project_id))
+        onSettled: (_data, _err, vars) => {
+            void invalidate(taskKeys.lists(vars.project_id))
         }
     })
 }

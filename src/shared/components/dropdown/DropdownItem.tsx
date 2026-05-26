@@ -5,13 +5,17 @@ type DropdownItemProps = {
     children: ReactNode;
     onClick?: () => void;
     danger?: boolean;
+    closeOnClick?: boolean;
 }
-const DropdownItem = ({children, onClick, danger}: DropdownItemProps) => {
+const DropdownItem = ({children, onClick, danger, closeOnClick = true}: DropdownItemProps) => {
     const {setOpen} = useDropdown()
 
     const handleClick = () => {
         onClick?.()
-        setOpen(false)
+        if(closeOnClick){
+            setOpen(false)
+        }
+
     }
     return (
         <button onClick={handleClick}

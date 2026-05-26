@@ -19,7 +19,7 @@ type EditTaskModalProps = {
 const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     const {selectedTask} = useTaskStore()
     const isCreator = me?.id === selectedTask?.created_by;
-    const isOwner = me?.id === selectedTask?.project?.owner_id;
+    const isOwner = me?.id === selectedTask?.project_owner_id;
 
     const canEditTaskFields = isCreator || isOwner
     const form = useForm<EditTaskFormValues>({
@@ -49,6 +49,8 @@ const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
 
     const {mutate, isPending} = useEditTask()
 
+    console.log("selectedTask:", selectedTask)
+    console.log("project_id:", selectedTask?.project_id)
     const handleSubmit = form.handleSubmit(data => {
         if(!selectedTask) return;
         mutate({

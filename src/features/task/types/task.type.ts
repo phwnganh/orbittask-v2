@@ -1,6 +1,3 @@
-import type {Profile} from "@/features/auth/types/auth.type.ts";
-import type {Project} from "@/features/project/types/project.type.ts";
-
 export type Task = {
     id: string;
     project_id: string;
@@ -9,11 +6,14 @@ export type Task = {
     start_date: string;
     due_date: string;
     assignee_id: string;
-    assignee?: Profile;
     status: TaskStatus;
     priority: "low" | "medium" | "high";
     created_by: string;
-    project?: Project;
+    project_owner_id?: string;
+    user_id?: string;
+    first_name?: string;
+    last_name?: string;
+    avatar_url?: string;
 }
 
 export type TaskStatus = "todo" | "in_progress" | "completed";

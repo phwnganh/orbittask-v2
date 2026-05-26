@@ -7,11 +7,11 @@ import type {Task, TaskStatus} from "@/features/task/types/task.type.ts";
 export const useEditTask = () => {
     const {setMany, cancel, invalidate} = useReactQueryClient()
     return useMutation({
-        mutationFn: ({task_id,payload}:{task_id: string, project_id: string, status: TaskStatus, payload: EditTaskPayload}) => editTaskApi(task_id, payload),
-        onMutate: async({task_id, project_id, status, payload}) => {
-            await cancel(taskKeys.list({project_id: project_id, status: status}))
+        mutationFn: ({task_id, payload}:{task_id: string, project_id: string, status: TaskStatus,  payload: EditTaskPayload}) => editTaskApi(task_id, payload),
+        onMutate: async({task_id, project_id, payload}) => {
+            await cancel(taskKeys.lists(project_id))
 
-            setMany(taskKeys.list({project_id, status}), (old: Task[] | undefined) => {
+            setMany(taskKeys.lists(project_id), (old: Task[] | undefined) => {
                 if(!old) return old;
 
                 return old.map(task => task.id === task_id ? {
@@ -26,10 +26,10 @@ export const useEditTask = () => {
             return {project_id}
         },
         onError: (_err, _vars) => {
-            void invalidate(taskKeys.list({project_id: _vars.project_id, status: _vars.status}))
+            void invalidate(taskKeys.lists(_vars.project_id))
         },
         onSettled: (_data, _err, vars) => {
-            void invalidate(taskKeys.list({project_id: vars.project_id, status: vars.status}))
+            void invalidate(taskKeys.lists(vars.project_id))
         }
     })
 }

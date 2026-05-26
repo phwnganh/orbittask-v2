@@ -13,7 +13,7 @@ export const useAddTask = () => {
         mutationFn: addTaskApi,
         onMutate: async (payload) => {
             if(!user) throw new Error("Unauthenticated")
-            await cancel(taskKeys.list({project_id: payload.project_id, status: payload.status}))
+            await cancel(taskKeys.lists(payload.project_id))
             const tempId = crypto.randomUUID()
             const optimisticTask = {
                 id: tempId,
@@ -27,31 +27,30 @@ export const useAddTask = () => {
                 status: payload.status as Task["status"],
                 created_by: user.id
             }
-            setMany<Task[]>(taskKeys.list({project_id: payload.project_id, status: payload.status}), (old)=> {
+            setMany<Task[]>(taskKeys.lists(payload.project_id), (old)=> {
                 if(!old) return [optimisticTask]
 
-                return [
-                    optimisticTask,
-                    ...old,
-                ]
+                const queryHasMatchingStatus = old.some(t => t.status === payload.status) || old.length === 0
+                if(!queryHasMatchingStatus) return old
+                return [optimisticTask, ...old]
             })
             return {tempId}
         },
         onError: (_err, _vars, context) => {
-            setMany<Task[]>(taskKeys.list({project_id: _vars.project_id, status: _vars.status}), old => {
+            setMany<Task[]>(taskKeys.lists(_vars.project_id), old => {
                 if(!old) return old;
                 return old.filter(task => task.id !== context?.tempId)
             })
         },
         onSuccess: (result, _vars, context) => {
-            setMany<Task[]>(taskKeys.list({project_id: _vars.project_id, status: _vars.status}), (old) => {
+            setMany<Task[]>(taskKeys.lists(_vars.project_id), (old) => {
                 if(!old) return old
 
                 return old.map(task => task.id === context?.tempId ? result : task);
             })
         },
         onSettled: (_data, _err, vars) => {
-            void invalidate(taskKeys.list({project_id: vars.project_id, status: vars.status}))
+            void invalidate(taskKeys.lists(vars.project_id))
         }
     })
 }

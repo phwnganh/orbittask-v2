@@ -1,6 +1,7 @@
 import type {CreateTaskFormValues, EditTaskFormValues} from "@/features/task/schemas/task.schema.ts";
 import {supabase} from "@/shared/libs/supabase.ts";
 import type {TaskStatus} from "@/features/task/types/task.type.ts";
+import type {TaskBoardSortBy} from "@/features/task-board/types/task-board-menu-item.type.ts";
 
 export type CreateTaskPayload = Omit<CreateTaskFormValues, "start_date" | "due_date"> & {
     start_date: string;
@@ -31,10 +32,16 @@ export const addTaskApi = async (payload: CreateTaskPayload)=> {
     return task;
 }
 
-export const viewAllTasksByStatusApi = async (status: TaskStatus, projectId?: string) => {
-    const {data: tasks, error} = await supabase.from("Tasks").select(`*, assignee:Profile!Tasks_assignee_id_fkey(*),
-    project:Projects!Tasks_project_id_fkey(owner_id)`).eq("project_id", projectId).eq("status", status).order("created_at", {
-        ascending: false
+type ViewTasksByStatusParams = {
+    status: TaskStatus;
+    projectId: string;
+    sortBy?: TaskBoardSortBy;
+}
+export const viewAllTasksByStatusApi = async ({status, projectId, sortBy = "newest"}: ViewTasksByStatusParams) => {
+    const {data: tasks, error} = await supabase.rpc("get_all_tasks_by_status", {
+        p_project_id: projectId,
+        p_status: status,
+        p_sort_by: sortBy,
     })
 
     if(error){
