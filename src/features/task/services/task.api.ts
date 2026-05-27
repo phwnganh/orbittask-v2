@@ -75,3 +75,14 @@ export const removeTaskApi = async (task_id: string) => {
     }
     return task;
 }
+
+export const moveTaskApi = async (task_id: string, new_status: TaskStatus) => {
+    const {data: task, error} = await supabase.rpc("move_task", {
+        p_task_id: task_id,
+        p_new_status: new_status,
+    })
+    if(error){
+        throw error;
+    }
+    return task;
+}
