@@ -8,8 +8,8 @@ const RelevanceFilter = () => {
             <span className={"text-xs text-text-muted font-medium"}>Focus</span>
             <SegmentedControl options={[
                 {label: "All", value: "all"},
-                {label: "My Tasks", value: "my_tasks"},
-                {label: "Overdue", value: "overdue"}
+                {label: "Assigned to Me", value: "my_tasks"},
+                {label: "Needs Attention", value: "overdue"}
             ]} value={relevance} onChange={setRelevance}/>
         </div>
     );

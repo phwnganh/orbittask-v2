@@ -9,6 +9,7 @@ import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import SortDropdownItem from "@/features/project/components/filters/SortDropdownItem.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
+import StatusFilter from "@/features/project/components/filters/StatusFilter.tsx";
 const ProjectsFilterSection = () => {
     const {sort, setSort} = useProjectFilterStore()
     const currentSort = SORT_OPTIONS.find(option => option.value === sort)
@@ -33,6 +34,7 @@ const ProjectsFilterSection = () => {
             <div className={"flex items-start gap-6 flex-wrap"}>
                 <OwnershipFilter/>
                 <RelevanceFilter/>
+                <StatusFilter/>
             </div>
         <div className={"min-h-8"}>
             <ActiveFilterSummary/>

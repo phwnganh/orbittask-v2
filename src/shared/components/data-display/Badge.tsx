@@ -1,6 +1,6 @@
 import type {HTMLAttributes, ReactNode} from "react";
 
-type BadgeProps = {
+export type BadgeProps = {
     children?: ReactNode;
     count?: number;
     max?: number;

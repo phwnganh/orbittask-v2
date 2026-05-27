@@ -2,11 +2,12 @@ import {useProjectFilterStore} from "@/features/project/stores/project-filter.st
 import CloseIcon from '@/assets/icons/close-icon.svg?react'
 import Chip from "@/shared/components/Chip.tsx";
 const ActiveFilterSummary = () => {
-    const {ownership, relevance, setOwnership, setRelevance, reset} = useProjectFilterStore()
+    const {ownership, relevance, status, setOwnership, setRelevance, setStatus, reset} = useProjectFilterStore()
     const hasOwnership = ownership !== "all";
-    const hasRelevance = relevance !== "all"
+    const hasRelevance = relevance !== "all";
+    const hasStatus = status !== "all";
 
-    if(!hasOwnership && !hasRelevance) return null;
+    if(!hasOwnership && !hasRelevance && !hasStatus) return null;
     return (
         <div className={"flex items-center gap-2 flex-wrap"}>
             {hasOwnership &&
@@ -19,6 +20,13 @@ const ActiveFilterSummary = () => {
             {hasRelevance &&
             <Chip active onClick={() => setRelevance("all")}>
                 {relevance}
+                <CloseIcon className={"w-3.5 h-3.5"}/>
+            </Chip>
+            }
+
+            {hasStatus &&
+            <Chip active onClick={() => setStatus("all")}>
+                {status}
                 <CloseIcon className={"w-3.5 h-3.5"}/>
             </Chip>
             }
