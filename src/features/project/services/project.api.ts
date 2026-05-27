@@ -37,11 +37,15 @@ export const deleteProjectApi = async (project_id: string) => {
     return project;
 }
 
-export const getAllProjectsApi = async ({search, page, pageSize}: {search?: string; page: number; pageSize: number}): Promise<ProjectResponse> => {
+export const getAllProjectsApi = async ({search, page, pageSize, ownership, relevance, status, sort}: {search?: string; page: number; pageSize: number; ownership: string; relevance: string; status: string; sort: string}): Promise<ProjectResponse> => {
     const {data, error} = await supabase.rpc("get_all_projects", {
         p_search: search ?? null,
         p_page: page,
         p_page_size: pageSize,
+        p_ownership: ownership ?? 'all',
+        p_relevance: relevance ?? 'all',
+        p_status: status ?? 'all',
+        p_sort: sort ?? 'smart',
     })
     if(error){
         throw error;

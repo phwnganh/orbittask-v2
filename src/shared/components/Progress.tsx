@@ -1,6 +1,6 @@
 import type {HTMLAttributes} from "react";
 
-type ProgressProps = {
+export type ProgressProps = {
     value: number;
     size?: "sm" | "md";
     variant?: "default" | "success" | "warning" | "error";

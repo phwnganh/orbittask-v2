@@ -28,15 +28,13 @@ const ProjectCard = ({project}: ProjectCardProps) => {
     const myTasks = project.my_tasks_count ?? 0;
     const projectHealth = (project.project_health ?? "on_track") as ProjectHealth;
     const projectStatus = PROJECT_STATUS[projectHealth]
-
-    const progressVariant = projectHealth === "completed" ? "success" : projectHealth === "at_risk" ? "warning" : "default"
     return (
         <Card key={project.id} onClick={handleClickProjectDetail} className={"flex flex-col gap-4 h-full cursor-pointer hover:shadow-sm hover:-translate-y-0.5"}>
             <div className={"flex items-start justify-between gap-3"}>
                 <div className={"flex flex-col gap-2 min-w-0"}>
                     <div className={"flex items-center gap-2 flex-wrap"}>
                         <h3 className={"font-semibold text-text-primary truncate"}>{project.title}</h3>
-                        <Badge size={"sm"} variant={projectStatus.variant}>{projectStatus.label}</Badge>
+                        <Badge size={"sm"} variant={projectStatus.badgeVariant}>{projectStatus.label}</Badge>
                     </div>
 
                     {project.description &&
@@ -72,7 +70,7 @@ const ProjectCard = ({project}: ProjectCardProps) => {
                         {progress}%
                     </span>
                 </div>
-                <Progress value={progress} variant={progressVariant}/>
+                <Progress value={progress} variant={projectStatus.progressVariant}/>
             </div>
 
             <div className={"flex items-center justify-between text-sm"}>

@@ -53,7 +53,8 @@ export const useProjectFilterStore = create<ProjectFilterState>((set) => ({
     reset: () => set({
         ownership: "all",
         relevance: "all",
-        sort: "newest",
+        status: "all",
+        sort: "smart",
         page: 1,
         pageSize: 6,
     })
