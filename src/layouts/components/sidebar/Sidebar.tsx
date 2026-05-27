@@ -1,12 +1,19 @@
 import { SIDEBAR } from "@/layouts/constants/sidebar.constant.ts";
-import SidebarItem from "@/layouts/components/sidebar/SidebarItem.tsx";
-import SidebarProjectList from "@/layouts/components/sidebar/SidebarProjectList.tsx";
-import SidebarFooter from "@/layouts/components/sidebar/SidebarFooter.tsx";
+import SidebarItem from "@/layouts/components/sidebar/uis/SidebarItem.tsx";
+import SidebarProjectList from "@/layouts/components/sidebar/sections/SidebarProjectList.tsx";
+import SidebarFooter from "@/layouts/components/sidebar/sections/SidebarFooter.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
-import SidebarHeader from "@/layouts/components/sidebar/SidebarHeader.tsx";
+import SidebarHeader from "@/layouts/components/sidebar/sections/SidebarHeader.tsx";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
-import SidebarDropdownItem from "@/layouts/components/sidebar/SidebarDropdownItem.tsx";
-const Sidebar = () => {
+import SidebarDropdownItem from "@/layouts/components/sidebar/uis/SidebarDropdownItem.tsx";
+import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
+import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
+
+type SidebarProps = {
+    profile?: Profile;
+}
+const Sidebar = ({profile}: SidebarProps) => {
   const { desktopCollapsed, isMobileOpen, closeMobile } = useSidebarStore();
   return (
     <>
@@ -43,10 +50,17 @@ const Sidebar = () => {
           })}
         </div>
         <div className={"p-3 border-t border-border-primary"}>
-            <Dropdown trigger={({open, ref, ...props}) => <SidebarFooter ref={ref} open={open} {...props}/>}>
-                <SidebarDropdownItem/>
-            </Dropdown>
 
+            <Dropdown>
+                <DropdownTrigger>
+                    {(props) => <SidebarFooter profile={profile} {...props}/>}
+
+                </DropdownTrigger>
+
+                <DropdownContent>
+                    <SidebarDropdownItem/>
+                </DropdownContent>
+            </Dropdown>
         </div>
       </aside>
     </>

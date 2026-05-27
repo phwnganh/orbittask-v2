@@ -1,4 +1,4 @@
-import Button from "@/shared/components/Button.tsx";
+import Button from "@/shared/components/button/Button.tsx";
 import {useNavigate} from "react-router-dom";
 import SuccessIcon from '@/assets/icons/verified-icon.svg'
 const SuccessfulVerifiedAccountPage = () => {
@@ -19,7 +19,7 @@ const SuccessfulVerifiedAccountPage = () => {
                 </div>
             </header>
             <div className={"w-full"}>
-                <Button variant={"secondary"} className={"w-full"} onClick={() => navigate("/")}>Go to Dashboard</Button>
+                <Button variant={"secondary"} fullWidth={true} onClick={() => navigate("/")}>Go to Dashboard</Button>
             </div>
         </div>
     );

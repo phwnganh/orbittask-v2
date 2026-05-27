@@ -4,7 +4,7 @@ import {registerApi} from "@/features/auth/services/auth.api.ts";
 export const useRegister = () => {
     return useMutation({
         mutationFn: registerApi,
-        onError: (error: any) => {
+        onError: (error) => {
             throw new Error(error.message)
         }
     })

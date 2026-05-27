@@ -8,9 +8,9 @@ import {
     SUCCESSFUL_VERIFIED_ACCOUNT,
     VERIFIED_ACCOUNT
 } from "@/shared/constants/route.constant.ts";
-import LoginPage from "../pages/LoginPage";
-import PostLoginLayout from "../layouts/postlogin.layout.tsx";
-import ProjectsPage from "../pages/ProjectsPage";
+import LoginPage from "@/pages/LoginPage";
+import PostLoginLayout from "@/layouts/postlogin.layout.tsx";
+import ProjectsPage from "@/pages/ProjectsPage";
 import PreLoginLayout from "@/layouts/prelogin.layout.tsx";
 import RegisterPage from "@/pages/RegisterPage";
 import VerifiedAccountPage from "@/pages/VerifiedAccountPage";
@@ -38,7 +38,7 @@ const AppRoute = () => {
                 <Route path={DASHBOARD} element={<DashboardPage/>}/>
                 <Route path={INBOX} element={<InboxPage/>}/>
                 <Route path={MY_TASKS} element={<TasksPage/>}/>
-                <Route path={`${PROJECT_DETAILS}/:project-id`} element={<ProjectDetailPage/>}/>
+                <Route path={`${PROJECT_DETAILS}/:id`} element={<ProjectDetailPage/>}/>
                 <Route path={LABELS} element={<LabelPage/>}/>
                 <Route index element={<DashboardPage/>} />
             </Route>

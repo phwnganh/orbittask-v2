@@ -1,0 +1,30 @@
+import NotificationIcon from "@/assets/icons/notification-icon.svg?react";
+import LanguageIcon from "@/assets/icons/language-icon.svg?react";
+import Badge from "@/shared/components/data-display/Badge.tsx";
+const HeaderAction = () => {
+    const unreadCount = 33;
+  return (
+    <div className={"flex items-center gap-6 pr-8"}>
+      <button
+        type={"button"}
+        aria-label={"open notifications"}
+        className={"relative hover:bg-bg-tertiary p-2 rounded-md transition focus:outline-none focus:ring-2 focus:ring-primary"}
+      >
+        <NotificationIcon className={"w-6 h-6"} />
+
+          {unreadCount > 0 && (
+              <Badge size={"sm"} count={unreadCount} variant={"error"} className={"absolute top-1 right-0 ring-2 ring-bg-primary"}/>
+          )}
+      </button>
+      <button
+        type={"button"}
+        aria-label={"change language"}
+        className={"hover:bg-bg-tertiary p-2 rounded-md transition"}
+      >
+        <LanguageIcon className={"w-6 h-6"} />
+      </button>
+    </div>
+  );
+};
+
+export default HeaderAction;

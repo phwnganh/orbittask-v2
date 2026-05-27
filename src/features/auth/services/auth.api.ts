@@ -43,3 +43,11 @@ export const loginWithGoogleApi = async () => {
     }
     return data
 }
+
+export const getCurrentUserApi = async () => {
+    const {data: {user}} = await supabase.auth.getUser();
+    if (!user) {
+        throw new Error("Unauthenticated")
+    }
+    return user;
+}

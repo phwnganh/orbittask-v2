@@ -4,7 +4,7 @@ import {loginApi, loginWithGoogleApi} from "@/features/auth/services/auth.api.ts
 export const useLogin = () => {
     return useMutation({
         mutationFn: loginApi,
-        onError: (error: any) => {
+        onError: (error) => {
             throw new Error(error.message)
         }
     })
