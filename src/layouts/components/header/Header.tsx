@@ -2,7 +2,11 @@ import HeaderTitle from "@/layouts/components/header/uis/HeaderTitle.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import PanelLeftIcon from "@/assets/icons/panel-left-icon.svg?react";
 import HeaderAction from "@/layouts/components/header/uis/HeaderAction.tsx";
-const Header = () => {
+import type {Profile} from "@/features/auth/types/auth.type.ts";
+type HeaderProps = {
+  profile?: Profile;
+}
+const Header = ({profile}: HeaderProps) => {
   const { toggleDesktop, openMobile } = useSidebarStore();
 
   return (
@@ -27,7 +31,7 @@ const Header = () => {
         >
           <PanelLeftIcon className="w-5 h-5" />
         </button>
-        <HeaderTitle />
+        <HeaderTitle profile={profile}/>
       </div>
       <HeaderAction />
     </header>

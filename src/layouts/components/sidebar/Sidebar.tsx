@@ -1,14 +1,19 @@
 import { SIDEBAR } from "@/layouts/constants/sidebar.constant.ts";
 import SidebarItem from "@/layouts/components/sidebar/uis/SidebarItem.tsx";
-import SidebarProjectList from "@/layouts/components/sidebar/blocks/SidebarProjectList.tsx";
-import SidebarFooter from "@/layouts/components/sidebar/blocks/SidebarFooter.tsx";
+import SidebarProjectList from "@/layouts/components/sidebar/sections/SidebarProjectList.tsx";
+import SidebarFooter from "@/layouts/components/sidebar/sections/SidebarFooter.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
-import SidebarHeader from "@/layouts/components/sidebar/blocks/SidebarHeader.tsx";
+import SidebarHeader from "@/layouts/components/sidebar/sections/SidebarHeader.tsx";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
 import SidebarDropdownItem from "@/layouts/components/sidebar/uis/SidebarDropdownItem.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
-const Sidebar = () => {
+import type {Profile} from "@/features/auth/types/auth.type.ts";
+
+type SidebarProps = {
+    profile?: Profile;
+}
+const Sidebar = ({profile}: SidebarProps) => {
   const { desktopCollapsed, isMobileOpen, closeMobile } = useSidebarStore();
   return (
     <>
@@ -48,7 +53,7 @@ const Sidebar = () => {
 
             <Dropdown>
                 <DropdownTrigger>
-                    {(props) => <SidebarFooter {...props}/>}
+                    {(props) => <SidebarFooter profile={profile} {...props}/>}
 
                 </DropdownTrigger>
 

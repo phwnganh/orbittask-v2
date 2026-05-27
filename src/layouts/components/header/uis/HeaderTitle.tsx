@@ -1,7 +1,9 @@
-import {useProfile} from "@/features/profile/hooks/useProfile.ts";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
-const HeaderTitle = () => {
-    const {data: profile} = useProfile()
+type HeaderTitleProps = {
+    profile?: Profile
+}
+const HeaderTitle = ({profile}: HeaderTitleProps) => {
   return (
     <div className={"flex items-center gap-2"}>
       <h1 className={"font-bold text-xl text-text-secondary"}>Hello, </h1>

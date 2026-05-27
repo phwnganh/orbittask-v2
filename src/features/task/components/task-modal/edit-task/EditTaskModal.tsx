@@ -48,9 +48,6 @@ const EditTaskModal = ({isOpen, onClose, users, me}: EditTaskModalProps) => {
     }, [isOpen, selectedTask, reset]);
 
     const {mutate, isPending} = useEditTask()
-
-    console.log("selectedTask:", selectedTask)
-    console.log("project_id:", selectedTask?.project_id)
     const handleSubmit = form.handleSubmit(data => {
         if(!selectedTask) return;
         mutate({

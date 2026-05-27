@@ -1,16 +1,15 @@
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import { useSidebarStore } from "@/layouts/stores/sidebar.store.ts";
 import ChevronIcon from "@/assets/icons/chevron-icon.svg?react";
-import {useProfile} from "@/features/profile/hooks/useProfile.ts";
 import {forwardRef, type HTMLAttributes} from "react";
+import type {Profile} from "@/features/auth/types/auth.type.ts";
 
 type SidebarFooterProps = {
   open?: boolean;
+  profile?: Profile;
 } & HTMLAttributes<HTMLDivElement>;
-const SidebarFooter = forwardRef<HTMLDivElement, SidebarFooterProps>(({open, className, ...props}, ref) => {
+const SidebarFooter = forwardRef<HTMLDivElement, SidebarFooterProps>(({open, className, profile, ...props}, ref) => {
   const { desktopCollapsed } = useSidebarStore();
-  const {data: profile} = useProfile()
-  console.log(profile?.avatar_url)
   return (
       <div ref={ref}
            {...props}
