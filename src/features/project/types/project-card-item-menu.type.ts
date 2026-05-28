@@ -1,1 +1,1 @@
-export type ProjectCardItemMenu = "edit" | "archive" | "favourite" | "pin" | "delete"
+export type ProjectCardItemMenu = "edit" | "archive" | "pin" | "unpin" | "delete"

@@ -2,6 +2,7 @@ import type {ProjectFormValues} from "@/features/project/schemas/project.schema.
 import {supabase} from "@/shared/libs/supabase.ts";
 import {getCurrentUserApi} from "@/features/auth/services/auth.api.ts";
 import type {ProjectResponse} from "@/features/project/types/project.type.ts";
+import type {ProjectPin} from "@/features/project/types/project-pins.type.ts";
 
 export const createProjectApi = async (payload: ProjectFormValues) => {
     const user = await getCurrentUserApi()
@@ -67,4 +68,35 @@ export const getProjectDetailApi = async (project_id: string)=> {
         throw error;
     }
     return data;
+}
+
+export const pinProjectApi = async (project_id: string) => {
+    const {data: projects, error} = await supabase.from("ProjectPins").insert({project_id}).select().single()
+
+    if(error){
+        throw error;
+    }
+    return projects;
+}
+
+export const unpinProjectApi = async (project_id: string) => {
+    const {data: projects, error} = await supabase.from("ProjectPins").delete().eq("project_id", project_id)
+    if(error){
+        throw error;
+    }
+    return projects;
+}
+
+export const getPinnedProjectsApi = async () => {
+    const {data: projects, error} = await supabase.from("ProjectPins").select(`user_id, pinned_at, project:project_id(
+    id,
+    title,
+    description,
+    created_at)`).order("pinned_at", {ascending: false})
+        .returns<ProjectPin[]>()
+
+    if(error){
+        throw error;
+    }
+    return projects;
 }
