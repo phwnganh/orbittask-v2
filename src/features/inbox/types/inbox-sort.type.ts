@@ -1,0 +1,1 @@
+export type InboxSortFilter = "smart" | "due_today" | "high_priority" | "in_progress" | "nearest_due_date";

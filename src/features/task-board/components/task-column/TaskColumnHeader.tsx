@@ -9,15 +9,16 @@ import type {Task} from "@/features/task/types/task.type.ts";
 
 type TaskColumnHeaderProps = {
     status: Task["status"];
+    tasks?: Task[];
 }
-const TaskColumnHeader = ({status}: TaskColumnHeaderProps) => {
+const TaskColumnHeader = ({status, tasks}: TaskColumnHeaderProps) => {
     return (
         <div className={"flex items-center justify-between"}>
             <div className={"flex items-center gap-2"}>
                 <Badge variant={"info"}>
                     {getTaskStatusHeader(status)}
                 </Badge>
-                <span className={"text-sm text-text-secondary"}>12</span>
+                <span className={"text-sm text-text-secondary"}>{tasks?.length}</span>
             </div>
             <Dropdown>
                 <DropdownTrigger>

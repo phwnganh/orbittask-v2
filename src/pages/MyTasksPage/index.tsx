@@ -1,5 +1,5 @@
 
-const TasksPage = () => {
+const MyTasksPage = () => {
     return (
         <div>
 
@@ -7,4 +7,4 @@ const TasksPage = () => {
     );
 };
 
-export default TasksPage;
+export default MyTasksPage;
