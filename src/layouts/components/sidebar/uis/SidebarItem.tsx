@@ -11,6 +11,7 @@ const SidebarItem = ({ item }: SidebarItemProps) => {
   return (
     <NavLink
       to={item.path}
+      end
       aria-labelledby={item.key}
       className={({ isActive }) =>
         `flex items-center ${desktopCollapsed ? "justify-center px-2" : "gap-3 px-3"} py-2 rounded-md hover:bg-bg-tertiary hover:text-text-primary cursor-pointer transition-all duration-200 ${isActive ? "text-text-primary bg-bg-tertiary" : "text-text-secondary"}`

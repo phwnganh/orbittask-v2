@@ -1,32 +1,38 @@
-import { Link } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import { PROJECT_DETAILS } from "@/shared/constants/route.constant.ts";
+import {useViewPinnedProjects} from "@/features/project/hooks/useViewProjects.ts";
 
-const projects = [
-  { id: 1, name: "Project A1" },
-  { id: 2, name: "Project A2" },
-  { id: 3, name: "Project A3" },
-  { id: 4, name: "Project A4" },
-  { id: 5, name: "Project A5" },
-];
 
 const SidebarProjectList = () => {
+  const {data: projects} = useViewPinnedProjects()
   return (
     <div className={"ml-6 mt-1 flex flex-col gap-1"}>
-      {projects.map((project) => (
-        <Link
-          key={project.id}
-          to={`${PROJECT_DETAILS}/${project.id}`}
-          className={
-            "group flex items-center gap-2 text-sm px-2 py-1.5 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-tertiary transition"
+      {projects?.map((project) => (
+        <NavLink
+          key={project.project.id}
+          to={`${PROJECT_DETAILS}/${project.project.id}`}
+          className={({ isActive }) =>
+              `group flex justify-between text-sm px-2 py-1.5 rounded-md transition ${
+                  isActive
+                      ? "text-text-primary bg-bg-tertiary"
+                      : "text-text-muted hover:text-text-primary hover:bg-bg-tertiary"
+              }`
           }
         >
-          <span
-            className={
-              "w-1.5 h-1.5 rounded-full bg-text-muted group-hover:bg-text-primary transition"
-            }
-          ></span>
-          <span className={"truncate"}>{project.name}</span>
-        </Link>
+          {({isActive}) => (
+              <div className={"flex items-center gap-2"}>
+                      <span
+                          className={
+                            `w-1.5 h-1.5 rounded-full bg-text-muted group-hover:bg-text-primary transition
+                            ${isActive ? "bg-text-primary" : "bg-text-muted group-hover:bg-text-primary"}`
+                          }
+                      ></span>
+                <span className={"truncate"}>{project.project.title}</span>
+              </div>
+          )}
+
+
+        </NavLink>
       ))}
     </div>
   );

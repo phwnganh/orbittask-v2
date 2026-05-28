@@ -23,7 +23,7 @@ export const usePinProject = () => {
                     created_at: project.created_at
                 }
             }
-            set<ProjectPin[]>(projectPinKeys.list(), (old = []) => [optimisticPin, ...old])
+            set<ProjectPin[]>(projectPinKeys.lists(), (old = []) => [optimisticPin, ...old])
             return {
                 optimisticPin: optimisticPin.id
             }
