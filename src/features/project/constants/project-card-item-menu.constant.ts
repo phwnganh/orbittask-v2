@@ -1,9 +1,19 @@
 import type {ProjectCardItemMenu} from "@/features/project/types/project-card-item-menu.type.ts";
 
-export const PROJECT_CARD_ITEM_MENU: {label: string; value: ProjectCardItemMenu}[] = [
-    {label: "Edit", value: "edit"},
-    {label: "Add to Favourite", value: "favourite"},
-    {label: "Pin Project", value: "pin"},
-    {label: "Archive", value: "archive"},
-    {label: "Delete", value: "delete"},
-]
+export const getProjectCardItemMenu = (isPinned?: boolean): {
+    label: string;
+    value: ProjectCardItemMenu
+}[] => {
+    return [
+        {
+            label: "Edit",
+            value: "edit",
+        },
+        {
+            label: isPinned ? "Unpinned Project" : "Pin Project",
+            value: isPinned ? "unpin" : "pin"
+        },
+        {label: "Archive", value: "archive"},
+        {label: "Delete", value: "delete"},
+    ]
+}

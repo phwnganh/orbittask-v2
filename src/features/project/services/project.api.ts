@@ -68,3 +68,33 @@ export const getProjectDetailApi = async (project_id: string)=> {
     }
     return data;
 }
+
+export const pinProjectApi = async (project_id: string) => {
+    const {data: projects, error} = await supabase.from("ProjectPins").insert({project_id}).select().single()
+
+    if(error){
+        throw error;
+    }
+    return projects;
+}
+
+export const unpinProjectApi = async (project_id: string) => {
+    const {data: projects, error} = await supabase.from("ProjectPins").delete().eq("project_id", project_id)
+    if(error){
+        throw error;
+    }
+    return projects;
+}
+
+export const getPinnedProjectsApi = async () => {
+    const {data: projects, error} = await supabase.from("ProjectPins").select(`pinned_at, project:project_id(
+    id,
+    title,
+    description,
+    created_at)`).order("pinned_at", {ascending: false})
+
+    if(error){
+        throw error;
+    }
+    return projects;
+}
