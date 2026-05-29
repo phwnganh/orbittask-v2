@@ -10,7 +10,7 @@ const InboxPage = () => {
             <InboxHeaderSection/>
             <InboxFiltersSection/>
             <div className={"flex-1 min-h-0 overflow-y-auto p-2 scrollbar-custom"}>
-                <InboxCardsSection inboxes={inboxes ?? []}/>
+                <InboxCardsSection inboxes={inboxes ?? []} isLoading={isLoading}/>
             </div>
         </div>
     );
