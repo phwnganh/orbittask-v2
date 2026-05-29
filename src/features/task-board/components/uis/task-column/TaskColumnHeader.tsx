@@ -4,7 +4,7 @@ import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import MenuDotsButton from "@/shared/components/button/MenuDotsButton.tsx";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
-import TaskColumnMenu from "@/features/task-board/components/task-column-menu/TaskColumnMenu.tsx";
+import TaskColumnMenu from "@/features/task-board/components/uis/task-column-menu/TaskColumnMenu.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
 
 type TaskColumnHeaderProps = {

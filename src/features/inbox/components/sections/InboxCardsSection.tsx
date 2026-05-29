@@ -1,7 +1,7 @@
-import InboxCard from "@/features/inbox/components/uis/InboxCard.tsx";
+import InboxCard from "@/features/inbox/components/uis/inbox-card/InboxCard.tsx";
 import type {Inbox} from "@/features/inbox/types/inbox.type.ts";
-import InboxCardSkeleton from "@/features/inbox/components/uis/InboxCardSkeleton.tsx";
-import TaskEmpty from "@/features/task/components/uis/TaskEmpty.tsx";
+import InboxCardSkeleton from "@/features/inbox/components/uis/inbox-card/InboxCardSkeleton.tsx";
+import TaskEmpty from "@/features/task/components/uis/states/TaskEmpty.tsx";
 
 type InboxCardsSectionProps = {
     inboxes: Inbox[];

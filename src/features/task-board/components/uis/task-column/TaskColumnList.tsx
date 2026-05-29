@@ -1,6 +1,6 @@
-import TaskCard from "@/features/task/components/task-card/TaskCard.tsx";
+import TaskCard from "@/features/task/components/uis/task-card/TaskCard.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
-import TaskEmpty from "@/features/task/components/uis/TaskEmpty.tsx";
+import TaskEmpty from "@/features/task/components/uis/states/TaskEmpty.tsx";
 
 type TaskColumnListProps = {
     tasks?: Task[]

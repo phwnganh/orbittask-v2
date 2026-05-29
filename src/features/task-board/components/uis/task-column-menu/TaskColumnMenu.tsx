@@ -1,9 +1,9 @@
 import type {TaskBoardMenuItem} from "@/features/task-board/types/task-board-menu-item.type.ts";
 import {TASK_BOARD_MENU} from "@/features/task-board/constants/task-board-menu.constant.ts";
 import DropdownItem from "@/shared/components/dropdown/DropdownItem.tsx";
-import TaskColumnPrioritySubmenu from "@/features/task-board/components/task-column-menu/TaskColumnPrioritySubmenu.tsx";
-import TaskColumnDueDateSubmenu from "@/features/task-board/components/task-column-menu/TaskColumnDueDateSubmenu.tsx";
-import TaskColumnTitleSubmenu from "@/features/task-board/components/task-column-menu/TaskColumnTitleSubmenu.tsx";
+import TaskColumnPrioritySubmenu from "@/features/task-board/components/uis/task-column-menu/TaskColumnPrioritySubmenu.tsx";
+import TaskColumnDueDateSubmenu from "@/features/task-board/components/uis/task-column-menu/TaskColumnDueDateSubmenu.tsx";
+import TaskColumnTitleSubmenu from "@/features/task-board/components/uis/task-column-menu/TaskColumnTitleSubmenu.tsx";
 import {useTaskBoardStore} from "@/features/task-board/stores/task-board.store.ts";
 import type {Task} from "@/features/task/types/task.type.ts";
 

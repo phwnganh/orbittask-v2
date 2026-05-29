@@ -7,7 +7,7 @@ import MenuDotsButton from "@/shared/components/button/MenuDotsButton.tsx";
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
 import {getDueDateStatus} from "@/features/task/utils/task-date.util.ts";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
-import TaskCardMenu from "@/features/task/components/task-card/TaskCardMenu.tsx";
+import TaskCardMenu from "@/features/task/components/uis/task-card/TaskCardMenu.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
 import GripVertical from '@/assets/icons/grip-vertical-icon.svg?react'
 import {useDraggable} from "@dnd-kit/core";

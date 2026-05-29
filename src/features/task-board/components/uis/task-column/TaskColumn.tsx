@@ -1,6 +1,6 @@
-import TaskColumnHeader from "@/features/task-board/components/task-column/TaskColumnHeader.tsx";
-import TaskColumnList from "@/features/task-board/components/task-column/TaskColumnList.tsx";
-import AddTaskButton from "@/features/task-board/components/AddTaskButton.tsx";
+import TaskColumnHeader from "@/features/task-board/components/uis/task-column/TaskColumnHeader.tsx";
+import TaskColumnList from "@/features/task-board/components/uis/task-column/TaskColumnList.tsx";
+import AddTaskButton from "@/features/task-board/components/uis/add-task-btn/AddTaskButton.tsx";
 import type {Task} from "@/features/task/types/task.type.ts";
 import {useViewTasks} from "@/features/task/hooks/useViewTasks.ts";
 import {useTaskBoardStore} from "@/features/task-board/stores/task-board.store.ts";

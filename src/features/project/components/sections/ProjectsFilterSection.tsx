@@ -1,13 +1,13 @@
-import ActiveFilterSummary from "@/features/project/components/filters/ActiveFilterSummary.tsx";
+import ActiveFilterSummary from "@/features/project/components/filters/filter-section/ActiveFilterSummary.tsx";
 import ProjectSearch from "../uis/search/ProjectSearch.tsx";
-import SortButton from "@/features/project/components/filters/SortButton.tsx";
-import OwnershipFilter from "@/features/project/components/filters/OwnershipFilter.tsx";
-import RelevanceFilter from "@/features/project/components/filters/RelevanceFilter.tsx";
+import SortButton from "@/features/project/components/uis/filter/SortButton.tsx";
+import OwnershipFilter from "@/features/project/components/filters/filter-section/OwnershipFilter.tsx";
+import RelevanceFilter from "@/features/project/components/filters/filter-section/RelevanceFilter.tsx";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
-import SortDropdownItem from "@/features/project/components/filters/SortDropdownItem.tsx";
+import SortDropdownItem from "@/features/project/components/filters/sort-section/SortDropdownItem.tsx";
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
-import StatusFilter from "@/features/project/components/filters/StatusFilter.tsx";
+import StatusFilter from "@/features/project/components/filters/filter-section/StatusFilter.tsx";
 const ProjectsFilterSection = () => {
 
     return (

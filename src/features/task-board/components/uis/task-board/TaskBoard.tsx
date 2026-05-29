@@ -1,4 +1,4 @@
-import TaskColumn from "@/features/task-board/components/task-column/TaskColumn.tsx";
+import TaskColumn from "@/features/task-board/components/uis/task-column/TaskColumn.tsx";
 import type {Member} from "@/features/member/types/member.type.ts";
 import AddTaskModal from "@/features/task/components/task-modal/add-task/AddTaskModal.tsx";
 import {useTaskStore} from "@/features/task/stores/task.store.ts";
@@ -17,7 +17,7 @@ import {
 } from "@dnd-kit/core";
 import type {Task, TaskStatus} from "@/features/task/types/task.type.ts";
 import {useState} from "react";
-import TaskCard from "@/features/task/components/task-card/TaskCard.tsx";
+import TaskCard from "@/features/task/components/uis/task-card/TaskCard.tsx";
 
 type TaskBoardProps = {
     users?: Member[]
