@@ -1,6 +1,7 @@
 import InboxCard from "@/features/inbox/components/uis/InboxCard.tsx";
 import type {Inbox} from "@/features/inbox/types/inbox.type.ts";
 import InboxCardSkeleton from "@/features/inbox/components/uis/InboxCardSkeleton.tsx";
+import TaskEmpty from "@/features/task/components/uis/TaskEmpty.tsx";
 
 type InboxCardsSectionProps = {
     inboxes: Inbox[];
@@ -19,12 +20,19 @@ const InboxCardsSection = ({inboxes, isLoading}: InboxCardsSectionProps) => {
     }
     return (
         <>
-            <div className={"flex flex-col gap-3"}>
-                {inboxes.map((inbox) => (
-                    <InboxCard key={inbox.id} inbox={inbox}/>
-                ))}
+            {inboxes && inboxes.length > 0 ?
+                <div className={"flex flex-col gap-3"}>
+                    {inboxes.map((inbox) => (
+                        <InboxCard key={inbox.id} inbox={inbox}/>
+                    ))}
 
-            </div>
+                </div>
+                :
+                <div className={"h-full"}>
+                    <TaskEmpty/>
+                </div>
+            }
+
         </>
     );
 };
