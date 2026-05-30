@@ -18,7 +18,7 @@ import SuccessfulVerifiedAccountPage from "@/pages/VerifiedAccountPage/Successfu
 import ForbiddenPage from "@/pages/NotFoundPage/ForbiddenPage.tsx";
 import DashboardPage from "@/pages/DashboardPage";
 import InboxPage from "@/pages/InboxPage";
-import TasksPage from "@/pages/TasksPage";
+import TasksPage from "@/pages/MyTasksPage";
 import ProjectDetailPage from "@/pages/ProjectDetailPage";
 import LabelPage from "@/pages/LabelPage";
 
