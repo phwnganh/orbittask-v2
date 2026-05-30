@@ -1,9 +1,9 @@
-import type {Task} from "@/features/task/types/task.type.ts";
 import {format} from "date-fns";
+import type {MyTask} from "@/features/my-tasks/types/my-task.type.ts";
 
 type MyToDoTasksHeaderProps = {
     selectedDate: Date
-    selectedDateTasks: Task[]
+    selectedDateTasks?: MyTask[]
 }
 const ToDoTasksHeader = ({selectedDate, selectedDateTasks}: MyToDoTasksHeaderProps) => {
     return (
@@ -12,7 +12,7 @@ const ToDoTasksHeader = ({selectedDate, selectedDateTasks}: MyToDoTasksHeaderPro
                 {format(selectedDate, "MMMM d")}
             </h2>
             <p className={"text-sm text-text-secondary mt-1"}>
-                {format(selectedDate, "EEEE")} • {selectedDateTasks.length} tasks
+                {format(selectedDate, "EEEE")} • {selectedDateTasks?.length} tasks
             </p>
         </div>
     );

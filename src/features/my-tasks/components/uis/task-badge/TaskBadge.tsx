@@ -1,9 +1,9 @@
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
-import type {Task} from "@/features/task/types/task.type.ts";
 import {PRIORITY_BADGE} from "@/features/my-tasks/constants/task-priority.constant.ts";
+import type {MyTask} from "@/features/my-tasks/types/my-task.type.ts";
 
 type TaskBadgeProps = {
-    task: Task;
+    task: MyTask;
 }
 const TaskBadge = ({task}: TaskBadgeProps) => {
     const priorityVariant = getTaskPriorityBadgeVariant(task.priority)

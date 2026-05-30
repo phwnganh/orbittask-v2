@@ -1,36 +1,25 @@
+import type {MyTaskStatus} from "@/features/my-tasks/types/my-task.type.ts";
 
-const MyTaskStatistic = () => {
+type MyTaskStatisticProps = {
+    statistics?: MyTaskStatus
+}
+const MyTaskStatistic = ({statistics}: MyTaskStatisticProps) => {
     return (
-        <div className={"grid grid-cols-4 gap-4"}>
-            {[
-                {
-                    label: "Today",
-                    value: 3,
-                },
-                {
-                    label: "Overdue",
-                    value: 2,
-                },
-                {
-                    label: "Upcoming",
-                    value: 8,
-                },
-                {
-                    label: "Completed",
-                    value: 14,
-                },
-            ].map((item) => (
-                <div
-                    key={item.label}
-                    className={
-                        "bg-bg-secondary border border-border-primary rounded-2xl p-4"
-                    }
-                >
-                    <p className={"text-sm text-text-secondary"}>{item.label}</p>
+        <div className={"flex items-center gap-4 rounded-xl border border-border-primary bg-bg-secondary px-4 py-3"}>
+            <div className={"flex items-center gap-2"}>
+                <div className={"w-2 h-2 shrink-0 rounded-full bg-error"}/>
+                <span className={"text-sm text-text-primary"}>
+                    {statistics?.overdue_tasks} overdue
+                </span>
+            </div>
+            <div className={"w-px h-4 bg-border-primary"} />
 
-                    <h2 className={"text-2xl font-semibold mt-2"}>{item.value}</h2>
-                </div>
-            ))}
+            <div className={"flex items-center gap-2"}>
+                <div className={"w-2 h-2 rounded-full bg-warning"} />
+                <span className={"text-sm text-text-primary"}>
+                    {statistics?.today_tasks} due today
+                </span>
+            </div>
         </div>
     );
 };

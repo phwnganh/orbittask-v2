@@ -1,7 +1,8 @@
-import CalendarHeader from "@/features/my-tasks/uis/calendars/calendar-section/CalendarHeader.tsx";
-import CalendarWeekday from "@/features/my-tasks/uis/calendars/calendar-section/CalendarWeekday.tsx";
-import CalendarTasks from "@/features/my-tasks/uis/calendars/calendar-section/CalendarTasks.tsx";
+import CalendarHeader from "@/features/my-tasks/components/uis/calendars/calendar-section/CalendarHeader";
+import CalendarWeekday from "@/features/my-tasks/components/uis/calendars/calendar-section/CalendarWeekday";
+import CalendarTasks from "@/features/my-tasks/components/uis/calendars/calendar-section/CalendarTasks";
 import type {Dispatch, SetStateAction} from "react";
+import type {MyTask} from "@/features/my-tasks/types/my-task.type.ts";
 
 type MyTaskCalendarProps = {
     selectedDate: Date;
@@ -9,9 +10,9 @@ type MyTaskCalendarProps = {
     currentMonth: Date;
     setCurrentMonth: Dispatch<SetStateAction<Date>>;
     calendarDays: Date[];
-
+    myTasks?: MyTask[];
 }
-const MyTaskCalendar = ({selectedDate, setSelectedDate, currentMonth, setCurrentMonth, calendarDays}: MyTaskCalendarProps) => {
+const MyTaskCalendar = ({myTasks, selectedDate, setSelectedDate, currentMonth, setCurrentMonth, calendarDays}: MyTaskCalendarProps) => {
     return (
         <div
             className={
@@ -22,7 +23,7 @@ const MyTaskCalendar = ({selectedDate, setSelectedDate, currentMonth, setCurrent
 
             <CalendarWeekday/>
 
-            <CalendarTasks calendarDays={calendarDays} currentMonth={currentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+            <CalendarTasks myTasks={myTasks} calendarDays={calendarDays} currentMonth={currentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import DropdownTrigger from "@/shared/components/dropdown/DropdownTrigger.tsx";
 import DropdownContent from "@/shared/components/dropdown/DropdownContent.tsx";
 import Dropdown from "@/shared/components/dropdown/Dropdown.tsx";
-import InboxSortDropdownItem from "@/features/inbox/components/uis/filter/sort-section/InboxSortDropdownItem.tsx";
-import InboxSortButton from "@/features/inbox/components/uis/filter/sort-section/InboxSortButton.tsx";
-import InboxFilters from "@/features/inbox/components/uis/filter/filter-section/InboxFilters.tsx";
+import InboxSortDropdownItem from "@/features/inbox/components/filters/sort-section/InboxSortDropdownItem.tsx";
+import InboxSortButton from "@/features/inbox/components/uis/filter/InboxSortButton.tsx";
+import InboxFilters from "@/features/inbox/components/filters/filter-section/InboxFilters.tsx";
 const InboxFiltersSection = () => {
     return (
         <div className={"flex flex-col gap-6"}>

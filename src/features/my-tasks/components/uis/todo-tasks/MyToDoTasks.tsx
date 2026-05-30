@@ -1,11 +1,11 @@
-import type { Task } from "@/features/task/types/task.type.ts";
-import ToDoTasksHeader from "@/features/my-tasks/uis/todo-tasks/todo-tasks-section/ToDoTasksHeader.tsx";
-import MyTaskEmpty from "@/features/my-tasks/uis/states/MyTaskEmpty.tsx";
-import ToDoTaskCard from "@/features/my-tasks/uis/todo-tasks/todo-tasks-section/ToDoTaskCard.tsx";
+import ToDoTasksHeader from "@/features/my-tasks/components/uis/todo-tasks/todo-tasks-section/ToDoTasksHeader.tsx";
+import MyTaskEmpty from "@/features/my-tasks/components/uis/states/MyTaskEmpty.tsx";
+import ToDoTaskCard from "@/features/my-tasks/components/uis/todo-tasks/todo-tasks-section/ToDoTaskCard.tsx";
+import type {MyTask} from "@/features/my-tasks/types/my-task.type.ts";
 
 type MyToDoTasksProps = {
   selectedDate: Date;
-  selectedDateTasks: Task[];
+  selectedDateTasks?: MyTask[];
 };
 const MyToDoTasks = ({ selectedDate, selectedDateTasks }: MyToDoTasksProps) => {
   return (
@@ -17,7 +17,7 @@ const MyToDoTasks = ({ selectedDate, selectedDateTasks }: MyToDoTasksProps) => {
       <ToDoTasksHeader selectedDate={selectedDate} selectedDateTasks={selectedDateTasks} />
 
       <div className={"space-y-3"}>
-        {selectedDateTasks.length === 0 ? (
+        {selectedDateTasks?.length === 0 ? (
           <div
             className={
               "border border-dashed border-border-primary rounded-2xl p-6 text-center"
@@ -26,7 +26,7 @@ const MyToDoTasks = ({ selectedDate, selectedDateTasks }: MyToDoTasksProps) => {
             <MyTaskEmpty/>
           </div>
         ) : (
-          selectedDateTasks.map((task) =>
+          selectedDateTasks?.map((task) =>
           <ToDoTaskCard key={task.id} task={task}/>)
         )}
       </div>

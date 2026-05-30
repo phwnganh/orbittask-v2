@@ -1,9 +1,9 @@
-import type {Task} from "@/features/task/types/task.type.ts";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
+import type {MyTask} from "@/features/my-tasks/types/my-task.type.ts";
 
 type TodoTaskCardProps = {
-    task: Task;
+    task: MyTask;
 }
 const ToDoTaskCard = ({task}: TodoTaskCardProps) => {
     return (
@@ -33,7 +33,7 @@ const ToDoTaskCard = ({task}: TodoTaskCardProps) => {
                         </Badge>
 
                         <span className={"text-xs text-text-muted"}>
-                      Orbit Task
+                      {task.project_title}
                     </span>
                     </div>
                 </div>
