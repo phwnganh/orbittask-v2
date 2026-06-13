@@ -10,8 +10,8 @@ const TaskColumnList = ({tasks}: TaskColumnListProps) => {
         <>
             {tasks && tasks.length > 0 ? (
                     <div className={"flex flex-col gap-2 p-2"}>
-                        {tasks?.map((task, index) =>
-                            <TaskCard key={`${task.id}-${task.status}-${index}`} task={task}/>
+                        {tasks?.map((task) =>
+                            <TaskCard key={task.id} task={task}/>
                         )}
                     </div>
                 ) :
