@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import {type Dispatch, type SetStateAction, useMemo} from "react";
 import {
   eachDayOfInterval,
   endOfMonth,
@@ -13,15 +13,18 @@ import MyTaskCalendar from "@/features/my-tasks/components/uis/calendars/MyTaskC
 import {useGetMyTasks} from "@/features/my-tasks/hooks/useGetMyTasks.ts";
 import {useGetMyTaskStatistics} from "@/features/my-tasks/hooks/useGetMyTaskStatistics.ts";
 
+type MyTaskMainSectionProps = {
+  currentMonth: Date;
+  selectedDate: Date;
+  setSelectedDate: Dispatch<SetStateAction<Date>>;
+  setCurrentMonth: Dispatch<SetStateAction<Date>>;
+}
 
-
-const MyTaskMainSection = () => {
+const MyTaskMainSection = ({currentMonth, selectedDate, setSelectedDate, setCurrentMonth}: MyTaskMainSectionProps) => {
   const {data: myTasks} = useGetMyTasks()
   const {data: statistics} = useGetMyTaskStatistics()
 
   console.log("statistics raw:", statistics);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const calendarDays = useMemo(() => {
     const monthStart = startOfMonth(currentMonth);

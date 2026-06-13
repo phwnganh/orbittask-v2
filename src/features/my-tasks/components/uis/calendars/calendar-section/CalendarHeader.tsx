@@ -1,6 +1,6 @@
 import {addMonths, format, subMonths} from "date-fns";
 import type {Dispatch, SetStateAction} from "react";
-
+import ChevronIcon from '@/assets/icons/chevron-right-icon.svg?react'
 type CalendarHeaderProps = {
     currentMonth: Date;
     setCurrentMonth: Dispatch<SetStateAction<Date>>;
@@ -12,7 +12,7 @@ const CalendarHeader = ({currentMonth, setCurrentMonth}: CalendarHeaderProps) =>
                 onClick={() => setCurrentMonth((prev) => subMonths(prev, 1))}
                 className={"p-2 rounded-xl hover:bg-bg-tertiary transition"}
             >
-                chevron left
+                <ChevronIcon className={"w-6 h-6 shrink-0 rotate-180"}/>
             </button>
             <h2 className={"font-semibold text-lg"}>
                 {format(currentMonth, "MMMM yyyy")}
@@ -21,7 +21,7 @@ const CalendarHeader = ({currentMonth, setCurrentMonth}: CalendarHeaderProps) =>
                 onClick={() => setCurrentMonth((prev) => addMonths(prev, 1))}
                 className={"p-2 rounded-xl hover:bg-bg-tertiary transition"}
             >
-                chevron right
+                <ChevronIcon className={"w-6 h-6 shrink-0"}/>
             </button>
         </div>
     );
