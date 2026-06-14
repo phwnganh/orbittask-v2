@@ -1,8 +1,8 @@
 import {BaseModal} from "@/shared/components/modal";
 import {useTaskDetailStore} from "@/features/task-detail/stores/task-detail.store.ts";
 import Button from "@/shared/components/button/Button.tsx";
-import TaskDetailInfo from "@/features/task-detail/components/sections/TaskDetailInfo";
-import TaskDetailActivity from "@/features/task-detail/components/sections/TaskDetailActivity.tsx";
+import TaskDetailInfo from "@/features/task-detail/components/uis/TaskDetailInfo";
+import TaskDetailActivity from "@/features/task-detail/components/uis/TaskDetailActivity.tsx";
 
 const TaskDetailModal = () => {
     const {openTaskDetail, onCloseTaskDetail} = useTaskDetailStore()
@@ -14,7 +14,7 @@ const TaskDetailModal = () => {
                     {openTaskDetail.selectedTask &&
                         <>
                             <TaskDetailInfo task={openTaskDetail.selectedTask}/>
-                            <TaskDetailActivity/>
+                            <TaskDetailActivity task={openTaskDetail.selectedTask}/>
                         </>
                     }
                 </BaseModal.Body>
