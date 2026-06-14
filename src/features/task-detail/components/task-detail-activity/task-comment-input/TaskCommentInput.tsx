@@ -21,7 +21,7 @@ const TaskCommentInput = ({task}: TaskCommentInputProps) => {
         <div className={"space-y-2"}>
             <Textarea value={commentInput} onChange={(e) => setCommentInput(e.target.value)} placeholder={"Write a comment..."} rows={3}/>
             <div className={"flex justify-end"}>
-                <Button type={"button"} fullWidth={false} onClick={handleSubmitComment}>Comment</Button>
+                <Button disabled={!commentInput} type={"button"} fullWidth={false} onClick={handleSubmitComment}>Comment</Button>
             </div>
         </div>
     );
