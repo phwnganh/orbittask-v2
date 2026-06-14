@@ -6,7 +6,7 @@ type ModalBodyProps = {
 }
 const ModalBody = ({children, className}: ModalBodyProps) => {
     return (
-        <div className={`py-3 ${className}`}>
+        <div className={`px-6 py-4 overflow-y-auto ${className}`}>
             {children}
         </div>
     );
