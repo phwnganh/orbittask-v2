@@ -7,11 +7,11 @@ type TaskDetailActivityProps = {
 }
 const TaskDetailActivity = ({task}: TaskDetailActivityProps) => {
     return (
-        <div className={"flex flex-col h-full"}>
+        <div className={"flex flex-col h-full min-h-0"}>
             <h3 className={"font-semibold mb-4"}>Activity</h3>
             <TaskCommentInput task={task}/>
-            <div className={"mt-4 border-t border-border-primary pt-4 flex-1 overflow-y-auto scrollbar-custom"}>
-                <TaskActivityList/>
+            <div className={"mt-4 flex-1 min-h-0 overflow-y-auto scrollbar-custom"}>
+                <TaskActivityList task={task}/>
             </div>
         </div>
     );

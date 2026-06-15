@@ -1,8 +1,20 @@
+import {useViewActivities} from "@/features/task-detail/hooks/useViewActivities.ts";
+import type {Task} from "@/features/task/types/task.type.ts";
+import TaskActivityItem
+    from "@/features/task-detail/components/task-detail-activity/task-activity-list/TaskActivityItem.tsx";
 
-const TaskActivityList = () => {
+type TaskActivityListProps = {
+    task: Task;
+}
+const TaskActivityList = ({task}: TaskActivityListProps) => {
+    const {data: activities} = useViewActivities(task.id)
     return (
-        <div>
-
+        <div className={"space-y-4"}>
+            {activities.map(activity =>
+                <TaskActivityItem
+                    key={activity.id}
+                    activity={activity}
+                />)}
         </div>
     );
 };

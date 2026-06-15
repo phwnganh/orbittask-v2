@@ -10,7 +10,7 @@ const TaskDetailModal = () => {
         <BaseModal isOpen={openTaskDetail.isOpen} onClose={onCloseTaskDetail} maxWidth={"max-w-4xl"}>
             <BaseModal.Content>
                 <BaseModal.Header title={openTaskDetail.selectedTask?.title || "View Task Detail"} onClose={onCloseTaskDetail} />
-                <BaseModal.Body className={"grid grid-cols-[260px_1fr] gap-6 max-h-full"}>
+                <BaseModal.Body className={"grid grid-cols-[260px_1fr] gap-6 h-[80vh] overflow-hidden"}>
                     {openTaskDetail.selectedTask &&
                         <>
                             <TaskDetailInfo task={openTaskDetail.selectedTask}/>
