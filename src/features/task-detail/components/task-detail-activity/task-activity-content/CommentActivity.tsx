@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Textarea from "@/shared/components/inputs/Textarea.tsx";
+import Button from "@/shared/components/button/Button.tsx";
 
 type CommentActivityProps = {
     content: string;
@@ -17,18 +18,19 @@ const CommentActivity = ({content}: CommentActivityProps) => {
                               className="min-h-5 text-sm leading-5"/>
 
                     <div className="mt-2 flex gap-2 justify-end">
-                        <button
+                        <Button type={"button"} variant={"secondary"} fullWidth={false}
+                                size={"sm"}
                             onClick={() => {
                                 setValue(content);
                                 setEditing(false);
                             }}
                         >
                             Cancel
-                        </button>
+                        </Button>
 
-                        <button>
+                        <Button type={"button"} fullWidth={false} size={"sm"}>
                             Save
-                        </button>
+                        </Button>
                     </div>
                 </>
             ) : (

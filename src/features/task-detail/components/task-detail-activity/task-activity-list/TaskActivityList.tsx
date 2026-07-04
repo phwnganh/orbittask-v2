@@ -10,9 +10,9 @@ const TaskActivityList = ({task}: TaskActivityListProps) => {
     const {data: activities} = useViewActivities(task.id)
     return (
         <div className={"space-y-4"}>
-            {activities.map(activity =>
+            {activities.map((activity, index) =>
                 <TaskActivityItem
-                    key={activity.id}
+                    key={index}
                     activity={activity}
                 />)}
         </div>
