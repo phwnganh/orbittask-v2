@@ -1,3 +1,5 @@
+import type {ActivityProfile} from "@/features/profile/types/profile.type.ts";
+
 export type ActivityType = | "comment" | "task_created" | "status_changed" | "due_date_changed" | "content_changed" | "assignee_changed" | "priority_changed";
 
 export type Activity = {
@@ -10,6 +12,8 @@ export type Activity = {
         content?: string;
         from?: string;
         to?: string;
+        from_user?: ActivityProfile;
+        to_user?: ActivityProfile;
     }
 
 }

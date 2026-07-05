@@ -1,6 +1,8 @@
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
 import CommentActivity
     from "@/features/task-detail/components/task-detail-activity/task-activity-content/CommentActivity.tsx";
+import TaskActivityAssignee
+    from "@/features/task-detail/components/task-detail-activity/task-activity-assignee/TaskActivityAssignee.tsx";
 
 type TaskActivityContentProps = {
     activity: Activity;
@@ -26,6 +28,8 @@ const TaskActivityContent = ({activity}: TaskActivityContentProps) => {
             return <p className="mt-1 text-sm text-text-secondary">
                 updated task details
             </p>
+        case "assignee_changed":
+            return <TaskActivityAssignee activity={activity}/>
     }
 };
 
