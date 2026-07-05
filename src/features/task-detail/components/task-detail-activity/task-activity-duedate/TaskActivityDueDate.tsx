@@ -8,12 +8,18 @@ type TaskActivityDueDateProps = {
     activity: Activity;
 }
 const TaskActivityDueDate = ({activity}: TaskActivityDueDateProps) => {
+    const fromDueDate = activity.metadata?.from as string | undefined;
+    const toDueDate = activity.metadata?.to as string | undefined;
+
+    if (!fromDueDate || !toDueDate) {
+        return null;
+    }
     return (
         <TaskActivityChanged label={"Change Due Date:"} from={
-            <Badge variant={getTaskActivityDueDateBadgeVariant(activity.metadata.from)} size={"sm"}>{format(new Date(activity.metadata.from), "MMM d")}</Badge>
+            <Badge variant={getTaskActivityDueDateBadgeVariant(fromDueDate)} size={"sm"}>{format(new Date(fromDueDate), "MMM d")}</Badge>
         }
         to={
-            <Badge variant={getTaskActivityDueDateBadgeVariant(activity.metadata.to)} size={"sm"}>{format(new Date(activity.metadata.to), "MMM d")}</Badge>
+            <Badge variant={getTaskActivityDueDateBadgeVariant(toDueDate)} size={"sm"}>{format(new Date(toDueDate), "MMM d")}</Badge>
         }/>
     );
 };

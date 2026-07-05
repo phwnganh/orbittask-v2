@@ -1,6 +1,5 @@
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
-import ArrowRight from '@/assets/icons/arrow-right-icon.svg?react'
 import TaskActivityChanged from "@/features/task-detail/components/task-detail-activity/shared/TaskActivityChanged.tsx";
 type TaskActivityAssigneeProps = {
     activity: Activity;

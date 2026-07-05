@@ -1,6 +1,6 @@
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
 import CommentActivity
-    from "@/features/task-detail/components/task-detail-activity/task-activity-content/CommentActivity.tsx";
+    from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentActivity.tsx";
 import TaskActivityAssignee
     from "@/features/task-detail/components/task-detail-activity/task-activity-assignee/TaskActivityAssignee.tsx";
 import TaskActivityStatus

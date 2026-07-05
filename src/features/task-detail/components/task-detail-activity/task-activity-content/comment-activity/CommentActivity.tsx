@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import Textarea from "@/shared/components/inputs/Textarea.tsx";
 import Button from "@/shared/components/button/Button.tsx";
+import CommentActivityActions
+    from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentActivityActions.tsx";
 
 type CommentActivityProps = {
     content: string;
@@ -9,7 +11,7 @@ const CommentActivity = ({content}: CommentActivityProps) => {
     const [editing, setEditing] = useState(false)
     const [value, setValue] = useState(content)
     return (
-        <div className={"mt-2 rounded-md border border-border-primary bg-bg-secondary px-3 py-2 transition"}>
+        <div className={"mt-2 group relative rounded-md border border-border-primary bg-bg-secondary px-3 py-2 transition"}>
             {editing ? (
                 <>
                     <Textarea value={value} onChange={e => setValue(e.target.value)}
@@ -34,13 +36,16 @@ const CommentActivity = ({content}: CommentActivityProps) => {
                     </div>
                 </>
             ) : (
-                <p
-                    onClick={() => setEditing(true)}
-                    className="m-0 whitespace-pre-wrap cursor-text"
-                >
-                    {content}
-                </p>
-            )}
+                <>
+                    <p
+                        onClick={() => setEditing(true)}
+                        className="m-0 whitespace-pre-wrap cursor-text"
+                    >
+                        {content}
+                    </p>
+                    <CommentActivityActions onEdit={() => setEditing(true)} onDelete={() => {}}/>
+                </>
+    )}
         </div>
     );
 };

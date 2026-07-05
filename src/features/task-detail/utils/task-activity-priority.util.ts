@@ -1,4 +1,4 @@
-import type {TaskPriority, TaskStatus} from "@/features/task/types/task.type.ts";
+import type {TaskPriority} from "@/features/task/types/task.type.ts";
 
 export const getTaskActivityPriorityDisplayed = (priority: TaskPriority) => {
     switch (priority) {
