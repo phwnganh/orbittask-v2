@@ -7,6 +7,8 @@ import TaskActivityStatus
     from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityStatus.tsx";
 import TaskActivityPriority
     from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityPriority.tsx";
+import TaskActivityDueDate
+    from "@/features/task-detail/components/task-detail-activity/task-activity-duedate/TaskActivityDueDate.tsx";
 
 type TaskActivityContentProps = {
     activity: Activity;
@@ -19,12 +21,14 @@ const TaskActivityContent = ({activity}: TaskActivityContentProps) => {
             />
         case "task_created":
             return <p className="mt-1 text-sm text-text-secondary">
-                created this task
+                Created This Task
             </p>
         case "status_changed":
             return <TaskActivityStatus activity={activity}/>
         case "priority_changed":
             return <TaskActivityPriority activity={activity}/>
+        case "due_date_changed":
+            return <TaskActivityDueDate activity={activity}/>
         case "content_changed":
             return <p className="mt-1 text-sm text-text-secondary">
                 Updated Task Details

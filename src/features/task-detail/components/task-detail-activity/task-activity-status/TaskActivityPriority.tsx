@@ -1,7 +1,6 @@
 import TaskActivityChanged from "@/features/task-detail/components/task-detail-activity/shared/TaskActivityChanged.tsx";
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
 import Badge from "@/shared/components/data-display/Badge.tsx";
-import {getTaskStatusBadgeVariant} from "@/features/task/utils/task-status.util.ts";
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
 import {getTaskActivityPriorityDisplayed} from "@/features/task-detail/utils/getTaskActivityPriorityDisplayed.util.ts";
 type TaskActivityPriorityProps = {
