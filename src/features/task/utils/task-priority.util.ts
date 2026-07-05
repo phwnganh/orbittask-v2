@@ -1,11 +1,12 @@
 import {TASK_PRIORITIES} from "@/features/task/constants/task-priority.constant.ts";
+import type {TaskPriority} from "@/features/task/types/task.type.ts";
 
 export const TASK_PRIORITY_VALUES = TASK_PRIORITIES.map(priority => priority.value) as [
     (typeof TASK_PRIORITIES)[number]["value"],
     ...(typeof TASK_PRIORITIES)[number]["value"][],
 ];
 
-export const getTaskPriorityBadgeVariant = (priority: string) => {
+export const getTaskPriorityBadgeVariant = (priority: TaskPriority) => {
     switch (priority) {
         case 'low':
             return 'success';

@@ -3,6 +3,10 @@ import CommentActivity
     from "@/features/task-detail/components/task-detail-activity/task-activity-content/CommentActivity.tsx";
 import TaskActivityAssignee
     from "@/features/task-detail/components/task-detail-activity/task-activity-assignee/TaskActivityAssignee.tsx";
+import TaskActivityStatus
+    from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityStatus.tsx";
+import TaskActivityPriority
+    from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityPriority.tsx";
 
 type TaskActivityContentProps = {
     activity: Activity;
@@ -18,15 +22,12 @@ const TaskActivityContent = ({activity}: TaskActivityContentProps) => {
                 created this task
             </p>
         case "status_changed":
-            return <p className="mt-1 text-sm">
-                changed status from
-                <strong> {activity.metadata.from} </strong>
-                to
-                <strong> {activity.metadata.to}</strong>
-            </p>
+            return <TaskActivityStatus activity={activity}/>
+        case "priority_changed":
+            return <TaskActivityPriority activity={activity}/>
         case "content_changed":
             return <p className="mt-1 text-sm text-text-secondary">
-                updated task details
+                Updated Task Details
             </p>
         case "assignee_changed":
             return <TaskActivityAssignee activity={activity}/>
