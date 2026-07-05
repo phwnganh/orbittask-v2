@@ -12,7 +12,7 @@ const TaskActivityList = ({task}: TaskActivityListProps) => {
         <div className={"space-y-4"}>
             {activities.map((activity, index) =>
                 <TaskActivityItem
-                    key={index}
+                    key={`${activity.id ?? "activity"}-${activity.action_type}-${activity.created_at}-${index}`}
                     activity={activity}
                 />)}
         </div>

@@ -2,8 +2,8 @@ import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
 import {useSession} from "@/features/auth/hooks/useSession.ts";
 import {useMutation} from "@tanstack/react-query";
 import {addCommentApi} from "@/features/task-detail/services/task-comment.api.ts";
-import {commentKeys} from "@/features/task-detail/constants/comment-query-key.constant.ts";
-import type {Comment} from "@/features/task-detail/types/comment.type.ts";
+import {activityKeys} from "@/features/task-detail/constants/activity-query-key.constant.ts";
+import type { Activity } from "../types/activity.type";
 
 export const useAddComment = () => {
     const {set, cancel, invalidate} = useReactQueryClient()
@@ -11,27 +11,35 @@ export const useAddComment = () => {
     const user = session?.user
     return useMutation({
         mutationFn: ({task_id, content, parent_id}: {task_id: string, content: string, parent_id?: string}) => addCommentApi(task_id, content, parent_id),
-        onMutate: async ({task_id, content, parent_id}) => {
+        onMutate: async ({task_id, content}) => {
             if(!user){
                 throw new Error("Unauthenticated");
             }
-            await cancel(commentKeys.list(task_id));
+            await cancel(activityKeys.list(task_id));
             const tempId = crypto.randomUUID();
-            const optimisticComment: Comment = {
+            const metadata = (user.user_metadata ?? {}) as {
+                avatar_url?: string;
+                first_name?: string;
+                last_name?: string;
+            };
+            const optimisticActivity: Activity = {
                 id: tempId,
-                task_id: task_id,
-                user_id: user.id,
-                content: content,
-                parent_id: parent_id ?? null,
+                action_type: "comment",
+                avatar_url: metadata.avatar_url,
+                first_name: metadata.first_name,
+                last_name: metadata.last_name,
+                metadata: {
+                    content: content,
+                },
                 created_at: new Date().toISOString(),
             };
 
-            set<Comment[]>(commentKeys.list(task_id), (old) => {
-                if (!old) return [optimisticComment];
+            set<Activity[]>(activityKeys.list(task_id), (old) => {
+                if (!old) return [optimisticActivity];
 
                 return [
                     ...old,
-                    optimisticComment
+                    optimisticActivity
                 ];
             });
 
@@ -42,11 +50,11 @@ export const useAddComment = () => {
         onError: (_error, _payload, context) => {
             if (!context) return;
 
-            set<Comment[]>(commentKeys.list(_payload.task_id), (old) => {
+            set<Activity[]>(activityKeys.list(_payload.task_id), (old) => {
                 if (!old) return [];
 
                 return old.filter(
-                    comment => comment.id !== context.tempId
+                    activity => activity.id !== context.tempId
                 );
             });
         },
@@ -54,20 +62,20 @@ export const useAddComment = () => {
         onSuccess: (result, _payload, context) => {
             if (!context) return;
 
-            set<Comment[]>(commentKeys.list(_payload.task_id), (old) => {
+            set<Activity[]>(activityKeys.list(_payload.task_id), (old) => {
                 if (!old) return [];
 
-                return old.map(comment =>
-                    comment.id === context.tempId
-                        ? result
-                        : comment
+                return old.map(activity =>
+                    activity.id === context.tempId
+                        ? (result as Activity)
+                        : activity
                 );
             });
         },
 
         onSettled: (_data, _error, payload) => {
             void invalidate(
-                commentKeys.list(payload.task_id)
+                activityKeys.list(payload.task_id)
             );
         }
     })
