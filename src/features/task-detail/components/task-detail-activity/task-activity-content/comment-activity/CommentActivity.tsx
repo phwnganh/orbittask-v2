@@ -3,13 +3,30 @@ import Textarea from "@/shared/components/inputs/Textarea.tsx";
 import Button from "@/shared/components/button/Button.tsx";
 import CommentActivityActions
     from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentActivityActions.tsx";
+import {useRemoveComment} from "@/features/task-detail/hooks/useRemoveComment.ts";
 
 type CommentActivityProps = {
+    taskId: string;
+    commentId: string;
     content: string;
 }
-const CommentActivity = ({content}: CommentActivityProps) => {
+const CommentActivity = ({taskId, commentId, content}: CommentActivityProps) => {
     const [editing, setEditing] = useState(false)
     const [value, setValue] = useState(content)
+    const {mutate} = useRemoveComment()
+
+    const handleRemoveComment = () => {
+        mutate({
+            commentId: commentId,
+            taskId: taskId
+        })
+    }
+
+    if(content === ""){
+        return (
+            <p className={"italic text-text-secondary"}>This comment has been deleted.</p>
+        )
+    }
     return (
         <div className={"mt-2 group relative rounded-md border border-border-primary bg-bg-secondary px-3 py-2 transition"}>
             {editing ? (
@@ -43,7 +60,7 @@ const CommentActivity = ({content}: CommentActivityProps) => {
                     >
                         {content}
                     </p>
-                    <CommentActivityActions onEdit={() => setEditing(true)} onDelete={() => {}}/>
+                    <CommentActivityActions onEdit={() => setEditing(true)} onDelete={handleRemoveComment}/>
                 </>
     )}
         </div>
