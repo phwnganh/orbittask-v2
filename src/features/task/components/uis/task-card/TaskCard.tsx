@@ -12,6 +12,7 @@ import type {Task} from "@/features/task/types/task.type.ts";
 import GripVertical from '@/assets/icons/grip-vertical-icon.svg?react'
 import {useDraggable} from "@dnd-kit/core";
 import {CSS} from "@dnd-kit/utilities";
+import {useTaskDetailStore} from "@/features/task-detail/stores/task-detail.store.ts";
 
 type TaskCardProps = {
     task: Task;
@@ -19,6 +20,7 @@ type TaskCardProps = {
 }
 const TaskCard = ({task, isDragOverlay = false}: TaskCardProps) => {
     const dueDateStatus = getDueDateStatus(task.due_date, task.status === "completed")
+    const {onOpenTaskDetail} = useTaskDetailStore()
     const {attributes, listeners, setNodeRef, transform, isDragging} = useDraggable({
         id: task.id,
         data: {status: task.status, task},
@@ -40,7 +42,7 @@ const TaskCard = ({task, isDragOverlay = false}: TaskCardProps) => {
                         >
                             <GripVertical className={"w-4 h-4"}/>
                         </button>
-                        <div className={"space-y-1 min-w-0"}>
+                        <div className={"space-y-1 min-w-0 cursor-pointer"} onClick={() => onOpenTaskDetail(task)}>
                             <h1 className={"text-text-primary font-bold"}>{task.title}</h1>
                             <p className={"text-sm text-text-secondary line-clamp-1"}>{task.description}</p>
                         </div>
@@ -62,10 +64,8 @@ const TaskCard = ({task, isDragOverlay = false}: TaskCardProps) => {
                     </div>
                     <Avatar size={"xs"} avatarUrl={task?.avatar_url}/>
                 </div>
-
-
-
             </Card>
+
         </div>
 
     );

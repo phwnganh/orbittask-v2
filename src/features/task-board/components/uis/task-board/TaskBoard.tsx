@@ -42,6 +42,9 @@ const TaskBoard = ({users, projectId, me}: TaskBoardProps) => {
     const handleDragEnd = (e: DragEndEvent) => {
         const {active, over} = e
 
+        console.log("drag active:", active.id, active.data.current);
+        
+        console.log("drop over:", over?.id, over)
         if(!activeTask) {
             setActiveTask(null)
             return;
