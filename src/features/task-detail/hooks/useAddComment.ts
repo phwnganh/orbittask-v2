@@ -1,46 +1,44 @@
 import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
-import {useSession} from "@/features/auth/hooks/useSession.ts";
 import {useMutation} from "@tanstack/react-query";
 import {addCommentApi} from "@/features/task-detail/services/task-comment.api.ts";
 import {activityKeys} from "@/features/task-detail/constants/activity-query-key.constant.ts";
 import type { Activity } from "../types/activity.type";
+import {useProfile} from "@/features/profile/hooks/useProfile.ts";
+
+const sortActivitiesByCreatedAtDesc = (activities: Activity[]) =>
+    [...activities].sort((a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
 
 export const useAddComment = () => {
     const {set, cancel, invalidate} = useReactQueryClient()
-    const {data: session} = useSession()
-    const user = session?.user
+    const {data: profile} = useProfile()
     return useMutation({
         mutationFn: ({task_id, content, parent_id}: {task_id: string, content: string, parent_id?: string}) => addCommentApi(task_id, content, parent_id),
         onMutate: async ({task_id, content}) => {
-            if(!user){
+            if(!profile){
                 throw new Error("Unauthenticated");
             }
             await cancel(activityKeys.list(task_id));
             const tempId = crypto.randomUUID();
-            const metadata = (user.user_metadata ?? {}) as {
-                avatar_url?: string;
-                first_name?: string;
-                last_name?: string;
-            };
             const optimisticActivity: Activity = {
                 id: tempId,
                 action_type: "comment",
-                avatar_url: metadata.avatar_url,
-                first_name: metadata.first_name,
-                last_name: metadata.last_name,
+                avatar_url: profile.avatar_url,
+                first_name: profile.first_name,
+                last_name: profile.last_name,
                 metadata: {
                     content: content,
                 },
                 created_at: new Date().toISOString(),
             };
-
             set<Activity[]>(activityKeys.list(task_id), (old) => {
                 if (!old) return [optimisticActivity];
 
-                return [
+                return sortActivitiesByCreatedAtDesc([
                     ...old,
                     optimisticActivity
-                ];
+                ]);
             });
 
             return {
@@ -65,11 +63,15 @@ export const useAddComment = () => {
             set<Activity[]>(activityKeys.list(_payload.task_id), (old) => {
                 if (!old) return [];
 
-                return old.map(activity =>
+                return sortActivitiesByCreatedAtDesc(old.map(activity =>
                     activity.id === context.tempId
-                        ? (result as Activity)
+                        ? {
+                            ...activity,
+                            ...result,
+                            isPending: false,
+                        }
                         : activity
-                );
+                ));
             });
         },
 

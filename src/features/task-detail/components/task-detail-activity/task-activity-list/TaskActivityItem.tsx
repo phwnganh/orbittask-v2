@@ -8,6 +8,16 @@ type TaskActivityItemProps = {
     activity: Activity;
 }
 const TaskActivityItem = ({activity}: TaskActivityItemProps) => {
+    const displayName = [activity.first_name, activity.last_name]
+        .filter(Boolean)
+        .join(" ")
+        || "Unknown user";
+
+    const createdAt = activity.created_at ? new Date(activity.created_at) : null;
+    const isCreatedAtValid = createdAt instanceof Date && !Number.isNaN(createdAt.getTime());
+    const createdAtLabel = isCreatedAtValid
+        ? formatDistanceToNow(createdAt, { addSuffix: true })
+        : "Time unavailable";
     return (
         <div className="flex gap-3 py-3">
             <Avatar
@@ -18,14 +28,11 @@ const TaskActivityItem = ({activity}: TaskActivityItemProps) => {
             <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                     <span className="font-medium text-sm">
-                        {activity.first_name} {activity.last_name}
+                        {displayName}
                     </span>
 
                     <span className="text-xs text-text-secondary">
-                        {formatDistanceToNow(
-                            new Date(activity.created_at),
-                            { addSuffix: true }
-                        )}
+                        {createdAtLabel}
                     </span>
                 </div>
 

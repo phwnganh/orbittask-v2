@@ -5,9 +5,9 @@ export type ActivityType = | "comment" | "task_created" | "status_changed" | "du
 export type Activity = {
     id: string;
     action_type: ActivityType;
-    first_name?: string;
-    last_name?: string;
-    avatar_url?: string;
+    first_name: string;
+    last_name: string;
+    avatar_url: string;
     created_at: string;
     metadata: {
         content?: string;
