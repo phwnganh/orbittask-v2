@@ -2,7 +2,7 @@ import TaskActivityChanged from "@/features/task-detail/components/task-detail-a
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import {getTaskPriorityBadgeVariant} from "@/features/task/utils/task-priority.util.ts";
-import {getTaskActivityPriorityDisplayed} from "@/features/task-detail/utils/getTaskActivityPriorityDisplayed.util.ts";
+import {getTaskActivityPriorityDisplayed} from "@/features/task-detail/utils/task-activity-priority.util.ts";
 type TaskActivityPriorityProps = {
     activity: Activity;
 }

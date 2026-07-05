@@ -2,7 +2,7 @@ import TaskActivityChanged from "@/features/task-detail/components/task-detail-a
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import {getTaskStatusBadgeVariant} from "@/features/task/utils/task-status.util.ts";
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
-import {getTaskActivityStatusDisplayed} from "@/features/task-detail/utils/getTaskActivityStatusDisplayed.util.ts";
+import {getTaskActivityStatusDisplayed} from "@/features/task-detail/utils/task-activity-status.util.ts";
 type TaskActivityStatusProps = {
     activity: Activity;
 }

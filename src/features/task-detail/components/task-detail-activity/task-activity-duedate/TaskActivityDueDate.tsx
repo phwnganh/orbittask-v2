@@ -2,7 +2,7 @@ import TaskActivityChanged from "@/features/task-detail/components/task-detail-a
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import {format} from "date-fns";
 import type {Activity} from "@/features/task-detail/types/activity.type.ts";
-import {getTaskActivityDueDateBadgeVariant} from "@/features/task-detail/utils/getTaskActivityDueDateDisplayed.util.ts";
+import {getTaskActivityDueDateBadgeVariant} from "@/features/task-detail/utils/task-activity-dueDate.util.ts";
 
 type TaskActivityDueDateProps = {
     activity: Activity;
