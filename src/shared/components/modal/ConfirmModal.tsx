@@ -4,7 +4,7 @@ import Button from "../button/Button.tsx";
 type ConfirmModalProps = {
     isOpen: boolean;
     title: string;
-    type: "project" | "task" | "";
+    type: "project" | "task" | "comment";
     description?: string;
     confirmText?: string;
     cancelText?: string;
@@ -12,6 +12,13 @@ type ConfirmModalProps = {
     onClose: () => void;
     isLoading: boolean;
 }
+
+const typeLabel = {
+    project: "project",
+    task: "task",
+    comment: "comment",
+} as const;
+
 const ConfirmModal = ({isOpen, title, description, type = "project", confirmText = "Confirm", cancelText = "Cancel", onConfirm, onClose, isLoading}: ConfirmModalProps) => {
     return (
         <BaseModal isOpen={isOpen} onClose={onClose}>
@@ -19,7 +26,7 @@ const ConfirmModal = ({isOpen, title, description, type = "project", confirmText
                 <BaseModal.Header title={title} onClose={onClose}/>
                 <BaseModal.Body>
                     <p className="text-sm text-text-secondary">
-                        Are you sure to delete the <span className={"font-bold"}>{description}</span> {type === "project" ? "project" : "task"}?
+                        Are you sure to delete the <span className={"font-bold"}>{description}</span> {typeLabel[type]}?
                     </p>
                 </BaseModal.Body>
                 <BaseModal.Footer>

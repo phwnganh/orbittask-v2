@@ -3,25 +3,16 @@ import Textarea from "@/shared/components/inputs/Textarea.tsx";
 import Button from "@/shared/components/button/Button.tsx";
 import CommentActivityActions
     from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentActivityActions.tsx";
-import {useRemoveComment} from "@/features/task-detail/hooks/useRemoveComment.ts";
+import {useCommentStore} from "@/features/task-detail/stores/comment.store.ts";
 
 type CommentActivityProps = {
-    taskId: string;
     commentId: string;
     content: string;
 }
-const CommentActivity = ({taskId, commentId, content}: CommentActivityProps) => {
+const CommentActivity = ({commentId, content}: CommentActivityProps) => {
     const [editing, setEditing] = useState(false)
     const [value, setValue] = useState(content)
-    const {mutate} = useRemoveComment()
-
-    const handleRemoveComment = () => {
-        mutate({
-            commentId: commentId,
-            taskId: taskId
-        })
-    }
-
+    const {onOpenRemovingComment} = useCommentStore()
     if(content === ""){
         return (
             <p className={"italic text-text-secondary"}>This comment has been deleted.</p>
@@ -60,7 +51,7 @@ const CommentActivity = ({taskId, commentId, content}: CommentActivityProps) => 
                     >
                         {content}
                     </p>
-                    <CommentActivityActions onEdit={() => setEditing(true)} onDelete={handleRemoveComment}/>
+                    <CommentActivityActions onEdit={() => setEditing(true)} onDelete={() => onOpenRemovingComment(commentId, content)}/>
                 </>
     )}
         </div>

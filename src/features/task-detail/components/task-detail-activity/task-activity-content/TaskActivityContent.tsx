@@ -9,17 +9,14 @@ import TaskActivityPriority
     from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityPriority.tsx";
 import TaskActivityDueDate
     from "@/features/task-detail/components/task-detail-activity/task-activity-duedate/TaskActivityDueDate.tsx";
-import type {Task} from "@/features/task/types/task.type.ts";
 
 type TaskActivityContentProps = {
     activity: Activity;
-    task: Task;
 }
-const TaskActivityContent = ({activity, task}: TaskActivityContentProps) => {
+const TaskActivityContent = ({activity}: TaskActivityContentProps) => {
     switch (activity.action_type) {
         case "comment":
             return <CommentActivity
-                taskId={task.id}
                 commentId={activity.metadata.comment_id ?? ""}
                 content={activity.metadata.content ?? ""}
             />

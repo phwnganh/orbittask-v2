@@ -3,13 +3,11 @@ import TaskActivityContent
     from "@/features/task-detail/components/task-detail-activity/task-activity-content/TaskActivityContent.tsx";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import {formatDistanceToNow} from "date-fns";
-import type {Task} from "@/features/task/types/task.type.ts";
 
 type TaskActivityItemProps = {
     activity: Activity;
-    task: Task;
 }
-const TaskActivityItem = ({activity, task}: TaskActivityItemProps) => {
+const TaskActivityItem = ({activity}: TaskActivityItemProps) => {
     const displayName = [activity.first_name, activity.last_name]
         .filter(Boolean)
         .join(" ")
@@ -39,7 +37,7 @@ const TaskActivityItem = ({activity, task}: TaskActivityItemProps) => {
                 </div>
 
                 <div className="mt-1 text-sm text-text-primary">
-                    <TaskActivityContent activity={activity} task={task}/>
+                    <TaskActivityContent activity={activity}/>
                 </div>
             </div>
         </div>
