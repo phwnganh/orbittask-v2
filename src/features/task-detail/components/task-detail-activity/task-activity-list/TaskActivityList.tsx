@@ -3,7 +3,7 @@ import type {Task} from "@/features/task/types/task.type.ts";
 import TaskActivityItem
     from "@/features/task-detail/components/task-detail-activity/task-activity-list/TaskActivityItem.tsx";
 import RemoveCommentModal
-    from "@/features/task-detail/components/task-detail-activity/task-activity-content/remove-comment-modal/RemoveCommentModal.tsx";
+    from "@/features/task-detail/components/modals/remove-comment-modal/RemoveCommentModal.tsx";
 
 type TaskActivityListProps = {
     task: Task;
