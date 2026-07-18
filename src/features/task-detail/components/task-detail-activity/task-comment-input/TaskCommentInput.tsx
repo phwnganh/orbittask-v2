@@ -15,7 +15,7 @@ const TaskCommentInput = ({task}: TaskCommentInputProps) => {
             task_id: task.id,
             content: commentInput.trim(),
         })
-        console.log(commentInput)
+        setCommentInput("")
     }
     return (
         <div className={"space-y-2"}>
