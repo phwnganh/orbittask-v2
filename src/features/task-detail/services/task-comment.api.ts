@@ -22,3 +22,15 @@ export const removeCommentApi = async (comment_id: string, task_id: string) => {
     }
     return comment
 }
+
+export const editCommentApi = async (task_id: string, comment_id: string, content: string) => {
+    const {data: comment, error} = await supabase.rpc("edit_comment", {
+        p_task_id: task_id,
+        p_comment_id: comment_id,
+        p_content: content.trim(),
+    })
+    if (error) {
+        throw error;
+    }
+    return comment;
+}
