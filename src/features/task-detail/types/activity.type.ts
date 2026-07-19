@@ -1,6 +1,6 @@
 import type {ActivityProfile} from "@/features/profile/types/profile.type.ts";
 
-export type ActivityType = | "comment" | "task_created" | "status_changed" | "due_date_changed" | "content_changed" | "assignee_changed" | "priority_changed" | "comment_deleted" | "comment_edited";
+export type ActivityType = | "comment" | "task_created" | "status_changed" | "due_date_changed" | "content_changed" | "assignee_changed" | "priority_changed" | "comment_deleted";
 
 export type Activity = {
     id: string;
@@ -9,6 +9,7 @@ export type Activity = {
     last_name: string;
     avatar_url: string;
     created_at: string;
+    comment_updated_at?: string;
     metadata: {
         comment_id?: string;
         content?: string;

@@ -16,6 +16,7 @@ const TaskActivityList = ({task}: TaskActivityListProps) => {
             {visibleActivities.map((activity, index) => (
                 <div key={`${activity.id ?? "activity"}-${activity.action_type}-${activity.created_at}-${index}`}>
                     <TaskActivityItem
+                        task={task}
                         activity={activity}
                     />
                 </div>
