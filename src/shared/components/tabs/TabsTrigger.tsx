@@ -26,13 +26,14 @@ const TabsTrigger = forwardRef<
             "px-4 py-2 text-sm font-medium rounded-md transition-all duration-200";
 
         const activeClass =
-            "bg-primary text-text-primary shadow-sm";
+            "bg-primary/50 text-text-primary shadow-sm";
 
         const inactiveClass =
             "text-text-secondary hover:bg-bg-tertiary hover:text-text-primary";
 
         return (
             <button
+                type={"button"}
                 ref={ref}
                 onClick={() => onChange(value)}
                 className={`

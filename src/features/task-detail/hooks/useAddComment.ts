@@ -1,84 +1,65 @@
-import {useReactQueryClient} from "@/shared/libs/react-query/query-client.ts";
-import {useMutation} from "@tanstack/react-query";
-import {addCommentApi} from "@/features/task-detail/services/task-comment.api.ts";
-import {activityKeys} from "@/features/task-detail/constants/activity-query-key.constant.ts";
-import type { Activity } from "../types/activity.type";
-import {useProfile} from "@/features/profile/hooks/useProfile.ts";
-
-const sortActivitiesByCreatedAtDesc = (activities: Activity[]) =>
-    [...activities].sort((a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
+import { useReactQueryClient } from "@/shared/libs/react-query/query-client.ts";
+import { useMutation } from "@tanstack/react-query";
+import { addCommentApi } from "@/features/task-detail/services/task-comment.api.ts";
+import { useProfile } from "@/features/profile/hooks/useProfile";
+import { commentKeys } from "../constants/comment-query-key.constant";
+import type { Comment } from "../types/comment.type";
 
 export const useAddComment = () => {
-    const {set, cancel, invalidate} = useReactQueryClient()
-    const {data: profile} = useProfile()
-    return useMutation({
-        mutationFn: ({task_id, content, parent_id}: {task_id: string, content: string, parent_id?: string}) => addCommentApi(task_id, content, parent_id),
-        onMutate: async ({task_id, content}) => {
-            if(!profile){
-                throw new Error("Unauthenticated");
-            }
-            await cancel(activityKeys.list(task_id));
-            const tempId = crypto.randomUUID();
-            const optimisticActivity: Activity = {
-                id: tempId,
-                action_type: "comment",
-                avatar_url: profile.avatar_url,
-                first_name: profile.first_name,
-                last_name: profile.last_name,
-                metadata: {
-                    content: content,
-                },
-                created_at: new Date().toISOString(),
-            };
-            set<Activity[]>(activityKeys.list(task_id), (old) => {
-                if (!old) return [optimisticActivity];
+  const { get, set, cancel, invalidate } = useReactQueryClient();
+  const { data: profile } = useProfile();
+  return useMutation({
+    mutationFn: ({
+      task_id,
+      content,
+      parent_id,
+    }: {
+      task_id: string;
+      content: string;
+      parent_id?: string;
+    }) => addCommentApi(task_id, content, parent_id),
 
-                return sortActivitiesByCreatedAtDesc([
-                    ...old,
-                    optimisticActivity
-                ]);
-            });
+    onMutate: async (payload) => {
+      const queryKey = commentKeys.list(payload.task_id);
 
-            return {
-                tempId,
-            };
-        },
-        onError: (_error, _payload, context) => {
-            if (!context) return;
+      await cancel(queryKey);
 
-            set<Activity[]>(activityKeys.list(_payload.task_id), (old) => {
-                if (!old) return [];
+      const previousComments = get<Comment[]>(queryKey);
 
-                return old.filter(
-                    activity => activity.id !== context.tempId
-                );
-            });
-        },
+      const optimisticComment: Comment = {
+        id: crypto.randomUUID(),
+        task_id: payload.task_id,
+        user_id: profile?.id ?? "",
+        first_name: profile?.first_name ?? "",
+        last_name: profile?.last_name ?? "",
+        avatar_url: profile?.avatar_url ?? "",
+        content: payload.content,
+        parent_id: payload.parent_id ?? null,
+        created_at: new Date().toISOString(),
+      };
 
-        onSuccess: (result, _payload, context) => {
-            if (!context) return;
-
-            set<Activity[]>(activityKeys.list(_payload.task_id), (old) => {
-                if (!old) return [];
-
-                return sortActivitiesByCreatedAtDesc(old.map(activity =>
-                    activity.id === context.tempId
-                        ? {
-                            ...activity,
-                            ...result,
-                            isPending: false,
-                        }
-                        : activity
-                ));
-            });
-        },
-
-        onSettled: (_data, _error, payload) => {
-            void invalidate(
-                activityKeys.list(payload.task_id)
-            );
+      set<Comment[]>(queryKey, (old) => {
+        if (!old) {
+          return [optimisticComment];
         }
-    })
-}
+
+        return [optimisticComment, ...old];
+      });
+
+      return { previousComments };
+    },
+
+    onError: (_error, payload, context) => {
+      if (!context) return;
+
+      set<Comment[]>(
+        commentKeys.list(payload.task_id),
+        context.previousComments ?? [],
+      );
+    },
+
+    onSettled: async (_result, _error, payload) => {
+      await invalidate(commentKeys.list(payload.task_id));
+    },
+  });
+};
