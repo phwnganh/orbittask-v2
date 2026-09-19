@@ -11,20 +11,22 @@ type CommentActivityProps = {
   task: Task;
   commentId: string;
   content: string;
-  userFirstName: string;
+  userId: string;
+  onReply?: () => void;
 };
 const CommentActivity = ({
   task,
   commentId,
   content,
-  userFirstName,
+  userId,
+  onReply,
 }: CommentActivityProps) => {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(content);
   const { mutate } = useEditComment();
   const { onOpenRemovingComment } = useCommentStore();
   const { data: user } = useProfile();
-  const isMe = user?.first_name === userFirstName;
+  const isMe = user?.id === userId;
   const handleEditComment = () => {
     mutate({
       task_id: task.id,
@@ -96,12 +98,13 @@ const CommentActivity = ({
           >
             {content}
           </p>
-          {isMe && (
-            <CommentActivityActions
-              onEdit={() => setEditing(true)}
-              onDelete={() => onOpenRemovingComment(commentId, content)}
-            />
-          )}
+          <CommentActivityActions
+            onReply={onReply}
+            onEdit={isMe ? () => setEditing(true) : undefined}
+            onDelete={
+              isMe ? () => onOpenRemovingComment(commentId, content) : undefined
+            }
+          />
         </>
       )}
     </div>

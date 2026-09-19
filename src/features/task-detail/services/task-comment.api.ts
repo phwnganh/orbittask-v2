@@ -3,7 +3,7 @@ import { supabase } from "@/shared/libs/supabase.ts";
 export const addCommentApi = async (
   task_id: string,
   content: string,
-  parent_id?: string,
+  parent_id?: string | null,
 ) => {
   const { data: comment, error } = await supabase.rpc("create_comment", {
     p_task_id: task_id,

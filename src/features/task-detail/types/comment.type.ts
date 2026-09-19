@@ -11,3 +11,7 @@ export type Comment = {
   updated_at?: string;
   deleted_at?: string;
 };
+
+export type CommentWithReplies = Comment & {
+  replies: Comment[];
+};

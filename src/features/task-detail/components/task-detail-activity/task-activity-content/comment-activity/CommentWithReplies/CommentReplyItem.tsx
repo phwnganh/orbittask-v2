@@ -1,20 +1,14 @@
-import type { CommentWithReplies } from "@/features/task-detail/types/comment.type.ts";
-import type { Task } from "@/features/task/types/task.type.ts";
-import { formatDistanceToNow } from "date-fns";
 import Avatar from "@/shared/components/avatar/Avatar.tsx";
 import CommentActivity from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentActivity.tsx";
-import CommentReplyList from "@/features/task-detail/components/task-detail-activity/task-activity-content/comment-activity/CommentWithReplies/CommentReplyList.tsx";
+import type { Comment } from "@/features/task-detail/types/comment.type.ts";
+import type { Task } from "@/features/task/types/task.type.ts";
+import { formatDistanceToNow } from "date-fns";
 
-type TaskActivityCommentItemProps = {
-  comment: CommentWithReplies;
+type CommentReplyItemProps = {
+  comment: Comment;
   task: Task;
-  onReply: (comment: CommentWithReplies) => void;
 };
-const TaskActivityCommentItem = ({
-  comment,
-  task,
-  onReply,
-}: TaskActivityCommentItemProps) => {
+const CommentReplyItem = ({ comment, task }: CommentReplyItemProps) => {
   const displayName =
     [comment.first_name, comment.last_name].filter(Boolean).join(" ") ||
     "Unknown user";
@@ -38,8 +32,10 @@ const TaskActivityCommentItem = ({
   const isDeletedComment = comment.deleted_at !== null;
   const showEdited = !isDeletedComment && isUpdatedAtValid;
   return (
-    <div className={"flex gap-3 py-3"}>
-      <Avatar size="sm" avatarUrl={comment.avatar_url} />
+    <div className={"relative flex gap-2"}>
+      <div className={"absolute -left-4 top-0 h-full w-px bg-border-primary"} />
+
+      <Avatar avatarUrl={comment.avatar_url} size={"sm"} />
 
       <div className={"flex-1 min-w-0"}>
         <div className={"flex items-center gap-2 flex-wrap"}>
@@ -56,15 +52,11 @@ const TaskActivityCommentItem = ({
             commentId={comment.id}
             content={comment.content}
             userId={comment.user_id}
-            onReply={() => onReply(comment)}
           />
-          {comment.replies.length > 0 && (
-            <CommentReplyList comments={comment} task={task} />
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default TaskActivityCommentItem;
+export default CommentReplyItem;

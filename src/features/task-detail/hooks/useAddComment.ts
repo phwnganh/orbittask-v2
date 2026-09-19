@@ -16,7 +16,7 @@ export const useAddComment = () => {
     }: {
       task_id: string;
       content: string;
-      parent_id?: string;
+      parent_id?: string | null;
     }) => addCommentApi(task_id, content, parent_id),
 
     onMutate: async (payload) => {
