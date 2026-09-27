@@ -5,7 +5,7 @@ import {commentKeys} from "@/features/task-detail/constants/comment-query-key.co
 import type {Comment} from "@/features/task-detail/types/comment.type.ts";
 
 export const useRemoveComment = () => {
-    const {set, get, invalidate, cancel} = useReactQueryClient()
+    const {set, get, cancel} = useReactQueryClient()
     return useMutation({
         mutationFn: ({commentId, taskId}: {commentId: string, taskId: string}) => removeCommentApi(commentId, taskId),
         onMutate: async ({commentId, taskId}) => {
@@ -30,8 +30,5 @@ export const useRemoveComment = () => {
                 context.previousComments
             );
         },
-        onSettled: (_, __, context) => {
-            void invalidate(commentKeys.list(context.taskId))
-        }
     })
 }

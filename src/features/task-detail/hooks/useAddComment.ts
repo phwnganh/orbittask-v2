@@ -6,7 +6,7 @@ import { commentKeys } from "../constants/comment-query-key.constant";
 import type { Comment } from "../types/comment.type";
 
 export const useAddComment = () => {
-  const { get, set, cancel, invalidate } = useReactQueryClient();
+  const { get, set, cancel } = useReactQueryClient();
   const { data: profile } = useProfile();
   return useMutation({
     mutationFn: ({
@@ -36,6 +36,8 @@ export const useAddComment = () => {
         content: payload.content,
         parent_id: payload.parent_id ?? null,
         created_at: new Date().toISOString(),
+        updated_at: null,
+        deleted_at: null,
       };
 
       set<Comment[]>(queryKey, (old) => {
@@ -56,10 +58,6 @@ export const useAddComment = () => {
         commentKeys.list(payload.task_id),
         context.previousComments ?? [],
       );
-    },
-
-    onSettled: async (_result, _error, payload) => {
-      await invalidate(commentKeys.list(payload.task_id));
     },
   });
 };

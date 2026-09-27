@@ -5,7 +5,7 @@ import {commentKeys} from "@/features/task-detail/constants/comment-query-key.co
 import type {Comment} from "@/features/task-detail/types/comment.type.ts";
 
 export const useEditComment = () => {
-    const {get, set, cancel, invalidate} = useReactQueryClient()
+    const {get, set, cancel} = useReactQueryClient()
     return useMutation({
         mutationFn: ({task_id, comment_id, content}: {task_id: string, comment_id: string, content: string}) => editCommentApi(task_id, comment_id, content),
         onMutate: async ({task_id, comment_id, content}) => {
@@ -35,8 +35,5 @@ export const useEditComment = () => {
 
             set<Comment[]>(commentKeys.list(_payload.task_id), context.previousComments)
         },
-        onSettled: (_, __, payload) => {
-            void invalidate(commentKeys.list(payload.task_id))
-        }
     })
 }
