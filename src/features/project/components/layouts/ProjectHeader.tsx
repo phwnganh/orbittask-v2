@@ -2,15 +2,14 @@ import Button from "@/shared/components/button/Button.tsx";
 import AvatarGroup from "@/shared/components/avatar/AvatarGroup.tsx";
 import {useMemberStore} from "@/features/member/stores/member.store.ts";
 import type {Member} from "@/features/member/types/member.type.ts";
-import {useViewProjectDetail} from "@/features/project/hooks/useViewProjects.ts";
 import InviteUserIcon from '@/assets/icons/invite-user-icon.svg?react'
+import type { Project } from "../../types/project.type";
 type ProjectHeaderProps = {
-    projectId: string;
+    project?: Project;
     members?: Member[];
 }
-const ProjectHeader = ({projectId, members}: ProjectHeaderProps) => {
+const ProjectHeader = ({project, members}: ProjectHeaderProps) => {
     const {onOpenInviteMemberModal, onOpenManageMemberModal} = useMemberStore()
-    const {data: project} = useViewProjectDetail(projectId)
 
     return (
         <>
