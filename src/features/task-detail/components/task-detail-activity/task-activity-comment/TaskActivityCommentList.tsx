@@ -4,25 +4,33 @@ import TaskActivityCommentItem from "@/features/task-detail/components/task-deta
 import RemoveCommentModal from "@/features/task-detail/components/modals/remove-comment-modal/RemoveCommentModal.tsx";
 import { commentWithReplies } from "@/features/task-detail/utils/task-activity-comment.util.ts";
 import type { CommentWithReplies } from "@/features/task-detail/types/comment.type";
+import CommentEmpty from "../../uis/states/CommentEmpty";
 
 type TaskActivityCommentProps = {
   task: Task;
   onReply: (comment: CommentWithReplies) => void;
 };
-const TaskActivityCommentList = ({ task, onReply }: TaskActivityCommentProps) => {
+const TaskActivityCommentList = ({
+  task,
+  onReply,
+}: TaskActivityCommentProps) => {
   const { data: comments } = useViewComments({ task_id: task.id });
 
   const commentsWithReplies = commentWithReplies(comments ?? []);
   return (
     <div className={"space-y-4"}>
-      {commentsWithReplies?.map((comment) => (
-        <TaskActivityCommentItem
-          key={comment.id}
-          comment={comment}
-          task={task}
-          onReply={onReply}
-        />
-      ))}
+      {commentsWithReplies.length > 0 ? (
+        commentsWithReplies.map((comment) => (
+          <TaskActivityCommentItem
+            key={comment.id}
+            comment={comment}
+            task={task}
+            onReply={onReply}
+          />
+        ))
+      ) : (
+        <CommentEmpty />
+      )}
 
       <RemoveCommentModal taskId={task.id} />
     </div>
