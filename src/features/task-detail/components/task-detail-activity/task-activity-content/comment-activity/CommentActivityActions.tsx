@@ -14,7 +14,7 @@ const CommentActivityActions = ({
   return (
     <div
       className={
-        "absolute right-2 top-2 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
+        "mt-2 sm:absolute sm:right-2 sm:top-2 flex items-center justify-end gap-1 opacity-100 sm:opacity-0 transition-opacity sm:group-hover:opacity-100"
       }
     >
       {onReply && (

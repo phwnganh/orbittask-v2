@@ -1,14 +1,11 @@
-import type {ReactNode} from "react";
+import type { ReactNode } from "react";
 
 type ModalContentProps = {
-    children: ReactNode
-}
-const ModalContent = ({children}: ModalContentProps) => {
-    return (
-        <div className={`p-4`}>
-            {children}
-        </div>
-    );
+  children: ReactNode;
+  className?: string;
+};
+const ModalContent = ({ children, className }: ModalContentProps) => {
+  return <div className={`p-4 ${className}`}>{children}</div>;
 };
 
 export default ModalContent;

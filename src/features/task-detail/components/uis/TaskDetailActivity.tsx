@@ -20,18 +20,19 @@ const TaskDetailActivity = ({ task }: TaskDetailActivityProps) => {
   };
   return (
     <div className={"flex flex-col h-full min-h-0"}>
-      <h3 className={"font-semibold mb-4"}>Activity</h3>
+      <h3 className={"font-semibold mb-4 shrink-0"}>Activity</h3>
 
       <Tabs defaultValue="comments">
-        <TabsList className="self-start">
+        <TabsList className="self-start shrink-0">
           <TabsTrigger value="comments">Comments</TabsTrigger>
           <TabsTrigger value="history">History</TabsTrigger>
         </TabsList>
-        <div className="mt-4 flex-1 min-h-0 overflow-y-auto scrollbar-custom">
+        <div className="mt-4 px-2 flex-1 min-h-0 overflow-y-auto scrollbar-custom">
           <TabsContent value="comments">
             <TaskCommentInput
               task={task}
               replyingTo={replyingTo}
+              onReplyComment={() => setReplyingTo(null)}
             />
             <div className="mt-4">
               <TaskActivityCommentList task={task} onReply={handleReply} />

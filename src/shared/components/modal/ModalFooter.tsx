@@ -1,14 +1,17 @@
-import type {ReactNode} from "react";
+import type { ReactNode } from "react";
 
 type ModalFooterProps = {
-    children: ReactNode
-}
-const ModalFooter = ({children}: ModalFooterProps) => {
-    return (
-        <div className="flex justify-end gap-2 pt-3 border-t border-border-primary">
-            {children}
-        </div>
-    );
+  children: ReactNode;
+  className?: string;
+};
+const ModalFooter = ({ children, className }: ModalFooterProps) => {
+  return (
+    <div
+      className={`flex justify-end gap-2 pt-3 border-t border-border-primary ${className}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default ModalFooter;

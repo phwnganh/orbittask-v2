@@ -11,7 +11,7 @@ const CommentReplyList = ({
   task,
 }: CommentReplyListProps) => {
   return (
-    <div className={"ml-6 mt-3 border-l border-border-primary pl-4"}>
+    <div className={"ml-3 sm:ml-6 mt-3 border-l border-border-primary pl-3 sm:pl-4"}>
       <div className={"space-y-3"}>
         {comments?.replies?.map((reply) => (
           <CommentReplyItem key={reply.id} comment={reply} task={task} />

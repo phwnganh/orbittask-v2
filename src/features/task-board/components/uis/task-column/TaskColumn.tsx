@@ -12,7 +12,7 @@ type TaskColumnProps = {
 }
 const TaskColumn = ({status, projectId}: TaskColumnProps) => {
     const sort = useTaskBoardStore(state => state.sorts[status])
-    const {data: tasks} = useViewTasks({project_id: projectId, status: status, sort_by: sort})
+    const {data: tasks, isLoading} = useViewTasks({project_id: projectId, status: status, sort_by: sort})
     const {setNodeRef, isOver} = useDroppable({id: status})
     return (
         <div className={"flex h-full min-h-0 overflow-y-auto scrollbar-custom flex-col gap-4 max-w-88 w-full shrink-0 bg-bg-secondary/80 border border-border-primary shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-md rounded-lg p-4"}>
@@ -20,7 +20,7 @@ const TaskColumn = ({status, projectId}: TaskColumnProps) => {
             <div ref={setNodeRef} className={`flex-1 min-h-0 overflow-y-auto scrollbar-custom duration-200 ${
                 isOver ? "bg-bg-tertiary/60 rounded-lg" : ""
             }`}>
-                <TaskColumnList tasks={tasks}/>
+                <TaskColumnList tasks={tasks} isLoading={isLoading}/>
             </div>
             <AddTaskButton status={status}/>
         </div>

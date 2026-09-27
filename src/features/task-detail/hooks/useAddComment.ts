@@ -36,11 +36,17 @@ export const useAddComment = () => {
         content: payload.content,
         parent_id: payload.parent_id ?? null,
         created_at: new Date().toISOString(),
+        updated_at: null,
+        deleted_at: null,
       };
 
       set<Comment[]>(queryKey, (old) => {
         if (!old) {
           return [optimisticComment];
+        }
+
+        if (payload.parent_id) {
+          return [...old, optimisticComment];
         }
 
         return [optimisticComment, ...old];
@@ -57,7 +63,6 @@ export const useAddComment = () => {
         context.previousComments ?? [],
       );
     },
-
     onSettled: async (_result, _error, payload) => {
       await invalidate(commentKeys.list(payload.task_id));
     },
