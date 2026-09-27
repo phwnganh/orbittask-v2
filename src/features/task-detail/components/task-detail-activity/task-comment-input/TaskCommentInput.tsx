@@ -8,8 +8,13 @@ import type { CommentWithReplies } from "@/features/task-detail/types/comment.ty
 type TaskCommentInputProps = {
   task: Task;
   replyingTo?: CommentWithReplies | null;
+  onReplyComment?: () => void;
 };
-const TaskCommentInput = ({ task, replyingTo }: TaskCommentInputProps) => {
+const TaskCommentInput = ({
+  task,
+  replyingTo,
+  onReplyComment,
+}: TaskCommentInputProps) => {
   const [commentInput, setCommentInput] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const { mutate } = useAddComment();
@@ -17,17 +22,46 @@ const TaskCommentInput = ({ task, replyingTo }: TaskCommentInputProps) => {
   const isReplying = !!replyingTo;
 
   useEffect(() => {
-    if (isReplying) {
-      textareaRef.current?.focus();
+    if (!replyingTo) {
+      return;
     }
-  }, [isReplying]);
-  const handleSubmitComment = () => {
-    mutate({
-      task_id: task.id,
-      content: commentInput.trim(),
-      parent_id: replyingTo?.id ?? null,
+    const name = [replyingTo.first_name, replyingTo.last_name]
+      .filter(Boolean)
+      .join(" ");
+
+    setCommentInput(`@${name} `);
+
+    requestAnimationFrame(() => {
+      const textarea = textareaRef.current;
+
+      if (!textarea) return;
+
+      textarea.focus();
+
+      const length = textarea.value.length;
+      textarea.setSelectionRange(length, length);
     });
-    setCommentInput("");
+  }, [replyingTo?.id]);
+  const handleSubmitComment = () => {
+    mutate(
+      {
+        task_id: task.id,
+        content: commentInput.trim(),
+        parent_id: replyingTo?.id ?? null,
+      },
+      {
+        onSuccess: () => {
+          setCommentInput("");
+          if (isReplying) {
+            onReplyComment?.();
+          }
+          // keep focus after being back to comment mode
+          requestAnimationFrame(() => {
+            textareaRef.current?.focus();
+          });
+        },
+      },
+    );
   };
   return (
     <div className={"space-y-2"}>
@@ -35,7 +69,7 @@ const TaskCommentInput = ({ task, replyingTo }: TaskCommentInputProps) => {
         ref={textareaRef}
         value={commentInput}
         onChange={(e) => setCommentInput(e.target.value)}
-        placeholder={isReplying ? "Write a reply..." : "Write a comment..."}
+        placeholder={isReplying ? "" : "Write a comment..."}
         rows={3}
       />
       <div className={"flex justify-end"}>

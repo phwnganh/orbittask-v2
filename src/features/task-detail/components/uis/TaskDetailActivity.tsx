@@ -32,6 +32,7 @@ const TaskDetailActivity = ({ task }: TaskDetailActivityProps) => {
             <TaskCommentInput
               task={task}
               replyingTo={replyingTo}
+              onReplyComment={() => setReplyingTo(null)}
             />
             <div className="mt-4">
               <TaskActivityCommentList task={task} onReply={handleReply} />
