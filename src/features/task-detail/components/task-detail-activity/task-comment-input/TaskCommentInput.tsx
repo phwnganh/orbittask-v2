@@ -71,12 +71,14 @@ const TaskCommentInput = ({
         onChange={(e) => setCommentInput(e.target.value)}
         placeholder={isReplying ? "" : "Write a comment..."}
         rows={3}
+        className={"resize-none"}
       />
       <div className={"flex justify-end"}>
         <Button
           disabled={!commentInput.trim()}
           type={"button"}
           fullWidth={false}
+          className={"w-full sm:w-auto"}
           onClick={handleSubmitComment}
         >
           {isReplying ? "Reply" : "Comment"}

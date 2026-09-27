@@ -32,7 +32,7 @@ const CommentReplyItem = ({ comment, task }: CommentReplyItemProps) => {
   const isDeletedComment = comment.deleted_at !== null;
   const showEdited = !isDeletedComment && isUpdatedAtValid;
   return (
-    <div className={"relative flex gap-2"}>
+    <div className={"relative flex min-w-0 gap-2"}>
       <div className={"absolute -left-4 top-0 h-full w-px bg-border-primary"} />
 
       <Avatar avatarUrl={comment.avatar_url} size={"sm"} />

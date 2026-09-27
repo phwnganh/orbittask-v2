@@ -38,7 +38,7 @@ const TaskActivityCommentItem = ({
   const isDeletedComment = comment.deleted_at !== null;
   const showEdited = !isDeletedComment && isUpdatedAtValid;
   return (
-    <div className={"flex gap-3 py-3"}>
+    <div className={"flex min-w-0 gap-3 py-3"}>
       <Avatar size="sm" avatarUrl={comment.avatar_url} />
 
       <div className={"flex-1 min-w-0"}>
