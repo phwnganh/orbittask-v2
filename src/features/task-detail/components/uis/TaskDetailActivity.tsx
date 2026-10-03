@@ -22,13 +22,13 @@ const TaskDetailActivity = ({ task }: TaskDetailActivityProps) => {
     <div className={"flex flex-col h-full min-h-0"}>
       <h3 className={"font-semibold mb-4 shrink-0"}>Activity</h3>
 
-      <Tabs defaultValue="comments">
+      <Tabs defaultValue="comments" className="flex flex-col flex-1 min-h-0">
         <TabsList className="self-start shrink-0">
           <TabsTrigger value="comments">Comments</TabsTrigger>
           <TabsTrigger value="history">History</TabsTrigger>
         </TabsList>
         <div className="mt-4 px-2 flex-1 min-h-0 overflow-y-auto scrollbar-custom">
-          <TabsContent value="comments">
+          <TabsContent value="comments" className="min-h-full">
             <TaskCommentInput
               task={task}
               replyingTo={replyingTo}
