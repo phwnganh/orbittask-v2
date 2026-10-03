@@ -4,29 +4,31 @@ import TaskActivityStatus from "@/features/task-detail/components/task-detail-ac
 import TaskActivityPriority from "@/features/task-detail/components/task-detail-activity/task-activity-status/TaskActivityPriority.tsx";
 import TaskActivityDueDate from "@/features/task-detail/components/task-detail-activity/task-activity-duedate/TaskActivityDueDate.tsx";
 import type { Task } from "@/features/task/types/task.type.ts";
+import type { Profile } from "@/features/auth/types/auth.type";
 
 type TaskActivityContentProps = {
   activity: Activity;
   task: Task;
+  me?: Profile | null;
 };
-const TaskActivityHistory = ({ activity }: TaskActivityContentProps) => {
+const TaskActivityHistory = ({ activity, me }: TaskActivityContentProps) => {
   switch (activity.action_type) {
     case "task_created":
       return (
         <p className="mt-1 text-sm text-text-secondary">Created This Task</p>
       );
     case "status_changed":
-      return <TaskActivityStatus activity={activity} />;
+      return <TaskActivityStatus activity={activity}/>;
     case "priority_changed":
-      return <TaskActivityPriority activity={activity} />;
+      return <TaskActivityPriority activity={activity}/>;
     case "due_date_changed":
-      return <TaskActivityDueDate activity={activity} />;
+      return <TaskActivityDueDate activity={activity}/>;
     case "content_changed":
       return (
         <p className="mt-1 text-sm text-text-secondary">Updated Task Details</p>
       );
     case "assignee_changed":
-      return <TaskActivityAssignee activity={activity} />;
+      return <TaskActivityAssignee activity={activity} me={me} />;
   }
 };
 

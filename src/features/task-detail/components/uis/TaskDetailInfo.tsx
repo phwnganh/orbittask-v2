@@ -3,11 +3,14 @@ import type { Task } from "@/features/task/types/task.type.ts";
 import { getTaskPriorityBadgeVariant } from "@/features/task/utils/task-priority.util.ts";
 import { getDueDateStatus } from "@/features/task/utils/task-date.util.ts";
 import { getTaskStatusHeader } from "@/features/task-board/utils/task-board.util.ts";
+import { getUserDisplayName } from "../../utils/task-activity-user-display.util";
+import type { Profile } from "@/features/auth/types/auth.type";
 
 type TaskDetailContentProps = {
   task: Task;
+  me?: Profile | null;
 };
-const TaskDetailInfo = ({ task }: TaskDetailContentProps) => {
+const TaskDetailInfo = ({ task, me }: TaskDetailContentProps) => {
   const dueDateStatus = getDueDateStatus(
     task.due_date,
     task.status === "completed",
@@ -38,7 +41,14 @@ const TaskDetailInfo = ({ task }: TaskDetailContentProps) => {
             Assignee
           </span>
           <span className="text-sm">
-            {task.first_name} {task.last_name}
+            {getUserDisplayName(
+              {
+                id: task.assignee_id,
+                first_name: task.first_name,
+                last_name: task.last_name,
+              },
+              me?.id,
+            )}
           </span>
 
           <span className="text-xs capitalize font-medium text-text-secondary">
@@ -80,7 +90,14 @@ const TaskDetailInfo = ({ task }: TaskDetailContentProps) => {
             Created By
           </span>
           <span className="text-sm">
-            {task.created_by_first_name} {task.created_by_last_name}
+            {getUserDisplayName(
+              {
+                id: task.created_by,
+                first_name: task.created_by_first_name,
+                last_name: task.created_by_last_name,
+              },
+              me?.id,
+            )}
           </span>
         </div>
       </div>

@@ -2,12 +2,29 @@ import { useViewActivities } from "@/features/task-detail/hooks/useViewActivitie
 import type { Task } from "@/features/task/types/task.type.ts";
 import TaskActivityItem from "@/features/task-detail/components/task-detail-activity/task-activity-list/TaskActivityItem.tsx";
 import ActivityEmpty from "../../uis/states/ActivityEmpty";
+import TaskActivityItemSkeleton from "./TaskActivityItemSkeleton";
+import type { Profile } from "@/features/auth/types/auth.type";
 
 type TaskActivityListProps = {
   task: Task;
+  me?: Profile | null;
 };
-const TaskActivityList = ({ task }: TaskActivityListProps) => {
-  const { data: activities } = useViewActivities(task.id);
+const TaskActivityList = ({ task, me }: TaskActivityListProps) => {
+  const { data: activities, isLoading: activityLoading } = useViewActivities(
+    task.id,
+  );
+
+  if (activityLoading) {
+    return (
+      <div className="min-h-full">
+        <div className="space-y-1">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <TaskActivityItemSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={"space-y-4"}>
       {activities && activities.length > 0 ? (
@@ -15,7 +32,7 @@ const TaskActivityList = ({ task }: TaskActivityListProps) => {
           <div
             key={`${activity.id ?? "activity"}-${activity.action_type}-${activity.created_at}-${index}`}
           >
-            <TaskActivityItem task={task} activity={activity} />
+            <TaskActivityItem task={task} activity={activity} me={me} />
           </div>
         ))
       ) : (

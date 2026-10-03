@@ -5,6 +5,7 @@ export type ActivityType = | "task_created" | "status_changed" | "due_date_chang
 export type Activity = {
     id: string;
     action_type: ActivityType;
+    user_id: string;
     first_name: string;
     last_name: string;
     avatar_url: string;

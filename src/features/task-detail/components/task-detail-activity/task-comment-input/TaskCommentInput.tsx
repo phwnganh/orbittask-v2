@@ -74,6 +74,19 @@ const TaskCommentInput = ({
         className={"resize-none"}
       />
       <div className={"flex justify-end"}>
+        {isReplying && (
+          <Button
+            className={"mr-3"}
+            onClick={() => {
+              setCommentInput("");
+              onReplyComment?.();
+            }}
+            fullWidth={false}
+            variant={"secondary"}
+          >
+            Cancel
+          </Button>
+        )}
         <Button
           disabled={!commentInput.trim()}
           type={"button"}

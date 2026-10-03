@@ -3,9 +3,11 @@ import { useTaskDetailStore } from "@/features/task-detail/stores/task-detail.st
 import Button from "@/shared/components/button/Button.tsx";
 import TaskDetailInfo from "@/features/task-detail/components/uis/TaskDetailInfo";
 import TaskDetailActivity from "@/features/task-detail/components/uis/TaskDetailActivity.tsx";
+import { useProfile } from "@/features/profile/hooks/useProfile";
 
 const TaskDetailModal = () => {
   const { openTaskDetail, onCloseTaskDetail } = useTaskDetailStore();
+  const {data: me} = useProfile()
   return (
     <BaseModal
       isOpen={openTaskDetail.isOpen}
@@ -13,7 +15,7 @@ const TaskDetailModal = () => {
       maxWidth={"max-w-4xl"}
     >
       <BaseModal.Content
-        className={"flex w-full max-h-[90vh] flex-col overflow-hidden"}
+        className={"flex h-[90vh] max-h-[90vh] w-full flex-col overflow-hidden"}
       >
         <BaseModal.Header
           title={openTaskDetail.selectedTask?.title || "View Task Detail"}
@@ -21,14 +23,14 @@ const TaskDetailModal = () => {
         />
         <BaseModal.Body
           className={
-            "grid grid-cols-1 sm:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[260px_minmax(0,1fr)] gap-5 sm:gap-6 flex-1 min-h-0 max-h-180 overflow-y-auto sm:overflow-hidden overflow-x-hidden px-4 sm:px-6 sm:h-[75vh]"
+            "grid grid-cols-1 sm:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[260px_minmax(0,1fr)] gap-5 sm:gap-6 flex-1 min-h-0 overflow-y-auto sm:overflow-hidden overflow-x-hidden px-4 sm:px-6"
           }
         >
           {openTaskDetail.selectedTask && (
             <>
-              <TaskDetailInfo task={openTaskDetail.selectedTask} />
+              <TaskDetailInfo task={openTaskDetail.selectedTask} me={me} />
               <div className={"min-w-0 min-h-0"}>
-                <TaskDetailActivity task={openTaskDetail.selectedTask} />
+                <TaskDetailActivity task={openTaskDetail.selectedTask} me={me} />
               </div>
             </>
           )}
