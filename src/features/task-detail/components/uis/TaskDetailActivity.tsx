@@ -8,11 +8,13 @@ import TabsContent from "@/shared/components/tabs/TabsContent";
 import TaskActivityCommentList from "@/features/task-detail/components/task-detail-activity/task-activity-comment/TaskActivityCommentList.tsx";
 import type { CommentWithReplies } from "../../types/comment.type";
 import { useState } from "react";
+import type { Profile } from "@/features/auth/types/auth.type";
 
 type TaskDetailActivityProps = {
   task: Task;
+  me?: Profile | null;
 };
-const TaskDetailActivity = ({ task }: TaskDetailActivityProps) => {
+const TaskDetailActivity = ({ task, me }: TaskDetailActivityProps) => {
   const [replyingTo, setReplyingTo] = useState<CommentWithReplies | null>(null);
 
   const handleReply = (comment: CommentWithReplies) => {
@@ -35,11 +37,11 @@ const TaskDetailActivity = ({ task }: TaskDetailActivityProps) => {
               onReplyComment={() => setReplyingTo(null)}
             />
             <div className="mt-4">
-              <TaskActivityCommentList task={task} onReply={handleReply} />
+              <TaskActivityCommentList task={task} onReply={handleReply} me={me} />
             </div>
           </TabsContent>
           <TabsContent value="history">
-            <TaskActivityList task={task} />
+            <TaskActivityList task={task} me={me} />
           </TabsContent>
         </div>
       </Tabs>

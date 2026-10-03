@@ -6,19 +6,21 @@ import { commentWithReplies } from "@/features/task-detail/utils/task-activity-c
 import type { CommentWithReplies } from "@/features/task-detail/types/comment.type";
 import CommentEmpty from "../../uis/states/CommentEmpty";
 import TaskActivityCommentItemSkeleton from "./TaskActivityCommentItemSkeleton";
+import type { Profile } from "@/features/auth/types/auth.type";
 
 type TaskActivityCommentProps = {
   task: Task;
   onReply: (comment: CommentWithReplies) => void;
+  me?: Profile | null;
 };
 const TaskActivityCommentList = ({
   task,
   onReply,
+  me,
 }: TaskActivityCommentProps) => {
   const { data: comments, isLoading: commentLoading } = useViewComments({
     task_id: task.id,
   });
-
   if (commentLoading) {
     return (
       <div className="space-y-1">
@@ -38,6 +40,7 @@ const TaskActivityCommentList = ({
             comment={comment}
             task={task}
             onReply={onReply}
+            me={me}
           />
         ))
       ) : (

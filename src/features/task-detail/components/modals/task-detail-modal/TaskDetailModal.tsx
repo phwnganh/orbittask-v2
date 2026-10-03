@@ -3,9 +3,11 @@ import { useTaskDetailStore } from "@/features/task-detail/stores/task-detail.st
 import Button from "@/shared/components/button/Button.tsx";
 import TaskDetailInfo from "@/features/task-detail/components/uis/TaskDetailInfo";
 import TaskDetailActivity from "@/features/task-detail/components/uis/TaskDetailActivity.tsx";
+import { useProfile } from "@/features/profile/hooks/useProfile";
 
 const TaskDetailModal = () => {
   const { openTaskDetail, onCloseTaskDetail } = useTaskDetailStore();
+  const {data: me} = useProfile()
   return (
     <BaseModal
       isOpen={openTaskDetail.isOpen}
@@ -26,9 +28,9 @@ const TaskDetailModal = () => {
         >
           {openTaskDetail.selectedTask && (
             <>
-              <TaskDetailInfo task={openTaskDetail.selectedTask} />
+              <TaskDetailInfo task={openTaskDetail.selectedTask} me={me} />
               <div className={"min-w-0 min-h-0"}>
-                <TaskDetailActivity task={openTaskDetail.selectedTask} />
+                <TaskDetailActivity task={openTaskDetail.selectedTask} me={me} />
               </div>
             </>
           )}
