@@ -6,7 +6,7 @@ const MyTasksPage = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
     return (
-        <div className={"flex flex-col gap-6 h-full"}>
+        <div className={"flex flex-col gap-4 sm:gap-6 h-full min-h-0"}>
             <MyTaskTitleSection setCurrentMonth={setCurrentMonth} setCurrentDate={setSelectedDate}/>
             <MyTaskMainSection selectedDate={selectedDate} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} setSelectedDate={setSelectedDate}/>
         </div>

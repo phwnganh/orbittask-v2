@@ -2,12 +2,12 @@ import {WEEK_DAYS} from "@/features/my-tasks/constants/week.constant.ts";
 
 const CalendarWeekday = () => {
     return (
-        <div className={"grid grid-cols-7 gap-2 mb-2"}>
+        <div className={"mb-2 grid w-full min-w-0 grid-cols-7 gap-1 sm:gap-2"}>
             {WEEK_DAYS.map((day) => (
                 <div
                     key={day}
                     className={
-                        "text-xs uppercase text-text-muted font-medium px-2 py-1"
+                        "min-w-0 truncate text-xs uppercase text-text-muted font-medium px-2 py-1"
                     }
                 >
                     {day}
