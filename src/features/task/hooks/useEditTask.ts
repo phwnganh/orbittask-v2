@@ -16,11 +16,11 @@ export const useEditTask = () => {
 
                 return old.map(task => task.id === task_id ? {
                     ...task,
-                    title: payload.title,
+                    title: payload.title ?? task.title,
                     description: payload.description ?? task.description,
                     priority: payload.priority ?? task.priority,
                     due_date: payload.due_date ?? task.due_date,
-                    assignee_id: payload.assignee_id,
+                    assignee_id: payload.assignee_id ?? task.assignee_id,
                 } : task)
             })
             return {project_id}
