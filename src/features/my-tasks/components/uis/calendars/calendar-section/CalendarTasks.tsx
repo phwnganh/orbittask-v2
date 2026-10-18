@@ -12,7 +12,7 @@ type CalendarTasksProps = {
 }
 const CalendarTasks = ({myTasks, currentMonth, selectedDate, setSelectedDate, calendarDays}: CalendarTasksProps) => {
     return (
-        <div className={"grid grid-cols-7 gap-2"}>
+        <div className={"grid w-full min-w-0 grid-cols-7 gap-1 sm:gap-2"}>
             {calendarDays.map((day, index) =>
             <CalendarDay key={index} myTasks={myTasks} day={day} currentMonth={currentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>)}
         </div>

@@ -5,14 +5,14 @@ type MyTaskStatisticProps = {
 }
 const MyTaskStatistic = ({statistics}: MyTaskStatisticProps) => {
     return (
-        <div className={"flex items-center gap-4 rounded-xl border border-border-primary bg-bg-secondary px-4 py-3"}>
+        <div className={"flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-border-primary bg-bg-secondary px-4 py-3"}>
             <div className={"flex items-center gap-2"}>
                 <div className={"w-2 h-2 shrink-0 rounded-full bg-error"}/>
                 <span className={"text-sm text-text-primary"}>
                     {statistics?.overdue_tasks} overdue
                 </span>
             </div>
-            <div className={"w-px h-4 bg-border-primary"} />
+            <div className={"hidden w-px h-4 bg-border-primary sm:block"} />
 
             <div className={"flex items-center gap-2"}>
                 <div className={"w-2 h-2 rounded-full bg-warning"} />

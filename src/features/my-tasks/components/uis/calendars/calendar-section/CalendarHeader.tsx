@@ -14,7 +14,7 @@ const CalendarHeader = ({currentMonth, setCurrentMonth}: CalendarHeaderProps) =>
             >
                 <ChevronIcon className={"w-6 h-6 shrink-0 rotate-180"}/>
             </Button>
-            <h2 className={"font-semibold text-lg"}>
+            <h2 className={"font-semibold text-base sm:text-lg"}>
                 {format(currentMonth, "MMMM yyyy")}
             </h2>
             <Button type={"button"} fullWidth={false} variant={"secondary"}

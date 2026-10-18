@@ -16,7 +16,7 @@ const MyTaskCalendar = ({myTasks, selectedDate, setSelectedDate, currentMonth, s
     return (
         <div
             className={
-                "bg-bg-secondary border border-border-primary rounded-2xl p-4"
+                "w-full min-w-0 max-w-full bg-bg-secondary border border-border-primary rounded-2xl p-2 sm:p-4"
             }
         >
             <CalendarHeader currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />

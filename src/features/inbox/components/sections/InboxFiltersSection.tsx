@@ -7,7 +7,7 @@ import InboxFilters from "@/features/inbox/components/filters/filter-section/Inb
 const InboxFiltersSection = () => {
     return (
         <div className={"flex flex-col gap-6"}>
-            <div className={"flex items-center gap-4 justify-between"}>
+            <div className={"flex flex-wrap items-center gap-4 justify-between"}>
                 <InboxFilters/>
                 <Dropdown>
                     <DropdownTrigger>
