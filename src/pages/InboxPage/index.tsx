@@ -6,10 +6,10 @@ import InboxFiltersSection from "@/features/inbox/components/sections/InboxFilte
 const InboxPage = () => {
     const {data: inboxes, isLoading} = useViewInbox()
     return (
-        <div className={"flex flex-col gap-6 h-full"}>
+        <div className={"flex flex-col gap-4 sm:gap-6 h-full min-h-0"}>
             <InboxHeaderSection/>
             <InboxFiltersSection/>
-            <div className={"flex-1 min-h-0 overflow-y-auto p-2 scrollbar-custom"}>
+            <div className={"flex-1 min-h-0 overflow-y-auto p-1 sm:p-2 scrollbar-custom"}>
                 <InboxCardsSection inboxes={inboxes ?? []} isLoading={isLoading}/>
             </div>
         </div>

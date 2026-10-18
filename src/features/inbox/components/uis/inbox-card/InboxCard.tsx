@@ -28,10 +28,10 @@ const InboxCard = ({inbox}: InboxCardProps) => {
                     {/* top content */}
                     <div>
                         {/* title */}
-                        <div className={"flex items-center gap-2 flex-wrap"}>
+                        <div className={"flex min-w-0 items-center gap-2 flex-wrap"}>
                             <h3
                                 className={
-                                    "text-sm font-semibold text-text-primary truncate"
+                                    "min-w-0 flex-1 text-sm font-semibold text-text-primary truncate"
                                 }
                             >
                                 {inbox.title}
