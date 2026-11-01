@@ -22,7 +22,10 @@ type EditTaskModalProps = {
 };
 const EditTaskModal = ({ isOpen, onClose, users, me }: EditTaskModalProps) => {
   const { selectedTask } = useTaskStore();
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [message, setMessage] = useState({
+    errorMessage: "",
+    successMessage: "",
+  });
   const isCreator = me?.id === selectedTask?.created_by;
   const isOwner = me?.id === selectedTask?.project_owner_id;
 
@@ -52,11 +55,11 @@ const EditTaskModal = ({ isOpen, onClose, users, me }: EditTaskModalProps) => {
     }
   }, [isOpen, selectedTask, reset]);
 
-  const { mutate, isPending} = useEditTask();
+  const { mutate, isPending } = useEditTask();
   const handleSubmit = form.handleSubmit((data) => {
     if (!selectedTask) return;
 
-    setErrorMessage("");
+    setMessage({ ...message, errorMessage: "" });
     mutate(
       {
         task_id: selectedTask.id,
@@ -79,7 +82,7 @@ const EditTaskModal = ({ isOpen, onClose, users, me }: EditTaskModalProps) => {
           onClose?.();
         },
         onError: (error) => {
-          setErrorMessage(error.message);
+          setMessage({ ...message, errorMessage: error.message });
         },
       },
     );
@@ -105,12 +108,12 @@ const EditTaskModal = ({ isOpen, onClose, users, me }: EditTaskModalProps) => {
         />
       </FormModal>
 
-      {isOpen && errorMessage && (
+      {isOpen && message.errorMessage && (
         <Toast
           variant="error"
           title="Unable to update task"
-          message={errorMessage}
-          onClose={() => setErrorMessage("")}
+          message={message.errorMessage}
+          onClose={() => setMessage({ ...message, errorMessage: "" })}
         />
       )}
     </>

@@ -36,7 +36,10 @@ const TaskBoard = ({ users, projectId, me }: TaskBoardProps) => {
   } = useTaskStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const { mutate } = useMoveTask();
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [message, setMessage] = useState({
+    successMessage: "",
+    errorMessage: "",
+  });
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -50,7 +53,7 @@ const TaskBoard = ({ users, projectId, me }: TaskBoardProps) => {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
-    setErrorMessage("");
+    setMessage({ errorMessage: "", successMessage: "" });
     const { active, over } = e;
 
     console.log("drag active:", active.id, active.data.current);
@@ -68,16 +71,22 @@ const TaskBoard = ({ users, projectId, me }: TaskBoardProps) => {
     const newStatus = over.id as TaskStatus;
     if (oldStatus === newStatus) return;
 
-    mutate({
-      task_id: active.id as string,
-      project_id: projectId!,
-      old_status: oldStatus,
-      new_status: newStatus,
-    }, {
+    mutate(
+      {
+        task_id: active.id as string,
+        project_id: projectId!,
+        old_status: oldStatus,
+        new_status: newStatus,
+      },
+      {
+        onSuccess: (data) => {
+          setMessage({ ...message, successMessage: data.message });
+        },
         onError: (error) => {
-          setErrorMessage(error.message);
-        }
-    });
+          setMessage({ ...message, errorMessage: error.message });
+        },
+      },
+    );
   };
   return (
     <>
@@ -119,12 +128,20 @@ const TaskBoard = ({ users, projectId, me }: TaskBoardProps) => {
         </DragOverlay>
       </DndContext>
 
-      {errorMessage && (
+      {message.errorMessage && (
         <Toast
           variant="error"
           title="Unable to move task"
-          message={errorMessage}
-          onClose={() => setErrorMessage("")}
+          message={message.errorMessage}
+          onClose={() => setMessage({ ...message, errorMessage: "" })}
+        />
+      )}
+      {message.successMessage && (
+        <Toast
+          variant="success"
+          title={"Move Task"}
+          message={message.successMessage}
+          onClose={() => setMessage({ ...message, successMessage: "" })}
         />
       )}
     </>
