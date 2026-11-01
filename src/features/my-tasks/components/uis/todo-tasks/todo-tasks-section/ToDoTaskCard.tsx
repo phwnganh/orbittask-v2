@@ -9,15 +9,19 @@ const ToDoTaskCard = ({ task }: TodoTaskCardProps) => {
   return (
     <div
       className={
-        "bg-bg-primary border border-border-primary rounded-2xl p-3 hover:bg-bg-tertiary transition cursor-pointer"
+        "bg-bg-primary border border-border-primary rounded-2xl p-3 group hover:bg-bg-tertiary transition cursor-pointer"
       }
     >
       <div className={"flex items-start gap-3"}>
         <div
-          className={"w-4 h-4 rounded-full border border-border-primary mt-1"}
+          className={
+            "w-4 h-4 rounded-full border border-border-primary mt-1 group-hover:border-text-muted hover:bg-text-muted"
+          }
         ></div>
         <div className={"flex-1 min-w-0"}>
-          <p className={`text-sm sm:text-base font-medium truncate`}>{task.title}</p>
+          <p className={`text-sm sm:text-base font-medium truncate`}>
+            {task.title}
+          </p>
 
           <div className={"flex items-center gap-2 mt-2"}>
             <Badge
