@@ -2,6 +2,7 @@ import type {TaskPriority, TaskStatus} from "@/features/task/types/task.type.ts"
 
 export type MyTask = {
     id: string;
+    project_id: string;
     project_title: string;
     title: string;
     description: string;

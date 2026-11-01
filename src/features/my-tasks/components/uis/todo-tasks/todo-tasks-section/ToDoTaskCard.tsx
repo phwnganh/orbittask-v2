@@ -4,8 +4,9 @@ import type { MyTask } from "@/features/my-tasks/types/my-task.type.ts";
 
 type TodoTaskCardProps = {
   task: MyTask;
+  onComplete: (task: MyTask) => void;
 };
-const ToDoTaskCard = ({ task }: TodoTaskCardProps) => {
+const ToDoTaskCard = ({ task, onComplete }: TodoTaskCardProps) => {
   return (
     <div
       className={
@@ -13,11 +14,13 @@ const ToDoTaskCard = ({ task }: TodoTaskCardProps) => {
       }
     >
       <div className={"flex items-start gap-3"}>
-        <div
+        <button
+          type={"button"}
+          onClick={() => onComplete(task)}
           className={
             "w-4 h-4 rounded-full border border-border-primary mt-1 group-hover:border-text-muted hover:bg-text-muted"
           }
-        ></div>
+        ></button>
         <div className={"flex-1 min-w-0"}>
           <p className={`text-sm sm:text-base font-medium truncate`}>
             {task.title}
