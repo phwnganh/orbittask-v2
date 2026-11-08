@@ -24,7 +24,7 @@ const ProtectedRoute = ({allowRoles, children}: ProtectedRouteProps) => {
         if(!profile){
             return <LoadingSpin/>
         }
-        if(allowRoles.includes(profile.role)){
+        if(!allowRoles.includes(profile.role)){
             return <Navigate to={FORBIDDEN} replace/>
         }
     }
