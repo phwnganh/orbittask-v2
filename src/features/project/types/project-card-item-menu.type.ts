@@ -1,0 +1,1 @@
+export type ProjectCardItemMenu = "edit" | "archive" | "pin" | "unpin" | "delete"

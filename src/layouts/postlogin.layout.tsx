@@ -1,29 +1,28 @@
 import ProtectedRoute from "@/routes/protected.route.tsx";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "@/layouts/components/sidebar/Sidebar.tsx";
 import Header from "@/layouts/components/header/Header.tsx";
-import {useSidebarStore} from "@/layouts/stores/sidebar.store.ts";
+import { useProfile } from "@/features/profile/hooks/useProfile.ts";
+import NotificationRealtimeListener from "@/features/notification/components/NotificationRealtimeListener";
+import { useSession } from "@/features/auth/hooks/useSession";
 
 const PostLoginLayout = () => {
-    const {collapsed} = useSidebarStore()
-    return (
-        <ProtectedRoute>
-            <div className={`grid h-screen transition-all duration-300 ${collapsed ? "grid-cols-[80px_1fr]" : "grid-cols-[260px_1fr]"} grid-rows-[64px_1fr]`}>
-                <div className={"row-span-2"}>
-                    <Sidebar/>
-                </div>
-                <div className={"flex items-center"}>
-                    <Header/>
-                </div>
-                <main className={"overflow-auto"}>
-                    <Outlet/>
-                </main>
-            </div>
-
-
-
-        </ProtectedRoute>
-    );
+  const { data: profile } = useProfile();
+  const { data: session } = useSession();
+  return (
+    <ProtectedRoute>
+      <NotificationRealtimeListener userId={session?.user?.id} />
+      <div className="flex h-screen bg-bg-primary overflow-hidden">
+        <Sidebar profile={profile ?? undefined} />
+        <div className={`flex flex-col flex-1`}>
+          <Header profile={profile ?? undefined} />
+          <main className="flex-1 min-h-0 overflow-hidden p-6">
+            <Outlet />
+          </main>
+        </div>
+      </div>
+    </ProtectedRoute>
+  );
 };
 
 export default PostLoginLayout;

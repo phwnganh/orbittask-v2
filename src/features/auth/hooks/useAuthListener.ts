@@ -1,9 +1,9 @@
-import {useQueryClient} from "@tanstack/react-query";
 import {useEffect} from "react";
 import {supabase} from "@/shared/libs/supabase.ts";
+import { useReactQueryClient } from "@/shared/libs/react-query/query-client";
 
 export const useAuthListener = () => {
-    const queryClient = useQueryClient()
+    const {queryClient} = useReactQueryClient()
 
     useEffect(() => {
         const {data} = supabase.auth.onAuthStateChange(() => {

@@ -1,6 +1,6 @@
-import RegisterTitleSection from "@/features/auth/components/RegisterTitleSection.tsx";
-import RegisterFormSection from "@/features/auth/components/RegisterFormSection.tsx";
-import LoginByGoogleSection from "@/features/auth/components/LoginByGoogleSection.tsx";
+import RegisterTitleSection from "@/features/auth/components/register/RegisterTitleSection.tsx";
+import RegisterFormSection from "@/features/auth/components/register/RegisterFormSection.tsx";
+import LoginByGoogleSection from "@/features/auth/components/login/LoginByGoogleSection.tsx";
 import {Link} from "react-router-dom";
 import {LOGIN} from "@/shared/constants/route.constant.ts";
 

@@ -1,0 +1,2 @@
+export type TaskBoardMenuItem = "newest" | "oldest" | "priority" | "due_date" | "title";
+export type TaskBoardSortBy = "newest" | "oldest" | "priority_high_to_low" | "priority_low_to_high" | "due_date_earliest" | "due_date_latest" | "title_a_z" | "title_z_a";

@@ -2,15 +2,29 @@ import {create} from "zustand";
 import {persist} from "zustand/middleware";
 
 type SidebarState = {
-    collapsed: boolean;
-    toggle: () => void;
-    setCollapsed: (value: boolean) => void;
+    desktopCollapsed: boolean;
+
+    isMobileOpen: boolean;
+    toggleDesktop: () => void;
+
+    openMobile: () => void;
+    closeMobile: () => void;
 }
 
 export const useSidebarStore = create<SidebarState>()(persist(set => ({
-    collapsed: false,
-    toggle: () => set((state) => ({collapsed: !state.collapsed})),
-    setCollapsed: (value) => set({collapsed: value}),
+    desktopCollapsed: false,
+    isMobileOpen: false,
+    toggleDesktop: () =>
+        set((state) => ({
+            desktopCollapsed: !state.desktopCollapsed
+        })),
+    openMobile: () =>
+        set((state) => ({
+            isMobileOpen: !state.isMobileOpen
+        })),
+
+    closeMobile: () => set({ isMobileOpen: false }),
 }), {
-    name: "sidebar-storage"
+    name: "sidebar-storage",
+    partialize: (state) => ({desktopCollapsed: state.desktopCollapsed})
 }))
