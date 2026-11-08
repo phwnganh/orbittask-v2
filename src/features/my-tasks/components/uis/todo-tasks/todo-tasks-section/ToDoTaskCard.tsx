@@ -1,6 +1,7 @@
 import Badge from "@/shared/components/data-display/Badge.tsx";
 import { getTaskPriorityBadgeVariant } from "@/features/task/utils/task-priority.util.ts";
 import type { MyTask } from "@/features/my-tasks/types/my-task.type.ts";
+import MarkedDotButton from "@/shared/components/button/MarkedDotButton";
 
 type TodoTaskCardProps = {
   task: MyTask;
@@ -14,13 +15,10 @@ const ToDoTaskCard = ({ task, onComplete }: TodoTaskCardProps) => {
       }
     >
       <div className={"flex items-start gap-3"}>
-        <button
-          type={"button"}
+        <MarkedDotButton
+          className="mt-1 group-hover:border-text-muted"
           onClick={() => onComplete(task)}
-          className={
-            "w-4 h-4 rounded-full border border-border-primary mt-1 group-hover:border-text-muted hover:bg-text-muted"
-          }
-        ></button>
+        />
         <div className={"flex-1 min-w-0"}>
           <p className={`text-sm sm:text-base font-medium truncate`}>
             {task.title}

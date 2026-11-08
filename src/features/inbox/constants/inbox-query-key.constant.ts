@@ -1,7 +1,6 @@
 export const inboxKeys = {
-    all: ["inbox"] as const,
-    lists: ({filter, sort}: {filter: string, sort: string}) => [...inboxKeys.all, "list", {
-        filter,
-        sort
-    }] as const,
-}
+  all: ["inbox"] as const,
+  lists: () => [...inboxKeys.all, "list"] as const,
+  list: ({ filter, sort }: { filter: string; sort: string }) =>
+    [...inboxKeys.lists(), { filter, sort }] as const,
+};

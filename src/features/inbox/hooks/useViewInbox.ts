@@ -6,7 +6,7 @@ import {useInboxFilterStore} from "@/features/inbox/stores/inbox-filter.store.ts
 export const useViewInbox = () => {
     const {sort, filter} = useInboxFilterStore()
     return useQuery({
-        queryKey: inboxKeys.lists({filter, sort}),
+        queryKey: inboxKeys.list({filter, sort}),
         queryFn: () => getInboxTasksApi(filter, sort),
         placeholderData: keepPreviousData,
     })

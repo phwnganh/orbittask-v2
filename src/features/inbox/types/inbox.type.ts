@@ -8,5 +8,6 @@ export type Inbox = {
     priority: TaskPriority;
     due_date: string;
     created_at: string;
+    project_id: string;
     project_title: string;
 }
